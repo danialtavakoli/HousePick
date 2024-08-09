@@ -19,15 +19,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val authenticationStateAdapter: AuthenticationStateAdapter = AuthenticationStateAdapter (
-            this
-        )
+        val authenticationStateAdapter = AuthenticationStateAdapter(this)
         authenticationStateAdapter.addFragment(LoginFragment())
         authenticationStateAdapter.addFragment(RegisterFragment())
-        viewPager = findViewById<ViewPager2>(R.id.viewPager)
+        viewPager = findViewById(R.id.viewPager)
         viewPager.adapter = authenticationStateAdapter
-        val isExpired : Boolean = TokenUtils.checkIfExpired()
-        if(!isExpired){
+        val isExpired: Boolean = TokenUtils.checkIfExpired()
+        if (!isExpired) {
             val appActivityIntent = Intent(applicationContext, AppActivity::class.java)
             startActivity(appActivityIntent)
             this.finish()
@@ -40,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         override fun createFragment(position: Int): Fragment {
             return fragmentList[position]
         }
+
         override fun getItemCount(): Int {
             return fragmentList.size
         }
