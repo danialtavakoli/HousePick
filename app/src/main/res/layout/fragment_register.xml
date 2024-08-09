@@ -28,6 +28,7 @@
         android:background="@drawable/et_custom"
         android:hint="@string/your_name"
         android:inputType="textPersonName"
+        android:layoutDirection="locale"
         android:padding="15dp"
         android:textColor="@color/greyDark"
         android:textColorHint="@color/greyLight"
@@ -43,6 +44,7 @@
         android:background="@drawable/et_custom"
         android:hint="@string/e_mail"
         android:inputType="textEmailAddress"
+        android:layoutDirection="locale"
         android:padding="15dp"
         android:textColor="@color/greyDark"
         android:textColorHint="@color/greyLight"
@@ -59,6 +61,7 @@
         android:gravity="end|center_vertical"
         android:hint="@string/password"
         android:inputType="textPassword"
+        android:layoutDirection="locale"
         android:padding="15dp"
         android:textColor="@color/greyDark"
         android:textColorHint="@color/greyLight"
@@ -75,6 +78,7 @@
         android:gravity="end|center_vertical"
         android:hint="@string/re_type_password"
         android:inputType="textPassword"
+        android:layoutDirection="locale"
         android:padding="15dp"
         android:textColor="@color/greyDark"
         android:textColorHint="@color/greyLight"
@@ -102,7 +106,7 @@
             android:layout_height="30dp"
             android:layout_above="@id/swipeLeft"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_arrow_left" />
+            android:src="@drawable/ic_arrow_right" />
 
         <TextView
             android:id="@+id/swipeLeft"
@@ -112,7 +116,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
             android:text="@string/swipe_right_for_login"
-            android:textColor="@color/redLight"
+            android:textColor="@color/colorPrimary"
             android:textSize="15sp" />
 
     </RelativeLayout>

@@ -14,4 +14,15 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+
+    <!--new colors-->
+    <color name="blue_light">#42A5F5</color>
+    <color name="blue_dark">#1E88E5</color>
+    <color name="green_light">#66BB6A</color>
+    <color name="green_dark">#388E3C</color>
+
+    <!--night colors-->
+    <color name="blackVariant">#1F1F1F</color>
+    <color name="greyDarker">#303030</color>
+
 </resources>

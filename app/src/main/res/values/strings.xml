@@ -15,6 +15,13 @@
     <string name="register">Register</string>
     <string name="re_type_password">Re-type Password</string>
     <string name="your_name">Full Name</string>
+    <string name="bad_email_password">Bad email/password, try again</string>
+    <string name="password_changed">Password changed</string>
+    <string name="error_from_server">Error from server</string>
+    <string name="account_created">Account created</string>
+    <string name="bad_mail_address">Bad mail address</string>
+    <string name="passwords_must_correspond">Passwords must correspond</string>
+    <string name="bad_arguments_try_again">Bad arguments, try again</string>
     <!-- add ads string -->
     <string name="editTextTitleHint">Title</string>
     <string name="imageContentDescription">Real Estate</string>

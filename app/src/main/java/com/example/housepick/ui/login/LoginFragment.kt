@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.housepick.AppActivity
 import com.example.housepick.Application
+import com.example.housepick.R
 import com.example.housepick.databinding.FragmentLoginBinding
 
 
@@ -77,7 +78,7 @@ class LoginFragment : Fragment() {
 
             Action.SHOW_INVALID_PASSWARD_OR_LOGIN -> {
                 loginButton.isEnabled = true
-                Toast.makeText(context, "Bad email/password, try again", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.bad_email_password, Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -90,17 +90,17 @@ class NotificationsFragment : Fragment() {
         when (action.value) {
             Action.SHOW_SUCCESS -> {
                 binding.profileButtonPasswordUpdate.isEnabled = true
-                Toast.makeText(context, "Password changed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.password_changed), Toast.LENGTH_SHORT).show()
             }
 
             Action.SHOW_ERROR -> {
                 binding.profileButtonPasswordUpdate.isEnabled = true
-                Toast.makeText(context, "Error from server", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.error_from_server), Toast.LENGTH_SHORT).show()
             }
 
             Action.SHOW_ERROR_MUST_CORRESPOND -> {
                 binding.profileButtonPasswordUpdate.isEnabled = true
-                Toast.makeText(context, "Passwords must correspond", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.passwords_must_correspond), Toast.LENGTH_SHORT).show()
             }
         }
     }

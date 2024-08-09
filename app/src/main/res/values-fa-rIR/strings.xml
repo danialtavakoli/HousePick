@@ -16,6 +16,13 @@
     <string name="register">ثبت نام</string>
     <string name="re_type_password">تکرار رمز عبور</string>
     <string name="your_name">نام کامل</string>
+    <string name="bad_email_password">ایمیل یا رمز عبور نادرست است، دوباره تلاش کنید</string>
+    <string name="password_changed">رمز عبور تغییر کرد</string>
+    <string name="error_from_server">خطا از سمت سرور</string>
+    <string name="account_created">حساب کاربری ایجاد شد</string>
+    <string name="bad_mail_address">آدرس ایمیل نادرست است</string>
+    <string name="passwords_must_correspond">رمزهای عبور باید یکسان باشند</string>
+    <string name="bad_arguments_try_again">مقادیر وارد شده نادرست است، دوباره تلاش کنید</string>
     <!-- add ads string -->
     <string name="editTextTitleHint">عنوان</string>
     <string name="imageContentDescription">املاک</string>

@@ -10,7 +10,7 @@ import org.json.JSONObject
 
 class LoginViewModel : ViewModel() {
     private val _text = MutableLiveData<String>().apply {
-        value = "Real Estate"
+        value = "ملک یاب"
     }
     private val authentication = Authentication()
 
@@ -24,13 +24,14 @@ class LoginViewModel : ViewModel() {
     }
 
     fun userWantToLogin(password: String, login: String) {
-        val cb:VolleyCallbackJsonObject = object: VolleyCallbackJsonObject{
+        val cb: VolleyCallbackJsonObject = object : VolleyCallbackJsonObject {
             override fun onSuccess(result: JSONObject?) {
                 if (result != null) {
                     Application.JWT = result.get("jwt") as String?
                 }
                 showWelcomeScreen()
             }
+
             override fun onError() {
                 showPasswordOrLoginInvalid()
             }

@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.housepick.R
 import com.example.housepick.databinding.FragmentRegisterBinding
 
 
@@ -72,24 +73,28 @@ class RegisterFragment : Fragment() {
     private fun handleAction(action: Action) {
         when (action.value) {
             Action.REGISTERED -> {
-                Toast.makeText(context,"Account created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.account_created), Toast.LENGTH_SHORT).show()
                 name.setText("")
                 mail.setText("")
                 password.setText("")
                 repassword.setText("")
             }
-            Action.INVALID_MAIL ->{
+
+            Action.INVALID_MAIL -> {
                 btnRegister.isEnabled = true
-                Toast.makeText(context,"Bad mail address", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.bad_mail_address), Toast.LENGTH_SHORT).show()
             }
+
             Action.PASSWORDS_DOES_NOT_CORRESPOND -> {
                 btnRegister.isEnabled = true
-                Toast.makeText(context,"Passwords must correspond", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.passwords_must_correspond), Toast.LENGTH_SHORT).show()
             }
+
             Action.INVALID_ARGUMENTS -> {
                 btnRegister.isEnabled = true
-                Toast.makeText(context,"Bad arguments try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, getString(R.string.bad_arguments_try_again), Toast.LENGTH_SHORT).show()
             }
+
         }
     }
 
