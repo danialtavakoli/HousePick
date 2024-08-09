@@ -56,9 +56,9 @@ class RegisterFragment : Fragment() {
 
 
 
-        registerViewModel.getAction().observe(viewLifecycleOwner,
-            { action -> action?.let { handleAction(it) } })
-        
+        registerViewModel.getAction().observe(viewLifecycleOwner
+        ) { action -> action?.let { handleAction(it) } }
+
 
         btnRegister.setOnClickListener {
             btnRegister.isEnabled = false
