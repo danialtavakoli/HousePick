@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.housepick.AppActivity
 import com.example.housepick.Application
@@ -37,7 +36,7 @@ class LoginFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -45,21 +44,23 @@ class LoginFragment : Fragment() {
         val textView: TextView = binding.tvTitle
         loginButton = binding.btnLogin
 
-        loginViewModel.text.observe(viewLifecycleOwner, Observer {
+        loginViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        })
-        loginViewModel.getAction()?.observe(viewLifecycleOwner,
-            Observer<Action?> { action -> action?.let { handleAction(it) } })
+        }
+        loginViewModel.getAction().observe(
+            viewLifecycleOwner
+        ) { action -> action?.let { handleAction(it) } }
 
         loginButton.setOnClickListener {
             loginButton.isEnabled = false
             val email = binding.etEmail.text.toString()
             val password = binding.etPassword.text.toString()
-            loginViewModel.userWantToLogin(password, email);
+            loginViewModel.userWantToLogin(password, email)
         }
 
         return root
     }
+
     private fun handleAction(action: Action) {
         when (action.value) {
             Action.SHOW_WELCOME -> {
@@ -73,14 +74,13 @@ class LoginFragment : Fragment() {
                 startActivity(appActivityIntent)
                 activity?.finish()
             }
+
             Action.SHOW_INVALID_PASSWARD_OR_LOGIN -> {
                 loginButton.isEnabled = true
-                Toast.makeText(context,"Bad email/password, try again", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Bad email/password, try again", Toast.LENGTH_SHORT).show()
             }
         }
     }
-
-
 
 
 }

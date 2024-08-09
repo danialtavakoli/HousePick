@@ -9,7 +9,7 @@ import com.example.housepick.Application
 import org.json.JSONObject
 
 
-class Authentication() {
+class Authentication {
 
     private val queue = Volley.newRequestQueue(Application.appContext)
     private val urlLogin = "http://"+ Application.IP+"/auth/login"

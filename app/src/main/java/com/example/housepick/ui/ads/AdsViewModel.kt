@@ -19,10 +19,6 @@ class AdsViewModel : ViewModel() {
     }
     private val ads = Ads()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is ad Fragment"
-    }
-
     fun displayAds(){
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
             override fun onSuccessObject(result: JSONObject) {

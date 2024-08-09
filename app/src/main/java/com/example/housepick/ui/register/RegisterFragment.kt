@@ -37,7 +37,7 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         registerViewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         val root: View = binding.root

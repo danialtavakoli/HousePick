@@ -55,7 +55,7 @@ class Application : Application() {
         val sharedPreferences : SharedPreferences = applicationContext.getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
         allowNotifications = sharedPreferences.getBoolean("allowNotifs",true)
         appContext = applicationContext
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         createNotificationChannel()
 

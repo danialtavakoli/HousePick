@@ -1,6 +1,6 @@
 package com.example.housepick.ui.ads
 
-import AddAdsFragment
+import com.example.housepick.ui.addads.AddAdsFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -43,7 +42,7 @@ class AdsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         adsViewModel =
             ViewModelProvider(this).get(AdsViewModel::class.java)
 
@@ -59,8 +58,8 @@ class AdsFragment : Fragment() {
             adapter = viewAdapter
         }
 
-        adsViewModel.getAction()?.observe(viewLifecycleOwner,
-            Observer<AdAction> { action -> action?.let { handleAction(it) } })
+        adsViewModel.getAction().observe(viewLifecycleOwner
+        ) { action -> action?.let { handleAction(it) } }
 
         adsViewModel.displayAds()
 
@@ -74,7 +73,7 @@ class AdsFragment : Fragment() {
             parentFragmentManager.commit {
                 replace(container!!.id, AddAdsFragment())
                 setReorderingAllowed(true)
-                addToBackStack("AddAdsFragment in the place")
+                addToBackStack("com.example.housepick.ui.addads.AddAdsFragment in the place")
             }
         }
 
@@ -95,7 +94,7 @@ class AdsFragment : Fragment() {
             }
             AdAction.NETWORK_ERROR ->{
                 if(Application.isActivityVisible()){
-                    Toast.makeText(context,"Network error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context,"Network error", Toast.LENGTH_SHORT).show()
                 }
                 swipeContainer.isRefreshing = false
             }

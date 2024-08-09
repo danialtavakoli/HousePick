@@ -9,7 +9,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +39,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -56,13 +55,14 @@ class HomeFragment : Fragment() {
             adapter = viewAdapter
         }
         binding.homeSearchBtn.setOnClickListener {
-            if(binding.homeSearch.text.toString().isNotEmpty()){
+            if (binding.homeSearch.text.toString().isNotEmpty()) {
                 homeViewModel.displayHomesByCity(binding.homeSearch.text.toString())
             }
         }
 
-        homeViewModel.getAction()?.observe(viewLifecycleOwner,
-            Observer<Action> { action -> action?.let { handleAction(it) } })
+        homeViewModel.getAction().observe(
+            viewLifecycleOwner
+        ) { action -> action?.let { handleAction(it) } }
 
         homeViewModel.displayHomes()
 
@@ -87,9 +87,11 @@ class HomeFragment : Fragment() {
                 viewAdapter.swapDataSet(homeViewModel.homesArray)
                 swipeContainer.isRefreshing = false
             }
-            Action.NETWORK_ERROR ->{
-                if(Application.isActivityVisible()){
-                    Toast.makeText(context,"No houses found for this location", Toast.LENGTH_SHORT).show();
+
+            Action.NETWORK_ERROR -> {
+                if (Application.isActivityVisible()) {
+                    Toast.makeText(context, "No houses found for this location", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 swipeContainer.isRefreshing = false
             }
@@ -108,8 +110,10 @@ class MyAdapter(private var myDataset: JSONArray) :
 
 
     // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
         // create a new view
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_list_house, parent, false)
@@ -135,8 +139,9 @@ class MyAdapter(private var myDataset: JSONArray) :
 //        val carNumber = house.getInt("numberCar")
         val rent = if (house.getBoolean("rent")) "rent" else "sell"
 
-        holder.item.findViewById<TextView>(R.id.adItemPrice).text = "$"+price.toString()
-        holder.item.findViewById<TextView>(R.id.adItemAddress).text = street + ", " + city + ", " + country
+        holder.item.findViewById<TextView>(R.id.adItemPrice).text = "$" + price.toString()
+        holder.item.findViewById<TextView>(R.id.adItemAddress).text =
+            street + ", " + city + ", " + country
         holder.item.findViewById<TextView>(R.id.adItemBedNumber).text = bedNumber.toString()
         holder.item.findViewById<TextView>(R.id.adItemBathNumber).text = bathNumber.toString()
 //        holder.item.findViewById<TextView>(R.id.adItemCarNumber).text = carNumber.toString()
@@ -152,7 +157,8 @@ class MyAdapter(private var myDataset: JSONArray) :
             println(bundle)
             println(R.id.action_navigation_home_to_oneHomeFragment)
             holder.item.findNavController().navigate(
-                R.id.action_navigation_home_to_oneHomeFragment, bundle)
+                R.id.action_navigation_home_to_oneHomeFragment, bundle
+            )
         }
     }
 

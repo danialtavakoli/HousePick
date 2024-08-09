@@ -18,7 +18,7 @@ import org.json.JSONObject
 import java.net.URISyntaxException
 
 class NotificationsService : Service() {
-    var handler: Handler? = null
+    private var handler: Handler? = null
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
@@ -45,21 +45,21 @@ class NotificationsService : Service() {
 
     //example to update
     private val onNewHouse = Emitter.Listener { args ->
-        runOnUiThread(Runnable {
-            if(Application.allowNotifications){
-                val json : JSONObject = args[0] as JSONObject
-                val housing : JSONObject= json.getJSONObject("newHousing")
-                val titleHouse : String = housing.getString("title")
+        runOnUiThread {
+            if (Application.allowNotifications) {
+                val json: JSONObject = args[0] as JSONObject
+                val housing: JSONObject = json.getJSONObject("newHousing")
+                val titleHouse: String = housing.getString("title")
 
-                val title : String = "La maison: $titleHouse est en ligne"
-                val text : String = "Une nouvelle maison est en ligne, venez la consulter"
+                val title = "La maison: $titleHouse est en ligne"
+                val text = "Une nouvelle maison est en ligne, venez la consulter"
                 val intent = Intent(this, MainActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
-                createNotification(title,text,intent,Application.getIdNotifParis())
+                createNotification(title, text, intent, Application.getIdNotifParis())
             }
 
-        })
+        }
 
     }
 
@@ -67,9 +67,10 @@ class NotificationsService : Service() {
 
     private fun createNotification(title: String, text: String, intent: Intent, id: Int){
         if(Application.isActivityVisible()){
-            Toast.makeText(applicationContext,text, Toast.LENGTH_SHORT).show();
+            Toast.makeText(applicationContext,text, Toast.LENGTH_SHORT).show()
         }else{
-            val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
+            val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent,
+                PendingIntent.FLAG_IMMUTABLE)
 
             val builder = NotificationCompat.Builder(this, "Notifications")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
@@ -85,9 +86,9 @@ class NotificationsService : Service() {
         }
     }
 
-    override fun onStartCommand(intent: Intent?, flags_: Int, startId: Int): Int {
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         println("SERVICE STARTED")
-        mSocket.connect();
+        mSocket.connect()
         mSocket.on("/housings",onNewHouse)
         return START_STICKY
     }

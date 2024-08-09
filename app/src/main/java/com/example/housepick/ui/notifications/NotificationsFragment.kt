@@ -11,7 +11,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.housepick.Application
 import com.example.housepick.MainActivity
@@ -31,11 +30,12 @@ class NotificationsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         notificationsViewModel =
             ViewModelProvider(this).get(NotificationsViewModel::class.java)
-        notificationsViewModel.getAction()?.observe(viewLifecycleOwner,
-            Observer<Action?> { action -> action?.let { handleAction(it) } })
+        notificationsViewModel.getAction().observe(
+            viewLifecycleOwner
+        ) { action -> action?.let { handleAction(it) } }
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -43,25 +43,28 @@ class NotificationsFragment : Fragment() {
         val disconnectButton: Button = binding.btnDisconnect
         binding.profileSwitchAllowNotifications.isChecked = Application.allowNotifications
 
-        binding.profileSwitchAllowNotifications.setOnCheckedChangeListener{_, isChecked ->
+        binding.profileSwitchAllowNotifications.setOnCheckedChangeListener { _, isChecked ->
             val sharedPreferences: SharedPreferences? =
-                Application.appContext?.getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
-                val myEdit = sharedPreferences!!.edit()
-                myEdit.putBoolean("allowNotifs", isChecked)
-                myEdit.apply()
-            if(isChecked){
+                Application.appContext?.getSharedPreferences(
+                    "MySharedPref",
+                    AppCompatActivity.MODE_PRIVATE
+                )
+            val myEdit = sharedPreferences!!.edit()
+            myEdit.putBoolean("allowNotifs", isChecked)
+            myEdit.apply()
+            if (isChecked) {
                 Application.allowNotifications = true
                 binding.profileImageView.setBackgroundResource(R.drawable.profile_picture_agency)
-            }else{
+            } else {
                 Application.allowNotifications = false
                 binding.profileImageView.setBackgroundResource(R.drawable.profile_picture)
             }
         }
         binding.profileButtonPasswordUpdate.setOnClickListener {
             binding.profileButtonPasswordUpdate.isEnabled = false
-            val password : String = binding.profileEditTextPassword.text.toString()
-            val repassword : String = binding.profileEditTextPasswordRetype.text.toString()
-            notificationsViewModel.changePassword(password,repassword)
+            val password: String = binding.profileEditTextPassword.text.toString()
+            val repassword: String = binding.profileEditTextPasswordRetype.text.toString()
+            notificationsViewModel.changePassword(password, repassword)
         }
 
         disconnectButton.setOnClickListener {
@@ -87,15 +90,17 @@ class NotificationsFragment : Fragment() {
         when (action.value) {
             Action.SHOW_SUCCESS -> {
                 binding.profileButtonPasswordUpdate.isEnabled = true
-                Toast.makeText(context,"Password changed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Password changed", Toast.LENGTH_SHORT).show()
             }
+
             Action.SHOW_ERROR -> {
                 binding.profileButtonPasswordUpdate.isEnabled = true
-                Toast.makeText(context,"Error from server", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error from server", Toast.LENGTH_SHORT).show()
             }
+
             Action.SHOW_ERROR_MUST_CORRESPOND -> {
                 binding.profileButtonPasswordUpdate.isEnabled = true
-                Toast.makeText(context,"Passwords must correspond", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Passwords must correspond", Toast.LENGTH_SHORT).show()
             }
         }
     }

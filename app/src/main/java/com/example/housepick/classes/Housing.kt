@@ -37,11 +37,13 @@ class Housing(
         jsonObject.put("email", email)
         jsonObject.put("phone", phone)
         jsonObject.put("rent", rent)
-        jsonObject.put("latLong", JSONObject().put("longitude", latLong!!.longitude)
-            .put("latitude",latLong!!.latitude).toString())
+        jsonObject.put(
+            "latLong", JSONObject().put("longitude", latLong!!.longitude)
+                .put("latitude", latLong!!.latitude).toString()
+        )
         if (imgPath !== null) {
             jsonObject.put("imgPath", imgPath)
         }
-        return jsonObject;
+        return jsonObject
     }
 }

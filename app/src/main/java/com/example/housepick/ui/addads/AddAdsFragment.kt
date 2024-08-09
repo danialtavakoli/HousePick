@@ -1,34 +1,34 @@
+package com.example.housepick.ui.addads
 
-import android.R
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.Switch
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.housepick.databinding.FragmentAddAdsBinding
-import android.graphics.BitmapFactory
-
-import android.graphics.Bitmap
-import android.net.Uri
-import android.util.Base64
 import androidx.navigation.fragment.findNavController
 import com.example.housepick.classes.Housing
-import com.example.housepick.ui.addads.Action
-import com.example.housepick.ui.addads.AddAdsViewModel
+import com.example.housepick.databinding.FragmentAddAdsBinding
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
-import java.util.*
-
 
 class AddAdsFragment : Fragment() {
 
@@ -44,13 +44,13 @@ class AddAdsFragment : Fragment() {
     private lateinit var editTextNumberBed: EditText
     private lateinit var editTextEmail: EditText
     private lateinit var editTextPhone: EditText
-    private lateinit var imgToUpload : ImageView
+    private lateinit var imgToUpload: ImageView
     private lateinit var createAdsButton: Button
 
     private lateinit var addAdsViewModel: AddAdsViewModel
     private var _binding: FragmentAddAdsBinding? = null
 
-    private var uri : Uri? = null
+    private var uri: Uri? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -71,7 +71,7 @@ class AddAdsFragment : Fragment() {
         val imgAddButton: ImageButton = binding.imgAddButton
         val locationButton: ImageButton = binding.locationButton
         val imageButtonBed: ImageButton = binding.imageButtonBed
-        val imageButtonBathroom : ImageButton = binding.imageButtonBathroom
+        val imageButtonBathroom: ImageButton = binding.imageButtonBathroom
         createAdsButton = binding.createAdsButton
         createAdsButton.isEnabled = false
 
@@ -104,8 +104,9 @@ class AddAdsFragment : Fragment() {
         editTextEmail.addTextChangedListener(textWatcher)
         editTextPhone.addTextChangedListener(textWatcher)
 
-        addAdsViewModel.getAction().observe(viewLifecycleOwner,
-            { action -> action?.let { handleAction(it) } })
+        addAdsViewModel.getAction().observe(
+            viewLifecycleOwner
+        ) { action -> action?.let { handleAction(it) } }
 
 
         createAdsButton.setOnClickListener {
@@ -122,35 +123,51 @@ class AddAdsFragment : Fragment() {
             val email = editTextEmail.text.toString()
             val phone = editTextPhone.text.toString()
             val rent = switchRent.isChecked
-            val housing = Housing(title,street,city, postalCode, country,estatePrice,estateType,rent,numberBath,numberBed,email,phone,desc,null,null)
+            val housing = Housing(
+                title,
+                street,
+                city,
+                postalCode,
+                country,
+                estatePrice,
+                estateType,
+                rent,
+                numberBath,
+                numberBed,
+                email,
+                phone,
+                desc,
+                null,
+                null
+            )
 
-            if(uri != null){
+            if (uri != null) {
                 val imageStream: InputStream? = context?.contentResolver?.openInputStream(uri!!)
-                if(imageStream != null){
+                if (imageStream != null) {
                     val selectedImage = BitmapFactory.decodeStream(imageStream)
                     val encodedImage: String? = encodeImage(selectedImage)
-                    if(encodedImage != null){
+                    if (encodedImage != null) {
                         binding.createAdsButton.isEnabled = false
-                        addAdsViewModel.createAd(housing,encodedImage)
+                        addAdsViewModel.createAd(housing, encodedImage)
 
                     }
                 }
-            }else{
-                Toast.makeText(context,"No image selected", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(context, "No image selected", Toast.LENGTH_SHORT).show()
             }
         }
 
-        binding.imgAddButton.setOnClickListener{
+        binding.imgAddButton.setOnClickListener {
             openActivityForResult()
         }
 
-        binding.imageButtonBed.setOnClickListener{
+        binding.imageButtonBed.setOnClickListener {
             binding.editTextNumberBed.requestFocus()
         }
-        binding.imageButtonBathroom.setOnClickListener{
+        binding.imageButtonBathroom.setOnClickListener {
             binding.editTextNumberBathroom.requestFocus()
         }
-        binding.imageButtonGarage.setOnClickListener{
+        binding.imageButtonGarage.setOnClickListener {
             binding.editTextNumberGarage.requestFocus()
         }
 
@@ -173,16 +190,18 @@ class AddAdsFragment : Fragment() {
                 editTextNumberBed.setText("")
                 editTextEmail.setText("")
                 editTextPhone.setText("")
-                Toast.makeText(context,"Ad created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Ad created", Toast.LENGTH_SHORT).show()
                 findNavController().navigate(com.example.housepick.R.id.navigation_ads)
             }
+
             Action.SHOW_INVALID_FORM -> {
                 binding.createAdsButton.isEnabled = true
-                Toast.makeText(context,"Invalid form", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Invalid form", Toast.LENGTH_SHORT).show()
             }
+
             Action.SHOW_BAD_ADDRESS -> {
                 binding.createAdsButton.isEnabled = true
-                Toast.makeText(context,"This address doesn't exist", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "This address doesn't exist", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -218,9 +237,9 @@ class AddAdsFragment : Fragment() {
         val s8: String = editTextEmail.text.toString()
         val s9: String = editTextPhone.text.toString()
         createAdsButton.isEnabled = s1.isNotEmpty() && s2.isNotEmpty() &&
-                s3.isNotEmpty() && s4.isNotEmpty()&& s5.isNotEmpty()
-                && s6.isNotEmpty()&& s7.isNotEmpty()&& s8.isNotEmpty()
-                && s9.isNotEmpty()&& s10.isNotEmpty()&& s11.isNotEmpty()
+                s3.isNotEmpty() && s4.isNotEmpty() && s5.isNotEmpty()
+                && s6.isNotEmpty() && s7.isNotEmpty() && s8.isNotEmpty()
+                && s9.isNotEmpty() && s10.isNotEmpty() && s11.isNotEmpty()
                 && s12.isNotEmpty()
     }
 
@@ -229,17 +248,17 @@ class AddAdsFragment : Fragment() {
         _binding = null
     }
 
-    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val res: Intent? = result.data
-            if(res != null){
-                val extra = res.data
-                uri = extra;
-                imgToUpload.setImageURI(extra)
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val res: Intent? = result.data
+                if (res != null) {
+                    val extra = res.data
+                    uri = extra
+                    imgToUpload.setImageURI(extra)
+                }
             }
         }
-    }
 
     private fun openActivityForResult() {
 

@@ -13,7 +13,6 @@ import com.example.housepick.ui.register.RegisterFragment
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var authenticationStateAdapter: AuthenticationStateAdapter
     private lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
