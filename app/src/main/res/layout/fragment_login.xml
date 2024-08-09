@@ -30,15 +30,15 @@
         android:textColor="@color/greyDark"
         android:inputType="textEmailAddress"
         android:padding="15dp"
-        android:text="admin"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp" />
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="@string/password"
-        android:text="admin"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -49,7 +49,11 @@
         android:inputType="textPassword"
         android:layout_centerInParent="true"
         android:background="@drawable/et_custom"
-        android:textSize="15sp" />
+        android:textSize="15sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:textDirection="rtl"
+        android:gravity="end|center_vertical" />
 
     <Button
         android:id="@+id/btn_login"
@@ -61,7 +65,9 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/btn_custom"
         android:text="@string/login"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp" />
 
     <ImageView
         android:layout_width="30dp"

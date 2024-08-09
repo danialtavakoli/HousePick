@@ -6,13 +6,13 @@
     <string name="title_profile">پروفایل</string>
     <string name="title_ads">آگهی‌ها</string>
     <string name="hello_blank_fragment">سلام، بخش خالی</string>
-    <string name="swipe_left_for_register">برای ثبت نام به چپ بکشید</string>
+    <string name="swipe_left_for_register">برای ثبت نام به راست بکشید</string>
     <!--login string-->
     <string name="login">ورود</string>
     <string name="password">رمز عبور</string>
     <string name="e_mail">ایمیل</string>
     <string name="tag">با ما بپیوندید و \nروابط خود را با دیگران بسازید</string>
-    <string name="swipe_right_for_login">برای ورود به راست بکشید</string>
+    <string name="swipe_right_for_login">برای ورود به چپ بکشید</string>
     <string name="register">ثبت نام</string>
     <string name="re_type_password">تکرار رمز عبور</string>
     <string name="your_name">نام کامل</string>
