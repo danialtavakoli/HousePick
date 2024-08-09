@@ -31,7 +31,7 @@
         android:padding="15dp"
         android:textColor="@color/greyDark"
         android:textColorHint="@color/greyLight"
-        android:textDirection="rtl"
+        android:textDirection="locale"
         android:textSize="15sp" />
 
     <EditText
