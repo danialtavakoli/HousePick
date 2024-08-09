@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ads.OneAdFragment">
+
+    <ImageView
+        android:id="@+id/adDetailsImage"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:contentDescription="@string/imageContentDescription"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_img_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/adDetailsPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsImage" />
+
+    <TextView
+        android:id="@+id/adDetailsAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/greyLight"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsPrice" />
+
+    <!--    Next fav feature-->
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/adDetailsFavButton"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginEnd="16dp"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        android:insetTop="0dp"-->
+    <!--        android:insetBottom="0dp"-->
+    <!--        android:minWidth="48dp"-->
+    <!--        android:minHeight="48dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/adDetailsTitle"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/adDetailsImage"-->
+    <!--        app:srcCompat="@drawable/fav_icon"-->
+    <!--        tools:ignore="SpeakableTextPresentCheck" />-->
+
+
+    <ImageView
+        android:id="@+id/adDetailsBedImg"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress"
+        app:srcCompat="@drawable/bed_single_img" />
+
+    <TextView
+        android:id="@+id/adDetailsBedNumber"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/adDetailsBedImg"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress" />
+
+    <ImageView
+        android:id="@+id/adDetailsBathImg"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/adDetailsBedNumber"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress"
+        app:srcCompat="@drawable/bathroom_single_img" />
+
+    <TextView
+        android:id="@+id/adDetailsBathNumber"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/adDetailsBathImg"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress" />
+
+    <ImageView
+        android:id="@+id/adDetailsCarImg"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/adDetailsBathNumber"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress"
+        app:srcCompat="@drawable/car_single_img" />
+
+    <TextView
+        android:id="@+id/adDetailsCarNumber"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/adDetailsCarImg"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress" />
+
+    <ImageView
+        android:id="@+id/adDetailsVerticalLine"
+        android:layout_width="1dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/adDetailsCarNumber"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress"
+        app:srcCompat="@drawable/vertical_line" />
+
+    <TextView
+        android:id="@+id/adDetailsEstateType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/adDetailsVerticalLine"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress" />
+
+    <TextView
+        android:id="@+id/adDetailsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsEstateType" />
+
+    <TextView
+        android:id="@+id/adDetailsDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:justificationMode="inter_word"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsTitle" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsDescription">
+
+        <ImageView
+            android:id="@+id/adDetailsPhoneIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/phone_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/adDetailsPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/adDetailsPhoneIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        <ImageView
+            android:id="@+id/adDetailsEmailIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/mail_box_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/adDetailsEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/adDetailsEmailIcon"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/adDetailsLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/map_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adDetailsDescription"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        app:tint="@color/white"
+        android:src="@drawable/ic_baseline_delete_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

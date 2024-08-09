@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.addads.AddAdsFragment"
+    >
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imgToUpload"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:contentDescription="@string/imageContentDescription"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_img_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/editTextTitle"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:padding="8dp"
+        android:background="@drawable/et_custom"
+        android:hint="@string/editTextTitleHint"
+        android:textColorHint="@color/greyLight"
+        android:textColor="@color/greyDark"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/imgAddButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgToUpload" />
+
+    <ImageButton
+        android:id="@+id/imgAddButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/add_img_button"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:contentDescription="@string/imgAddButtonContentDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgToUpload"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/editTextStreet"
+        android:layout_width="0dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/et_custom"
+        android:ems="10"
+        android:hint="@string/editTextAddressHint"
+        android:inputType="textPersonName"
+        android:padding="8dp"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
+        app:layout_constraintEnd_toStartOf="@+id/locationButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDescription">
+
+        <EditText
+            android:id="@+id/editTextEstateType"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextEstateTypeHint"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            android:textColor="@color/greyDark"
+            android:textColorHint="@color/greyLight" />
+
+        <EditText
+            android:id="@+id/editTextEstatePrice"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextEstatePriceHint"
+            android:inputType="numberDecimal"
+            android:padding="8dp"
+            android:textColor="@color/greyDark"
+            android:textColorHint="@color/greyLight" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTextPhone"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/et_custom"
+        android:hint="@string/editTextPhoneHint"
+        android:inputType="textEmailAddress"
+        android:padding="8dp"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutAddress"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutPostalCode">
+
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextCityHint"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            android:textColor="@color/greyDark"
+            android:textColorHint="@color/greyLight" />
+
+        <EditText
+            android:id="@+id/editTextCountry"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextCountryHint"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            android:textColor="@color/greyDark"
+            android:textColorHint="@color/greyLight" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTextDescription"
+        android:layout_width="0dp"
+        android:layout_height="140dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/et_custom"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/editTextDescriptionHint"
+        android:inputType="textMultiLine"
+        android:padding="8dp"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutAddress" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/et_custom"
+        android:hint="@string/editTextEmailHint"
+        android:inputType="textEmailAddress"
+        android:padding="8dp"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+    <Button
+        android:id="@+id/createAdsButton"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/createAdsButton"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPhone" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutPostalCode"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:weightSum="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextStreet">
+
+        <EditText
+            android:id="@+id/editTextPostalCode"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextPostalCodeHint"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            android:textColor="@color/greyDark"
+            android:textColorHint="@color/greyLight" />
+
+        <EditText
+            android:id="@+id/editTextNoVisible"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/editTextCountryHint"
+            android:inputType="textPersonName"
+            android:padding="8dp"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <Switch
+            android:id="@+id/switchRent"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/switchRent"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/switchRent">
+
+            <ImageButton
+                android:id="@+id/imageButtonBed"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/bed_number" />
+
+            <EditText
+                android:id="@+id/editTextNumberBed"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_number_inputs"
+                android:ems="10"
+                android:hint="@string/bedStartNumber"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:gravity="center"
+                android:textColor="@color/greyDark"
+                android:textColorHint="@color/greyLight"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/switchRent">
+
+            <ImageButton
+                android:id="@+id/imageButtonBathroom"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/bathroom_number" />
+
+            <EditText
+                android:id="@+id/editTextNumberBathroom"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_number_inputs"
+                android:ems="10"
+                android:hint="@string/bathroomStartNumber"
+                android:gravity="center"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textColor="@color/greyDark"
+                android:textColorHint="@color/greyLight"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/switchRent">
+
+            <ImageButton
+                android:id="@+id/imageButtonGarage"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/garage_number" />
+
+            <EditText
+                android:id="@+id/editTextNumberGarage"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/custom_number_inputs"
+                android:ems="10"
+                android:hint="@string/garageStartNumber"
+                android:gravity="center"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textColor="@color/greyDark"
+                android:textColorHint="@color/greyLight"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/locationButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/location_button"
+        android:contentDescription="@string/locationButtonContentDescription"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgAddButton"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+<!--
+-->

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/cstm_card"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:elevation="8dp"
+    android:layout_marginBottom="16dp"
+    >
+
+    <com.google.android.material.imageview.ShapeableImageView
+    android:id="@+id/adItemImage"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:contentDescription="@string/imageContentDescription"
+        android:scaleType="centerCrop"
+        android:src="@drawable/default_img_placeholder"
+        app:shapeAppearance="@style/roundimageview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/adItemPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adItemImage" />
+
+    <TextView
+        android:id="@+id/adItemAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/greyLight"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adItemPrice" />
+
+<!--    Next fav feature-->
+<!--    <ImageButton-->
+<!--        android:id="@+id/adItemFavButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:insetTop="0dp"-->
+<!--        android:insetBottom="0dp"-->
+<!--        android:minWidth="48dp"-->
+<!--        android:minHeight="48dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/adItemImage"-->
+<!--        app:srcCompat="@drawable/fav_icon"-->
+<!--        tools:ignore="SpeakableTextPresentCheck" />-->
+
+
+    <ImageView
+        android:id="@+id/adItemBedImg"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adItemAddress"
+        app:srcCompat="@drawable/bed_single_img" />
+
+    <TextView
+        android:id="@+id/adItemBedNumber"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/adItemBedImg"
+        app:layout_constraintTop_toBottomOf="@+id/adItemAddress" />
+
+    <ImageView
+        android:id="@+id/adItemBathImg"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/adItemBedNumber"
+        app:layout_constraintTop_toBottomOf="@+id/adItemAddress"
+        app:srcCompat="@drawable/bathroom_single_img" />
+
+    <TextView
+        android:id="@+id/adItemBathNumber"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/adItemBathImg"
+        app:layout_constraintTop_toBottomOf="@+id/adItemAddress" />
+
+    <ImageView
+        android:id="@+id/adItemCarImg"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/adItemBathNumber"
+        app:layout_constraintTop_toBottomOf="@+id/adItemAddress"
+        app:srcCompat="@drawable/car_single_img" />
+
+    <TextView
+        android:id="@+id/adItemCarNumber"
+        android:layout_width="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/adItemCarImg"
+        app:layout_constraintTop_toBottomOf="@+id/adItemAddress" />
+
+    <ImageView
+        android:id="@+id/adItemVerticalLine"
+        android:layout_width="1dp"
+        android:layout_height="14dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="6dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/adItemCarNumber"
+        app:layout_constraintTop_toBottomOf="@+id/adItemAddress"
+        app:srcCompat="@drawable/vertical_line" />
+
+    <TextView
+        android:id="@+id/adItemEstateType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/adItemVerticalLine"
+        app:layout_constraintTop_toBottomOf="@+id/adItemAddress" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

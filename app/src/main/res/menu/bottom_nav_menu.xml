@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_outline_real_estate_agent"
+        android:title="@string/title_real_estate" />
+
+    <item
+        android:id="@+id/navigation_ads"
+        android:icon="@drawable/ant_design_home_outlined"
+        android:tint="@color/grey"
+        android:title="@string/title_ads" />
+
+    <item
+        android:id="@+id/navigation_notifications"
+        android:icon="@drawable/line_md_account"
+        android:tint="@color/grey"
+        android:title="@string/title_profile" />
+
+</menu>

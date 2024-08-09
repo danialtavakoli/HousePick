@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">HousePick</string>
+    <string name="title_real_estate">Real Estate</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_ads">Ads</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="swipe_left_for_register">Swipe Left for Register</string>
+    <!--login string-->
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="e_mail">Email</string>
+    <string name="tag">Let\'s join us and \nBuild your relationship with others</string>
+    <string name="swipe_right_for_login">Swipe Right for Login</string>
+    <string name="register">Register</string>
+    <string name="re_type_password">Re-type Password</string>
+    <string name="your_name">Full Name</string>
+    <!-- add ads string -->
+    <string name="editTextTitleHint">Title</string>
+    <string name="imageContentDescription">Real Estate</string>
+    <string name="imgAddButtonContentDescription">Set image button</string>
+    <string name="locationButtonContentDescription">Set location button</string>
+    <string name="editTextAddressHint">Street</string>
+    <string name="editTextCityHint">City</string>
+    <string name="editTextCountryHint">Country</string>
+    <string name="editTextPostalCodeHint">Postal code</string>
+    <string name="editTextDescriptionHint">Description</string>editTextEstateTypeHint
+    <string name="editTextEstateTypeHint">Estate type</string>
+    <string name="editTextEstatePriceHint">Estate price $CAD</string>
+    <string name="switchRent">Rent</string>
+    <string name="bedStartNumber">0</string>
+    <string name="bathroomStartNumber">0</string>
+    <string name="garageStartNumber">0</string>
+    <string name="editTextEmailHint">Contact email</string>
+    <string name="editTextPhoneHint">Contact phone</string>createAdsButton
+    <string name="createAdsButton">Create</string>
+    <!-- profile strings -->
+    <string name="profileImageContentDescription">Your profile</string>
+    <string name="profileAgencySwicth">Agency</string>
+    <string name="profileNotificationSwicth">Allow notifications</string>
+    <string name="profileUpdatePasswordButton">Update password</string>
+    <!-- Map strings -->
+    <string name="editTextSearchHint">Search</string>
+
+
+    <string name="channel_name">Notifications</string>
+    <string name="channel_description">rien</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="map">Map</string>
+</resources>
