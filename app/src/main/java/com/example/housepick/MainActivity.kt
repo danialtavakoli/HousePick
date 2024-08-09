@@ -1,6 +1,7 @@
 package com.example.housepick
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.housepick.data.utils.TokenUtils
 import com.example.housepick.ui.login.LoginFragment
 import com.example.housepick.ui.register.RegisterFragment
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +19,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        /*//set lang to farsi
+        val config = resources.configuration
+        val lang = "fa" // your language code
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        config.setLocale(locale)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) createConfigurationContext(config)
+        resources.updateConfiguration(config, resources.displayMetrics)*/
+
         setContentView(R.layout.activity_main)
 
         val authenticationStateAdapter = AuthenticationStateAdapter(this)
