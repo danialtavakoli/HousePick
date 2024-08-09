@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ملک‌ یاب</string>
+    <string name="title_real_estate">املاک</string>
+    <string name="title_favorites">علاقه‌مندی‌ها</string>
+    <string name="title_profile">پروفایل</string>
+    <string name="title_ads">آگهی‌ها</string>
+    <string name="hello_blank_fragment">سلام، بخش خالی</string>
+    <string name="swipe_left_for_register">برای ثبت نام به چپ بکشید</string>
+    <!--login string-->
+    <string name="login">ورود</string>
+    <string name="password">رمز عبور</string>
+    <string name="e_mail">ایمیل</string>
+    <string name="tag">با ما بپیوندید و \nروابط خود را با دیگران بسازید</string>
+    <string name="swipe_right_for_login">برای ورود به راست بکشید</string>
+    <string name="register">ثبت نام</string>
+    <string name="re_type_password">تکرار رمز عبور</string>
+    <string name="your_name">نام کامل</string>
+    <!-- add ads string -->
+    <string name="editTextTitleHint">عنوان</string>
+    <string name="imageContentDescription">املاک</string>
+    <string name="imgAddButtonContentDescription">تنظیم دکمه تصویر</string>
+    <string name="locationButtonContentDescription">تنظیم دکمه موقعیت</string>
+    <string name="editTextAddressHint">خیابان</string>
+    <string name="editTextCityHint">شهر</string>
+    <string name="editTextCountryHint">کشور</string>
+    <string name="editTextPostalCodeHint">کد پستی</string>
+    <string name="editTextDescriptionHint">توضیحات</string>
+    <string name="editTextEstateTypeHint">نوع ملک</string>
+    <string name="editTextEstatePriceHint">قیمت ملک (دلار کانادا)</string>
+    <string name="switchRent">اجاره</string>
+    <string name="bedStartNumber">۰</string>
+    <string name="bathroomStartNumber">۰</string>
+    <string name="garageStartNumber">۰</string>
+    <string name="editTextEmailHint">ایمیل تماس</string>
+    <string name="editTextPhoneHint">تلفن تماس</string>
+    <string name="createAdsButton">ایجاد</string>
+    <!-- profile strings -->
+    <string name="profileImageContentDescription">پروفایل شما</string>
+    <string name="profileAgencySwicth">آژانس</string>
+    <string name="profileNotificationSwicth">اجازه ارسال نوتیفیکیشن‌ها</string>
+    <string name="profileUpdatePasswordButton">بروزرسانی رمز عبور</string>
+    <!-- Map strings -->
+    <string name="editTextSearchHint">جستجو</string>
+
+    <string name="channel_name">نوتیفیکیشن‌ها</string>
+    <string name="channel_description">هیچ</string>
+    <string name="disconnect">قطع ارتباط</string>
+    <string name="map">نقشه</string>
+</resources>

@@ -20,14 +20,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*//set lang to farsi
+        //set lang to farsi
         val config = resources.configuration
         val lang = "fa" // your language code
         val locale = Locale(lang)
         Locale.setDefault(locale)
         config.setLocale(locale)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) createConfigurationContext(config)
-        resources.updateConfiguration(config, resources.displayMetrics)*/
+        resources.updateConfiguration(config, resources.displayMetrics)
 
         setContentView(R.layout.activity_main)
 
