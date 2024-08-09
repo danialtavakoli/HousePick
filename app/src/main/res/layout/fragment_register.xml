@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,68 +22,63 @@
         android:id="@+id/et_name"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="@string/your_name"
-        android:textColorHint="@color/greyLight"
-        android:textColor="@color/greyDark"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="26dp"
-        android:padding="15dp"
-        android:inputType="textPersonName"
-        android:background="@drawable/et_custom"
-        android:textSize="15sp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp" />
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/et_custom"
+        android:hint="@string/your_name"
+        android:inputType="textPersonName"
+        android:padding="15dp"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="@string/e_mail"
-        android:textColorHint="@color/greyLight"
-        android:textColor="@color/greyDark"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="26dp"
-        android:padding="15dp"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/et_custom"
-        android:textSize="15sp"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp" />
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/et_custom"
+        android:hint="@string/e_mail"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="@string/password"
-        android:textColorHint="@color/greyLight"
-        android:textColor="@color/greyDark"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="26dp"
-        android:padding="15dp"
-        android:inputType="textPassword"
-        android:background="@drawable/et_custom"
-        android:textSize="15sp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp" />
+        android:layout_marginBottom="26dp"
+        android:background="@drawable/et_custom"
+        android:gravity="end|center_vertical"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
+        android:textDirection="rtl"
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/et_repassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="@string/re_type_password"
-        android:textColorHint="@color/greyLight"
-        android:textColor="@color/greyDark"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="16dp"
-        android:padding="15dp"
-        android:inputType="textPassword"
-        android:background="@drawable/et_custom"
-        android:textSize="15sp"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/et_custom"
+        android:gravity="end|center_vertical"
+        android:hint="@string/re_type_password"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
+        android:textSize="15sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -96,21 +90,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="80dp"
             android:background="@drawable/btn_custom"
             android:text="@string/register"
-            android:textColor="@color/white"
-            android:layout_marginEnd="20dp"
-            android:layout_marginStart="20dp" />
+            android:textColor="@color/white" />
 
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_arrow_left"
             android:layout_above="@id/swipeLeft"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_arrow_left" />
 
         <TextView
             android:id="@+id/swipeLeft"
