@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/black</item>
         <item name="colorPrimaryVariant">@color/blackVariant</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:fontFamily">@font/iran_yekan_500</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/greyDark</item>
         <item name="colorSecondaryVariant">@color/greyDarker</item>
