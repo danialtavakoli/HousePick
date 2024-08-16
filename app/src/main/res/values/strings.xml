@@ -44,7 +44,7 @@
     <string name="no_houses_found">No houses found for this location</string>
     <string name="network_error">Network error</string>
     <string name="housing_deleted_success">Housing successfully deleted</string>
-    <string name="housing_delete_failed">Couldn't delete the housing</string>
+    <string name="housing_delete_failed">Couldn\'t delete the housing</string>
     <!-- profile strings -->
     <string name="profileImageContentDescription">Your profile</string>
     <string name="profileAgencySwicth">Agency</string>
