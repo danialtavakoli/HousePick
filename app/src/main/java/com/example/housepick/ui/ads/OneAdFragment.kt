@@ -91,17 +91,17 @@ class OneAdFragment : Fragment() {
 
             OneAdAction.NETWORK_ERROR -> {
                 if (Application.isActivityVisible()) {
-                    Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
                 }
             }
 
             OneAdAction.DELETE_SUCCESS -> {
                 findNavController().navigate(R.id.navigation_ads)
-                Toast.makeText(context, "Housing successfully deleted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.housing_deleted_success, Toast.LENGTH_SHORT).show()
             }
 
             OneAdAction.DELETE_ERROR -> {
-                Toast.makeText(context, "Couldn't delete the housing.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.housing_delete_failed, Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -1,6 +1,5 @@
 package com.example.housepick.ui.ads
 
-import com.example.housepick.ui.addads.AddAdsFragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.housepick.Application
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentAdsBinding
+import com.example.housepick.ui.addads.AddAdsFragment
 import com.example.housepick.ui.home.OneHomeFragment
 import org.json.JSONArray
 import org.json.JSONObject
@@ -58,7 +58,8 @@ class AdsFragment : Fragment() {
             adapter = viewAdapter
         }
 
-        adsViewModel.getAction().observe(viewLifecycleOwner
+        adsViewModel.getAction().observe(
+            viewLifecycleOwner
         ) { action -> action?.let { handleAction(it) } }
 
         adsViewModel.displayAds()
@@ -69,7 +70,7 @@ class AdsFragment : Fragment() {
             adsViewModel.displayAds()
         }
 
-        binding.floatingAddButton.setOnClickListener{
+        binding.floatingAddButton.setOnClickListener {
             parentFragmentManager.commit {
                 replace(container!!.id, AddAdsFragment())
                 setReorderingAllowed(true)
@@ -92,9 +93,10 @@ class AdsFragment : Fragment() {
                 viewAdapter.swapDataSet(adsViewModel.adsArray)
                 swipeContainer.isRefreshing = false
             }
-            AdAction.NETWORK_ERROR ->{
-                if(Application.isActivityVisible()){
-                    Toast.makeText(context,"Network error", Toast.LENGTH_SHORT).show()
+
+            AdAction.NETWORK_ERROR -> {
+                if (Application.isActivityVisible()) {
+                    Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
                 }
                 swipeContainer.isRefreshing = false
             }
@@ -113,8 +115,10 @@ class MyAdapter(private var myDataset: JSONArray) :
 
 
     // Create new views (invoked by the layout manager)
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
         // create a new view
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_list_ad, parent, false)
@@ -140,8 +144,9 @@ class MyAdapter(private var myDataset: JSONArray) :
 //        val carNumber = ad.getInt("numberCar")
         val rent = if (ad.getBoolean("rent")) "rent" else "sell"
 
-        holder.item.findViewById<TextView>(R.id.adItemPrice).text = "$"+price.toString()
-        holder.item.findViewById<TextView>(R.id.adItemAddress).text = street + ", " + city + ", " + country
+        holder.item.findViewById<TextView>(R.id.adItemPrice).text = "$" + price.toString()
+        holder.item.findViewById<TextView>(R.id.adItemAddress).text =
+            street + ", " + city + ", " + country
         holder.item.findViewById<TextView>(R.id.adItemBedNumber).text = bedNumber.toString()
         holder.item.findViewById<TextView>(R.id.adItemBathNumber).text = bathNumber.toString()
 //        holder.item.findViewById<TextView>(R.id.adItemCarNumber).text = carNumber.toString()
@@ -153,7 +158,8 @@ class MyAdapter(private var myDataset: JSONArray) :
         holder.item.setOnClickListener {
             val bundle = bundleOf("id" to id)
             holder.item.findNavController().navigate(
-                R.id.action_navigation_ads_to_oneAdFragment, bundle)
+                R.id.action_navigation_ads_to_oneAdFragment, bundle
+            )
         }
     }
 

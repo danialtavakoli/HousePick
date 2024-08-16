@@ -130,8 +130,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
                 }
 
                 Action.NETWORK_ERROR -> {
-                    Toast.makeText(context, "No houses found for this location", Toast.LENGTH_SHORT)
-                        .show();
+                    Toast.makeText(context, R.string.no_houses_found, Toast.LENGTH_SHORT).show()
                 }
             }
 

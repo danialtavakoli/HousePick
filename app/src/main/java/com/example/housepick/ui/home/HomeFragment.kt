@@ -90,7 +90,7 @@ class HomeFragment : Fragment() {
 
             Action.NETWORK_ERROR -> {
                 if (Application.isActivityVisible()) {
-                    Toast.makeText(context, "No houses found for this location", Toast.LENGTH_SHORT)
+                    Toast.makeText(context, R.string.no_houses_found, Toast.LENGTH_SHORT)
                         .show()
                 }
                 swipeContainer.isRefreshing = false

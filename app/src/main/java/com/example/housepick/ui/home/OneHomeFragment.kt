@@ -2,23 +2,22 @@ package com.example.housepick.ui.home
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.housepick.Application
+import com.example.housepick.R
 import com.example.housepick.databinding.FragmentOneHomeBinding
 import org.json.JSONObject
-import android.graphics.BitmapFactory
-import android.widget.ImageView
-
-import java.lang.Exception
 
 
 class OneHomeFragment : Fragment() {
@@ -41,7 +40,7 @@ class OneHomeFragment : Fragment() {
         _binding = FragmentOneHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val id : Int = arguments?.getInt("id")!!
+        val id: Int = arguments?.getInt("id")!!
 
         oneHomeViewModel.getAction()?.observe(viewLifecycleOwner,
             Observer<OneHomeAction> { action -> action?.let { handleAction(it) } })
@@ -61,9 +60,18 @@ class OneHomeFragment : Fragment() {
             OneHomeAction.HOME_LOADED -> {
                 home = oneHomeViewModel.home
                 binding.adDetailsTitle.setText(home.getString("title"))
-                binding.adDetailsAddress.setText(home.getString("street") + ", " + home.getString("city") + ", " + home.getString("country"))
-                binding.adDetailsPrice.setText("$"+home.getInt("estateprice"))
-                binding.adDetailsEstateType.setText(home.getString("estatetype") + " for " + if (home.getBoolean("rent")) "rent" else "sell")
+                binding.adDetailsAddress.setText(
+                    home.getString("street") + ", " + home.getString("city") + ", " + home.getString(
+                        "country"
+                    )
+                )
+                binding.adDetailsPrice.setText("$" + home.getInt("estateprice"))
+                binding.adDetailsEstateType.setText(
+                    home.getString("estatetype") + " for " + if (home.getBoolean(
+                            "rent"
+                        )
+                    ) "rent" else "sell"
+                )
                 binding.adDetailsBedNumber.setText(home.getInt("numberbed").toString())
                 binding.adDetailsBathNumber.setText(home.getInt("numberbath").toString())
 //                binding.adDetailsCarNumber.setText(home.getInt("numbercar").toString())
@@ -75,17 +83,19 @@ class OneHomeFragment : Fragment() {
                 //Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
                 DownloadImageFromInternet(img).execute(home.getString("imgpath"))
             }
+
             OneHomeAction.NETWORK_ERROR -> {
                 if (Application.isActivityVisible()) {
-                    Toast.makeText(context, "Network error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
+
     @SuppressLint("StaticFieldLeak")
     @Suppress("DEPRECATION")
     class DownloadImageFromInternet(var imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
-//        init {
+        //        init {
 //            Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
 //        }
         override fun doInBackground(vararg urls: String): Bitmap? {
@@ -94,13 +104,13 @@ class OneHomeFragment : Fragment() {
             try {
                 val `in` = java.net.URL(imageURL).openStream()
                 image = BitmapFactory.decodeStream(`in`)
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 Log.e("Error Message", e.message.toString())
                 e.printStackTrace()
             }
             return image
         }
+
         override fun onPostExecute(result: Bitmap?) {
             imageView.setImageBitmap(result)
         }

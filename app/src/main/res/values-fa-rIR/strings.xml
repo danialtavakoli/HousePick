@@ -42,6 +42,10 @@
     <string name="editTextEmailHint">ایمیل تماس</string>
     <string name="editTextPhoneHint">تلفن تماس</string>
     <string name="createAdsButton">ایجاد</string>
+    <string name="no_houses_found">هیچ خانه‌ای در این مکان یافت نشد</string>
+    <string name="network_error">خطای شبکه</string>
+    <string name="housing_deleted_success">ملک با موفقیت حذف شد</string>
+    <string name="housing_delete_failed">حذف ملک امکان‌پذیر نبود</string>
     <!-- profile strings -->
     <string name="profileImageContentDescription">پروفایل شما</string>
     <string name="profileAgencySwicth">آژانس</string>
