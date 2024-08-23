@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.housepick.MainActivity
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentRegisterBinding
 import com.example.housepick.ui.utils.showSnackBar
@@ -85,6 +86,9 @@ class RegisterFragment : Fragment() {
                 mail.setText("")
                 password.setText("")
                 repassword.setText("")
+
+                // Switch to LoginFragment
+                (activity as? MainActivity)?.switchToLoginFragment()
             }
 
             Action.INVALID_MAIL -> {

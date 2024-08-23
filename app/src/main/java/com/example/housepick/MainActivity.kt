@@ -44,6 +44,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Function to switch to the LoginFragment
+    fun switchToLoginFragment() {
+        viewPager.currentItem = 0  // Assuming LoginFragment is at position 0
+    }
+
+
     class AuthenticationStateAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
         private val fragmentList: ArrayList<Fragment> = ArrayList()
 
