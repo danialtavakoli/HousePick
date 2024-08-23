@@ -135,11 +135,11 @@ class MyAdapter(private var myDataset: JSONArray) :
 
         // Extract data from JSONObject
         val id = ad.getInt("id")
-        val price = ad.getInt("estateprice")
+        val price = ad.getInt("stateprice")
         val street = ad.getString("street")
         val city = ad.getString("city")
         val country = ad.getString("country")
-        val estateType = ad.getString("estatetype")
+        val estateType = ad.getString("statetype")
         val bedNumber = ad.getInt("numberbed")
         val bathNumber = ad.getInt("numberbath")
 //        val carNumber = ad.getInt("numberCar")

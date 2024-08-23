@@ -65,9 +65,9 @@ class OneHomeFragment : Fragment() {
                         "country"
                     )
                 )
-                binding.adDetailsPrice.setText("$" + home.getInt("estateprice"))
+                binding.adDetailsPrice.setText("$" + home.getInt("stateprice"))
                 binding.adDetailsEstateType.setText(
-                    home.getString("estatetype") + " for " + if (home.getBoolean(
+                    home.getString("statetype") + " for " + if (home.getBoolean(
                             "rent"
                         )
                     ) "rent" else "sell"

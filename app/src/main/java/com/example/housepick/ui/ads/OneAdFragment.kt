@@ -70,9 +70,9 @@ class OneAdFragment : Fragment() {
                         "country"
                     )
                 )
-                binding.adDetailsPrice.setText("$" + ad.getInt("estateprice"))
+                binding.adDetailsPrice.setText("$" + ad.getInt("stateprice"))
                 binding.adDetailsEstateType.setText(
-                    ad.getString("estatetype") + " for " + if (ad.getBoolean(
+                    ad.getString("statetype") + " for " + if (ad.getBoolean(
                             "rent"
                         )
                     ) "rent" else "sell"
