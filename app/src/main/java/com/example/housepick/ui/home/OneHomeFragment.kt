@@ -10,13 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.housepick.Application
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentOneHomeBinding
+import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONObject
 
 
@@ -86,7 +86,8 @@ class OneHomeFragment : Fragment() {
 
             OneHomeAction.NETWORK_ERROR -> {
                 if (Application.isActivityVisible()) {
-                    Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
+                    showSnackBar(binding.root, R.string.network_error, R.drawable.mail_box_icon)
+                    //Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
                 }
             }
         }

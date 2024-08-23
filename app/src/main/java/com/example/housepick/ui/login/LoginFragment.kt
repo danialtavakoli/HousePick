@@ -9,13 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.housepick.AppActivity
 import com.example.housepick.Application
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentLoginBinding
+import com.example.housepick.ui.utils.showSnackBar
 
 
 class LoginFragment : Fragment() {
@@ -35,8 +35,7 @@ class LoginFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
@@ -78,7 +77,8 @@ class LoginFragment : Fragment() {
 
             Action.SHOW_INVALID_PASSWARD_OR_LOGIN -> {
                 loginButton.isEnabled = true
-                Toast.makeText(context, R.string.bad_email_password, Toast.LENGTH_SHORT).show()
+                showSnackBar(binding.root, R.string.bad_email_password, R.drawable.mail_box_icon)
+                //Toast.makeText(context, R.string.bad_email_password, Toast.LENGTH_SHORT).show()
             }
         }
     }

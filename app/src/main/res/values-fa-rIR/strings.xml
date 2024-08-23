@@ -46,6 +46,10 @@
     <string name="network_error">خطای شبکه</string>
     <string name="housing_deleted_success">ملک با موفقیت حذف شد</string>
     <string name="housing_delete_failed">حذف ملک امکان‌پذیر نبود</string>
+    <string name="no_image_selected">تصویری انتخاب نشده است</string>
+    <string name="ad_created">آگهی ایجاد شد</string>
+    <string name="invalid_form">فرم نامعتبر است</string>
+    <string name="address_doesnt_exist">این آدرس وجود ندارد</string>
     <!-- profile strings -->
     <string name="profileImageContentDescription">پروفایل شما</string>
     <string name="profileAgencySwicth">آژانس</string>

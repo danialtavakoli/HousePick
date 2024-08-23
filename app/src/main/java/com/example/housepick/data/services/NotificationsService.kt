@@ -22,14 +22,15 @@ class NotificationsService : Service() {
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
+
     private lateinit var mSocket: Socket
 
     override fun onCreate() {
         super.onCreate()
         println("SERVICE CREE")
         try {
-            val options : IO.Options = IO.Options.builder().setUpgrade(false).build()
-            mSocket = IO.socket("http://"+Application.IPSocket+":8000", options)
+            val options: IO.Options = IO.Options.builder().setUpgrade(false).build()
+            mSocket = IO.socket("http://" + Application.IPSocket + ":8000", options)
         } catch (e: URISyntaxException) {
             print(e)
         }
@@ -64,21 +65,18 @@ class NotificationsService : Service() {
     }
 
 
-
-    private fun createNotification(title: String, text: String, intent: Intent, id: Int){
-        if(Application.isActivityVisible()){
-            Toast.makeText(applicationContext,text, Toast.LENGTH_SHORT).show()
-        }else{
-            val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent,
-                PendingIntent.FLAG_IMMUTABLE)
+    private fun createNotification(title: String, text: String, intent: Intent, id: Int) {
+        if (Application.isActivityVisible()) {
+            Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
+        } else {
+            val pendingIntent: PendingIntent = PendingIntent.getActivity(
+                this, 0, intent, PendingIntent.FLAG_IMMUTABLE
+            )
 
             val builder = NotificationCompat.Builder(this, "Notifications")
-                .setSmallIcon(R.drawable.ic_launcher_foreground)
-                .setContentTitle(title)
-                .setContentText(text)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
+                .setSmallIcon(R.drawable.ic_launcher_foreground).setContentTitle(title)
+                .setContentText(text).setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setContentIntent(pendingIntent).setAutoCancel(true)
             with(NotificationManagerCompat.from(this)) {
                 // notificationId is a unique int for each notification that you must define
                 notify(id, builder.build())
@@ -89,19 +87,16 @@ class NotificationsService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         println("SERVICE STARTED")
         mSocket.connect()
-        mSocket.on("/housings",onNewHouse)
+        mSocket.on("/housings", onNewHouse)
         return START_STICKY
     }
 
 
     override fun onDestroy() {
         println("destroy")
-        super.onDestroy()
-        /*mSocket.disconnect()
+        super.onDestroy()/*mSocket.disconnect()
         mSocket.off()*/
     }
-
-
 
 
 }

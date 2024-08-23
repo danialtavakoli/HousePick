@@ -10,13 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.housepick.Application
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentOneAdBinding
+import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONObject
 
 
@@ -91,17 +91,28 @@ class OneAdFragment : Fragment() {
 
             OneAdAction.NETWORK_ERROR -> {
                 if (Application.isActivityVisible()) {
-                    Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
+                    showSnackBar(binding.root, R.string.network_error, R.drawable.phone_icon)
+                    //Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
                 }
             }
 
             OneAdAction.DELETE_SUCCESS -> {
                 findNavController().navigate(R.id.navigation_ads)
-                Toast.makeText(context, R.string.housing_deleted_success, Toast.LENGTH_SHORT).show()
+                showSnackBar(
+                    binding.root,
+                    R.string.housing_deleted_success,
+                    R.drawable.ant_design_home_outlined
+                )
+                //Toast.makeText(context, R.string.housing_deleted_success, Toast.LENGTH_SHORT).show()
             }
 
             OneAdAction.DELETE_ERROR -> {
-                Toast.makeText(context, R.string.housing_delete_failed, Toast.LENGTH_SHORT).show()
+                showSnackBar(
+                    binding.root,
+                    R.string.housing_delete_failed,
+                    R.drawable.ant_design_home_outlined
+                )
+                //Toast.makeText(context, R.string.housing_delete_failed, Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.housepick.Application
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentHomeBinding
+import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -90,8 +90,12 @@ class HomeFragment : Fragment() {
 
             Action.NETWORK_ERROR -> {
                 if (Application.isActivityVisible()) {
-                    Toast.makeText(context, R.string.no_houses_found, Toast.LENGTH_SHORT)
-                        .show()
+                    showSnackBar(
+                        binding.root,
+                        R.string.no_houses_found,
+                        R.drawable.ant_design_home_outlined
+                    )
+                    //Toast.makeText(context, R.string.no_houses_found, Toast.LENGTH_SHORT).show()
                 }
                 swipeContainer.isRefreshing = false
             }

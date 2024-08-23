@@ -18,15 +18,16 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Switch
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.housepick.R
 import com.example.housepick.classes.Housing
 import com.example.housepick.databinding.FragmentAddAdsBinding
+import com.example.housepick.ui.utils.showSnackBar
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 
@@ -153,7 +154,8 @@ class AddAdsFragment : Fragment() {
                     }
                 }
             } else {
-                Toast.makeText(context, "No image selected", Toast.LENGTH_SHORT).show()
+                showSnackBar(binding.root, R.string.no_image_selected, R.drawable.mail_box_icon)
+                //Toast.makeText(context, "No image selected", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -190,18 +192,21 @@ class AddAdsFragment : Fragment() {
                 editTextNumberBed.setText("")
                 editTextEmail.setText("")
                 editTextPhone.setText("")
-                Toast.makeText(context, "Ad created", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(com.example.housepick.R.id.navigation_ads)
+                showSnackBar(binding.root, R.string.ad_created, R.drawable.mail_box_icon)
+                //Toast.makeText(context, "Ad created", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(R.id.navigation_ads)
             }
 
             Action.SHOW_INVALID_FORM -> {
                 binding.createAdsButton.isEnabled = true
-                Toast.makeText(context, "Invalid form", Toast.LENGTH_SHORT).show()
+                showSnackBar(binding.root, R.string.invalid_form, R.drawable.mail_box_icon)
+                //Toast.makeText(context, "Invalid form", Toast.LENGTH_SHORT).show()
             }
 
             Action.SHOW_BAD_ADDRESS -> {
                 binding.createAdsButton.isEnabled = true
-                Toast.makeText(context, "This address doesn't exist", Toast.LENGTH_SHORT).show()
+                showSnackBar(binding.root, R.string.address_doesnt_exist, R.drawable.mail_box_icon)
+                //Toast.makeText(context, "This address doesn't exist", Toast.LENGTH_SHORT).show()
             }
 
         }

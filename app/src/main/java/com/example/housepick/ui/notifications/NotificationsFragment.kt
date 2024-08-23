@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +15,7 @@ import com.example.housepick.Application
 import com.example.housepick.MainActivity
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentNotificationsBinding
+import com.example.housepick.ui.utils.showSnackBar
 
 class NotificationsFragment : Fragment() {
 
@@ -90,17 +90,20 @@ class NotificationsFragment : Fragment() {
         when (action.value) {
             Action.SHOW_SUCCESS -> {
                 binding.profileButtonPasswordUpdate.isEnabled = true
-                Toast.makeText(context, getString(R.string.password_changed), Toast.LENGTH_SHORT).show()
+                showSnackBar(binding.root, R.string.password_changed, R.drawable.mail_box_icon)
+                //Toast.makeText(context, getString(R.string.password_changed), Toast.LENGTH_SHORT).show()
             }
 
             Action.SHOW_ERROR -> {
                 binding.profileButtonPasswordUpdate.isEnabled = true
-                Toast.makeText(context, getString(R.string.error_from_server), Toast.LENGTH_SHORT).show()
+                showSnackBar(binding.root, R.string.error_from_server, R.drawable.mail_box_icon)
+                //Toast.makeText(context, getString(R.string.error_from_server), Toast.LENGTH_SHORT).show()
             }
 
             Action.SHOW_ERROR_MUST_CORRESPOND -> {
                 binding.profileButtonPasswordUpdate.isEnabled = true
-                Toast.makeText(context, getString(R.string.passwords_must_correspond), Toast.LENGTH_SHORT).show()
+                showSnackBar(binding.root, R.string.passwords_must_correspond, R.drawable.mail_box_icon)
+                //Toast.makeText(context, getString(R.string.passwords_must_correspond), Toast.LENGTH_SHORT).show()
             }
         }
     }

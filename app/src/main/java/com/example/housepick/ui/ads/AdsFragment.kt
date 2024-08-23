@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -19,6 +18,7 @@ import com.example.housepick.R
 import com.example.housepick.databinding.FragmentAdsBinding
 import com.example.housepick.ui.addads.AddAdsFragment
 import com.example.housepick.ui.home.OneHomeFragment
+import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -96,7 +96,8 @@ class AdsFragment : Fragment() {
 
             AdAction.NETWORK_ERROR -> {
                 if (Application.isActivityVisible()) {
-                    Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
+                    showSnackBar(binding.root, R.string.network_error, R.drawable.mail_box_icon)
+                    //Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
                 }
                 swipeContainer.isRefreshing = false
             }

@@ -11,7 +11,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -20,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentHomeMapBinding
+import com.example.housepick.ui.utils.showSnackBar
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -130,7 +130,12 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
                 }
 
                 Action.NETWORK_ERROR -> {
-                    Toast.makeText(context, R.string.no_houses_found, Toast.LENGTH_SHORT).show()
+                    showSnackBar(
+                        binding.root,
+                        R.string.no_houses_found,
+                        R.drawable.ant_design_home_outlined
+                    )
+                    //Toast.makeText(context, R.string.no_houses_found, Toast.LENGTH_SHORT).show()
                 }
             }
 
