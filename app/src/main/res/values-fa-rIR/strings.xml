@@ -50,6 +50,7 @@
     <string name="ad_created">آگهی ایجاد شد</string>
     <string name="invalid_form">فرم نامعتبر است</string>
     <string name="address_doesnt_exist">این آدرس وجود ندارد</string>
+    <string name="my_ads">آگهی‌های من</string>
     <!-- profile strings -->
     <string name="profileImageContentDescription">پروفایل شما</string>
     <string name="profileAgencySwicth">آژانس</string>
