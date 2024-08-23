@@ -50,6 +50,7 @@
     <string name="invalid_form">Invalid form</string>
     <string name="address_doesnt_exist">This address doesn\'t exist</string>
     <string name="my_ads">My ads</string>
+    <string name="search_ads">Search ads</string>
     <!-- profile strings -->
     <string name="profileImageContentDescription">Your profile</string>
     <string name="profileAgencySwicth">Agency</string>
