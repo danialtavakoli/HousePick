@@ -55,7 +55,7 @@
     <!-- profile strings -->
     <string name="profileImageContentDescription">پروفایل شما</string>
     <string name="profileAgencySwicth">آژانس</string>
-    <string name="profileNotificationSwicth">اجازه ارسال نوتیفیکیشن‌ها</string>
+    <string name="profileNotificationSwicth">اجازه ارسال اعلان‌ها</string>
     <string name="profileUpdatePasswordButton">بروزرسانی رمز عبور</string>
     <!-- Map strings -->
     <string name="editTextSearchHint">جستجو</string>
@@ -63,5 +63,6 @@
     <string name="channel_name">نوتیفیکیشن‌ها</string>
     <string name="channel_description">هیچ</string>
     <string name="disconnect">قطع ارتباط</string>
+    <string name="sign_out">خروج از حساب کاربری</string>
     <string name="map">نقشه</string>
 </resources>

@@ -63,5 +63,6 @@
     <string name="channel_name">Notifications</string>
     <string name="channel_description">rien</string>
     <string name="disconnect">Disconnect</string>
+    <string name="sign_out">Sign out</string>
     <string name="map">Map</string>
 </resources>
