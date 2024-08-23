@@ -247,6 +247,7 @@
         android:layout_marginBottom="8dp"
         android:clickable="true"
         app:tint="@color/white"
+        android:backgroundTint="?attr/colorPrimary"
         android:src="@drawable/ic_baseline_delete_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
