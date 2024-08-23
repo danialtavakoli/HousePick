@@ -27,8 +27,8 @@ class LoginViewModel : ViewModel() {
         val cb: VolleyCallbackJsonObject = object : VolleyCallbackJsonObject {
             override fun onSuccess(result: JSONObject?) {
                 if (result != null) {
-                    Application.JWT =
-                        "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGFybUBnbWFpbC5jb20iLCJpYXQiOjE3MjM3NTEyMjMsImV4cCI6MTcyMzgzNzYyM30.Wt7qfpe-zj_ITijWyuJY0ibLmh_7tqqNIJjfiuP4tso"
+                    val jsonResult = result.get("result") as JSONObject
+                    Application.JWT = jsonResult.get("token").toString()
                 }
                 showWelcomeScreen()
             }

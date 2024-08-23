@@ -12,7 +12,7 @@ import com.example.housepick.data.utils.TokenUtils
 
 class Application : Application() {
     companion object{
-        var IP = "192.168.1.102:8080"
+        var IP = "192.168.233.118:8080"
         var IPSocket = IP.split(":")[0]
         var JWT: String? = null
         var appContext: Context? = null
