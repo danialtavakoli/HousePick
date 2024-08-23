@@ -46,7 +46,7 @@
             android:layout_height="42dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/add_image_icon"
+            android:background="@drawable/add_img_icon"
             android:contentDescription="@string/imgAddButtonContentDescription"
             android:insetTop="0dp"
             android:insetBottom="0dp"
@@ -304,11 +304,12 @@
                     android:id="@+id/imageButtonBed"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
+                    android:backgroundTint="@color/white"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:padding="0dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/bed_double_icon" />
+                    android:src="@drawable/bed_filled_icon" />
 
                 <EditText
                     android:id="@+id/editTextNumberBed"
@@ -339,11 +340,12 @@
                     android:id="@+id/imageButtonBathroom"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
+                    android:backgroundTint="@color/white"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:padding="0dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/bathroom_icon" />
+                    android:src="@drawable/bathroom_filled_icon" />
 
                 <EditText
                     android:id="@+id/editTextNumberBathroom"
@@ -374,11 +376,12 @@
                     android:id="@+id/imageButtonGarage"
                     android:layout_width="40dp"
                     android:layout_height="match_parent"
+                    android:backgroundTint="@color/white"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
                     android:padding="0dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/car_side_icon" />
+                    android:src="@drawable/garage_filled_icon" />
 
                 <EditText
                     android:id="@+id/editTextNumberGarage"
@@ -403,7 +406,7 @@
             android:layout_height="42dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:background="@drawable/location_icon"
+            android:background="@drawable/location_filled_icon"
             android:contentDescription="@string/locationButtonContentDescription"
             android:insetTop="0dp"
             android:insetBottom="0dp"
