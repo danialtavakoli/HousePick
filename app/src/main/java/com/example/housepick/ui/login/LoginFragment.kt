@@ -1,5 +1,6 @@
 package com.example.housepick.ui.login
 
+import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences

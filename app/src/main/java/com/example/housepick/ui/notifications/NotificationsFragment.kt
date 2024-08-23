@@ -40,6 +40,16 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        // Retrieve the full name and email from SharedPreferences
+        val sharedPreferences: SharedPreferences =
+            requireActivity().getSharedPreferences("MySharedPref", Context.MODE_PRIVATE)
+        val fullName = sharedPreferences.getString("fullName", "N/A")
+        val email = sharedPreferences.getString("email", "N/A")
+
+        // Display the full name and email in the TextViews
+        binding.profileFullName.text = fullName
+        binding.profileEmail.text = email
+
         val disconnectButton: Button = binding.btnDisconnect
         binding.profileSwitchAllowNotifications.isChecked = Application.allowNotifications
 
@@ -102,7 +112,11 @@ class NotificationsFragment : Fragment() {
 
             Action.SHOW_ERROR_MUST_CORRESPOND -> {
                 binding.profileButtonPasswordUpdate.isEnabled = true
-                showSnackBar(binding.root, R.string.passwords_must_correspond, R.drawable.mail_box_icon)
+                showSnackBar(
+                    binding.root,
+                    R.string.passwords_must_correspond,
+                    R.drawable.mail_box_icon
+                )
                 //Toast.makeText(context, getString(R.string.passwords_must_correspond), Toast.LENGTH_SHORT).show()
             }
         }

@@ -1,5 +1,6 @@
 package com.example.housepick.ui.login
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,6 +30,18 @@ class LoginViewModel : ViewModel() {
                 if (result != null) {
                     val jsonResult = result.get("result") as JSONObject
                     Application.JWT = jsonResult.get("token").toString()
+
+                    val fullName = jsonResult.getString("fullname")
+                    val email = jsonResult.getString("username")
+                    // Store full name and email in SharedPreferences
+                    val sharedPreferences = Application.appContext?.getSharedPreferences(
+                        "MySharedPref",
+                        Context.MODE_PRIVATE
+                    )
+                    val editor = sharedPreferences?.edit()
+                    editor?.putString("fullName", fullName)
+                    editor?.putString("email", email)
+                    editor?.apply()
                 }
                 showWelcomeScreen()
             }
@@ -38,7 +51,6 @@ class LoginViewModel : ViewModel() {
             }
         }
         authentication.login(login, password, cb)
-
     }
 
 
