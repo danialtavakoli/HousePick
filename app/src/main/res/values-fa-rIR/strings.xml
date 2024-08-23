@@ -34,7 +34,7 @@
     <string name="editTextPostalCodeHint">کد پستی</string>
     <string name="editTextDescriptionHint">توضیحات</string>
     <string name="editTextEstateTypeHint">نوع ملک</string>
-    <string name="editTextEstatePriceHint">قیمت ملک (دلار کانادا)</string>
+    <string name="editTextEstatePriceHint">قیمت ملک (ریال ایران)</string>
     <string name="switchRent">اجاره</string>
     <string name="bedStartNumber">۰</string>
     <string name="bathroomStartNumber">۰</string>

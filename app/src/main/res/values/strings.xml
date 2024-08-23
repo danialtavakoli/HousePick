@@ -33,7 +33,7 @@
     <string name="editTextPostalCodeHint">Postal code</string>
     <string name="editTextDescriptionHint">Description</string>editTextEstateTypeHint
     <string name="editTextEstateTypeHint">Estate type</string>
-    <string name="editTextEstatePriceHint">Estate price $CAD</string>
+    <string name="editTextEstatePriceHint">Estate price Rial</string>
     <string name="switchRent">Rent</string>
     <string name="bedStartNumber">0</string>
     <string name="bathroomStartNumber">0</string>
