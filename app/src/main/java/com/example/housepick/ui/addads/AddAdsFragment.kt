@@ -3,7 +3,6 @@ package com.example.housepick.ui.addads
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -30,7 +29,6 @@ import com.example.housepick.databinding.FragmentAddAdsBinding
 import com.example.housepick.ui.utils.showSnackBar
 import com.google.android.gms.maps.model.LatLng
 import java.io.ByteArrayOutputStream
-import java.io.InputStream
 
 class AddAdsFragment : Fragment() {
 
@@ -145,8 +143,9 @@ class AddAdsFragment : Fragment() {
 
             val latLng = LatLng(32.63647365027362, 51.67652963465183)
             housing.latLong = latLng
+            addAdsViewModel.createAd(housing)
 
-            if (uri != null) {
+            /*if (uri != null) {
                 val imageStream: InputStream? = context?.contentResolver?.openInputStream(uri!!)
                 if (imageStream != null) {
                     val selectedImage = BitmapFactory.decodeStream(imageStream)
@@ -160,7 +159,7 @@ class AddAdsFragment : Fragment() {
             } else {
                 showSnackBar(binding.root, R.string.no_image_selected, R.drawable.mail_box_icon)
                 //Toast.makeText(context, "No image selected", Toast.LENGTH_SHORT).show()
-            }
+            }*/
         }
 
         binding.imgAddButton.setOnClickListener {

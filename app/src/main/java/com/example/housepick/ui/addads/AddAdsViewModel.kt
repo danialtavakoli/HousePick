@@ -1,6 +1,5 @@
 package com.example.housepick.ui.addads
 
-import android.location.Address
 import android.location.Geocoder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,7 +8,6 @@ import com.example.housepick.Application
 import com.example.housepick.classes.Housing
 import com.example.housepick.data.httpServices.Ads
 import com.example.housepick.data.httpServices.VolleyCallbackJsonObject
-import com.google.android.gms.maps.model.LatLng
 import org.json.JSONObject
 import java.util.Locale
 
@@ -29,7 +27,25 @@ class AddAdsViewModel : ViewModel() {
         return mAction
     }
 
-    fun createAd(housing: Housing, b64Image: String) {
+    fun createAd(housing: Housing) {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(housing.email).matches()) {
+            showBadMail()
+        } else {
+            val addHousingCb: VolleyCallbackJsonObject = object : VolleyCallbackJsonObject {
+                override fun onSuccess(result: JSONObject?) {
+                    println(result.toString())
+                    showAdsCreated()
+                }
+
+                override fun onError() {
+                    showInvalidArguments()
+                }
+            }
+            ads.createAd(housing, addHousingCb)
+        }
+    }
+
+    /*fun createAd(housing: Housing, b64Image: String) {
         val latLong: LatLng
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(housing.email).matches()) {
             showBadMail()
@@ -85,7 +101,7 @@ class AddAdsViewModel : ViewModel() {
         }
 
 
-    }
+    }*/
 
     private fun showInvalidArguments() {
         mAction.value = Action(Action.SHOW_INVALID_FORM)
