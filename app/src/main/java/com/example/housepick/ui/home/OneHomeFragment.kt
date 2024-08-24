@@ -1,6 +1,7 @@
 package com.example.housepick.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
@@ -11,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.housepick.Application
 import com.example.housepick.R
@@ -33,17 +33,22 @@ class OneHomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        oneHomeViewModel =
-            ViewModelProvider(this).get(OneHomeViewModel::class.java)
+    ): View {
+        oneHomeViewModel = ViewModelProvider(this).get(OneHomeViewModel::class.java)
 
         _binding = FragmentOneHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val id: Int = arguments?.getInt("id")!!
 
-        oneHomeViewModel.getAction()?.observe(viewLifecycleOwner,
-            Observer<OneHomeAction> { action -> action?.let { handleAction(it) } })
+        oneHomeViewModel.getAction().observe(viewLifecycleOwner) { action ->
+            action?.let {
+                handleAction(
+                    it,
+                    root.context
+                )
+            }
+        }
 
         oneHomeViewModel.displayHome(id)
 
@@ -55,33 +60,41 @@ class OneHomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun handleAction(action: OneHomeAction) {
+    @SuppressLint("SetTextI18n")
+    private fun handleAction(action: OneHomeAction, context: Context) {
         when (action.value) {
             OneHomeAction.HOME_LOADED -> {
                 home = oneHomeViewModel.home
-                binding.adDetailsTitle.setText(home.getString("title"))
-                binding.adDetailsAddress.setText(
-                    home.getString("street") + ", " + home.getString("city") + ", " + home.getString(
-                        "country"
-                    )
-                )
-                binding.adDetailsPrice.setText("$" + home.getInt("stateprice"))
-                binding.adDetailsEstateType.setText(
-                    home.getString("statetype") + " for " + if (home.getBoolean(
-                            "rent"
-                        )
-                    ) "rent" else "sell"
-                )
-                binding.adDetailsBedNumber.setText(home.getInt("numberbed").toString())
-                binding.adDetailsBathNumber.setText(home.getInt("numberbath").toString())
+                val textRent = context.getString(R.string.rent)
+                val textSell = context.getString(R.string.sell)
+                val rent = if (home.getBoolean("rent")) textRent else textSell
+                val textFor = context.getString(R.string.text_for)
+                val textRial = context.getString(R.string.rial)
+                val price = home.getInt("statePrice")
+                val street = home.getString("street")
+                val city = home.getString("city")
+                val country = home.getString("country")
+                val estateType = home.getString("stateType")
+                val bedNumber = home.getInt("numberBed").toString()
+                val bathNumber = home.getInt("numberBath").toString()
+                val email = home.getString("email")
+                val phone = home.getString("phone")
+                val description = home.getString("description")
+                val title = home.getString("title")
+                binding.adDetailsTitle.text = title
+                binding.adDetailsAddress.text = "$street, $city, $country"
+                binding.adDetailsPrice.text = "$price $textRial"
+                binding.adDetailsEstateType.text = "$estateType $textFor $rent"
+                binding.adDetailsBedNumber.text = bedNumber
+                binding.adDetailsBathNumber.text = bathNumber
 //                binding.adDetailsCarNumber.setText(home.getInt("numbercar").toString())
-                binding.adDetailsEmail.setText(home.getString("email"))
-                binding.adDetailsPhone.setText(home.getString("phone"))
-                binding.adDetailsDescription.setText(home.getString("description"))
+                binding.adDetailsEmail.text = email
+                binding.adDetailsPhone.text = phone
+                binding.adDetailsDescription.text = description
 
                 val img = binding.adDetailsImage
                 //Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
-                DownloadImageFromInternet(img).execute(home.getString("imgpath"))
+                //DownloadImageFromInternet(img).execute(home.getString("imgpath"))
             }
 
             OneHomeAction.NETWORK_ERROR -> {

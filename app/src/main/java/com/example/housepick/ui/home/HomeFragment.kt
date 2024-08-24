@@ -1,15 +1,13 @@
 package com.example.housepick.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.housepick.Application
@@ -36,12 +34,9 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -91,9 +86,7 @@ class HomeFragment : Fragment() {
             Action.NETWORK_ERROR -> {
                 if (Application.isActivityVisible()) {
                     showSnackBar(
-                        binding.root,
-                        R.string.no_houses_found,
-                        R.drawable.ant_design_home_outlined
+                        binding.root, R.string.no_houses_found, R.drawable.ant_design_home_outlined
                     )
                     //Toast.makeText(context, R.string.no_houses_found, Toast.LENGTH_SHORT).show()
                 }
@@ -103,8 +96,7 @@ class HomeFragment : Fragment() {
     }
 }
 
-class MyAdapter(private var myDataset: JSONArray) :
-    RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -115,47 +107,50 @@ class MyAdapter(private var myDataset: JSONArray) :
 
     // Create new views (invoked by the layout manager)
     override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
+        parent: ViewGroup, viewType: Int
     ): ViewHolder {
         // create a new view
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_list_house, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list_house, parent, false)
 
         return ViewHolder(itemView)
     }
 
     // Replace the contents of a view (invoked by the layout manager)
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
         val house = myDataset[position] as JSONObject
 
         // Extract data from JSONObject
-        val id = house.getInt("id")
-        val price = house.getInt("stateprice")
+        //val id = house.getInt("id")
+        val price = house.getInt("statePrice")
         val street = house.getString("street")
         val city = house.getString("city")
         val country = house.getString("country")
-        val estateType = house.getString("statetype")
-        val bedNumber = house.getInt("numberbed")
-        val bathNumber = house.getInt("numberbath")
+        val estateType = house.getString("stateType")
+        val bedNumber = house.getInt("numberBed")
+        val bathNumber = house.getInt("numberBath")
 //        val carNumber = house.getInt("numberCar")
-        val rent = if (house.getBoolean("rent")) "rent" else "sell"
+        val textRent = holder.itemView.context.getString(R.string.rent)
+        val textSell = holder.itemView.context.getString(R.string.sell)
+        val rent = if (house.getBoolean("rent")) textRent else textSell
+        val textFor = holder.itemView.context.getString(R.string.text_for)
+        val textRial = holder.itemView.context.getString(R.string.rial)
 
-        holder.item.findViewById<TextView>(R.id.adItemPrice).text = "$" + price.toString()
-        holder.item.findViewById<TextView>(R.id.adItemAddress).text =
-            street + ", " + city + ", " + country
+        holder.item.findViewById<TextView>(R.id.adItemPrice).text = "$price $textRial"
+        holder.item.findViewById<TextView>(R.id.adItemAddress).text = "$street, $city, $country"
         holder.item.findViewById<TextView>(R.id.adItemBedNumber).text = bedNumber.toString()
         holder.item.findViewById<TextView>(R.id.adItemBathNumber).text = bathNumber.toString()
 //        holder.item.findViewById<TextView>(R.id.adItemCarNumber).text = carNumber.toString()
-        holder.item.findViewById<TextView>(R.id.adItemEstateType).text = estateType + " for " + rent
+        holder.item.findViewById<TextView>(R.id.adItemEstateType).text = "$estateType $textFor $rent"
 
-        val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
-        OneHomeFragment.DownloadImageFromInternet(img).execute(house.getString("imgpath"))
+        //val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
+        //OneHomeFragment.DownloadImageFromInternet(img).execute(house.getString("imgpath"))
 
 
-        holder.item.setOnClickListener {
+        /*holder.item.setOnClickListener {
             val bundle = bundleOf("id" to id)
             print("BUNDLE")
             println(bundle)
@@ -163,7 +158,7 @@ class MyAdapter(private var myDataset: JSONArray) :
             holder.item.findNavController().navigate(
                 R.id.action_navigation_home_to_oneHomeFragment, bundle
             )
-        }
+        }*/
     }
 
     fun swapDataSet(newData: JSONArray) {

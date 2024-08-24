@@ -1,6 +1,7 @@
 package com.example.housepick.ui.ads
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
@@ -34,17 +35,21 @@ class OneAdFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        oneAdViewModel =
-            ViewModelProvider(this).get(OneAdViewModel::class.java)
+        oneAdViewModel = ViewModelProvider(this).get(OneAdViewModel::class.java)
 
         _binding = FragmentOneAdBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val id: Int = arguments?.getInt("id")!!
 
-        oneAdViewModel.getAction().observe(
-            viewLifecycleOwner
-        ) { action -> action?.let { handleAction(it) } }
+        oneAdViewModel.getAction().observe(viewLifecycleOwner) { action ->
+            action?.let {
+                handleAction(
+                    it,
+                    root.context
+                )
+            }
+        }
 
         oneAdViewModel.displayHome(id)
 
@@ -60,33 +65,41 @@ class OneAdFragment : Fragment() {
         _binding = null
     }
 
-    private fun handleAction(action: OneAdAction) {
+    @SuppressLint("SetTextI18n")
+    private fun handleAction(action: OneAdAction, context: Context) {
         when (action.value) {
             OneAdAction.HOME_LOADED -> {
                 ad = oneAdViewModel.ad
-                binding.adDetailsTitle.setText(ad.getString("title"))
-                binding.adDetailsAddress.setText(
-                    ad.getString("street") + ", " + ad.getString("city") + ", " + ad.getString(
-                        "country"
-                    )
-                )
-                binding.adDetailsPrice.setText("$" + ad.getInt("stateprice"))
-                binding.adDetailsEstateType.setText(
-                    ad.getString("statetype") + " for " + if (ad.getBoolean(
-                            "rent"
-                        )
-                    ) "rent" else "sell"
-                )
-                binding.adDetailsBedNumber.setText(ad.getInt("numberbed").toString())
-                binding.adDetailsBathNumber.setText(ad.getInt("numberbath").toString())
+                val textRent = context.getString(R.string.rent)
+                val textSell = context.getString(R.string.sell)
+                val rent = if (ad.getBoolean("rent")) textRent else textSell
+                val textFor = context.getString(R.string.text_for)
+                val textRial = context.getString(R.string.rial)
+                val price = ad.getInt("statePrice")
+                val street = ad.getString("street")
+                val city = ad.getString("city")
+                val country = ad.getString("country")
+                val estateType = ad.getString("stateType")
+                val bedNumber = ad.getInt("numberBed").toString()
+                val bathNumber = ad.getInt("numberBath").toString()
+                val email = ad.getString("email")
+                val phone = ad.getString("phone")
+                val description = ad.getString("description")
+                val title = ad.getString("title")
+                binding.adDetailsTitle.text = title
+                binding.adDetailsAddress.text = "$street, $city, $country"
+                binding.adDetailsPrice.text = "$price $textRial"
+                binding.adDetailsEstateType.text = "$estateType $textFor $rent"
+                binding.adDetailsBedNumber.text = bedNumber
+                binding.adDetailsBathNumber.text = bathNumber
 //                binding.adDetailsCarNumber.setText(home.getInt("numbercar").toString())
-                binding.adDetailsEmail.setText(ad.getString("email"))
-                binding.adDetailsPhone.setText(ad.getString("phone"))
-                binding.adDetailsDescription.setText(ad.getString("description"))
+                binding.adDetailsEmail.text = email
+                binding.adDetailsPhone.text = phone
+                binding.adDetailsDescription.text = description
 
                 val img = binding.adDetailsImage
                 //Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
-                DownloadImageFromInternet(img).execute(ad.getString("imgpath"))
+                //DownloadImageFromInternet(img).execute(ad.getString("imgpath"))
             }
 
             OneAdAction.NETWORK_ERROR -> {
