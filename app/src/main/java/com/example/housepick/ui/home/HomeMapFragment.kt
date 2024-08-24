@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.housepick.R
@@ -42,19 +41,19 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentHomeMapBinding? = null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val binding get() = _binding!!
-    lateinit var marker: MarkerOptions
+    private lateinit var marker: MarkerOptions
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        homeMapViewModel = ViewModelProvider(this).get(HomeMapViewModel::class.java)
+    ): View {
+        homeMapViewModel = ViewModelProvider(this)[HomeMapViewModel::class.java]
         // Inflate the layout for this fragment
         _binding = FragmentHomeMapBinding.inflate(inflater, container, false)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         homeMapViewModel.getAction().observe(
-            viewLifecycleOwner,
-            Observer<Action> { action -> action?.let { handleAction(it) } })
+            viewLifecycleOwner
+        ) { action -> action?.let { handleAction(it) } }
 
         /*binding.floatingActionButton.setOnClickListener{
             getLastKnownLocation()
@@ -84,8 +83,8 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
                 geocoder.getFromLocationName(name, 1)!!
             if (addresses.isNotEmpty()) {
                 mMap.clear()
-                val latLong: LatLng = LatLng(addresses[0].latitude, addresses[0].longitude)
-                val markerOptions: MarkerOptions = MarkerOptions()
+                val latLong = LatLng(addresses[0].latitude, addresses[0].longitude)
+                val markerOptions = MarkerOptions()
                 markerOptions.title(name)
                 markerOptions.position(latLong)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerOptions.position, 12F))
@@ -96,6 +95,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+
     @SuppressLint("MissingPermission")
     private fun getLastKnownLocation() {
         mMap.clear()
@@ -103,7 +103,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
             .addOnSuccessListener { location ->
                 if (location != null) {
                     homeMapViewModel.displayHomesByArea(location.latitude, location.longitude)
-                    val latLng: LatLng = LatLng(location.latitude, location.longitude)
+                    val latLng = LatLng(location.latitude, location.longitude)
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12F))
                 }
 
@@ -133,7 +133,7 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
                     showSnackBar(
                         binding.root,
                         R.string.no_houses_found,
-                        R.drawable.ant_design_home_outlined
+                        R.drawable.mail_box_icon
                     )
                     //Toast.makeText(context, R.string.no_houses_found, Toast.LENGTH_SHORT).show()
                 }
@@ -177,16 +177,30 @@ class HomeMapFragment : Fragment(), OnMapReadyCallback {
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        mMap.isMyLocationEnabled = true;
+        mMap.isMyLocationEnabled = true
         getLastKnownLocation()
+
         mMap.setOnMyLocationButtonClickListener {
             mMap.clear()
-            val ll = LatLng(mMap.myLocation.latitude, mMap.myLocation.longitude)
-            val update = CameraUpdateFactory.newLatLngZoom(ll, 12F)
-            mMap.animateCamera(update)
-            homeMapViewModel.displayHomesByArea(mMap.myLocation.latitude, mMap.myLocation.longitude)
+
+            val location = mMap.myLocation
+            if (location != null) {
+                val ll = LatLng(location.latitude, location.longitude)
+                val update = CameraUpdateFactory.newLatLngZoom(ll, 12F)
+                mMap.animateCamera(update)
+                homeMapViewModel.displayHomesByArea(location.latitude, location.longitude)
+            } else {
+                // Handle the case where the location is not yet available
+                showSnackBar(
+                    binding.root,
+                    R.string.network_error,
+                    R.drawable.mail_box_icon
+                )
+            }
             false
+
         }
+
         mMap.setOnMarkerClickListener { marker ->
             val bundle = bundleOf("id" to marker.tag)
             findNavController().navigate(
