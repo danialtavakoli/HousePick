@@ -28,6 +28,7 @@ class Ads {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
                 params["Authorization"] = "Bearer " + Application.JWT
+                params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
         }
@@ -36,7 +37,87 @@ class Ads {
 
     fun getHouses(callback: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/add/all"
+        val url = "http://${Application.IP}/ad/all"
+        println(Application.JWT)
+
+        val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
+            Method.GET, url, null,
+            { response ->
+                callback.onSuccessArray(response)
+            },
+            { error ->
+                callback.onError()
+                println(error.message)
+                println(error.cause?.message.toString())
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "Bearer " + Application.JWT
+                params["User-Agent"] = "Mozilla/5.0"
+                return params
+            }
+        }
+        println(jsonRequest.url.toString())
+        println(jsonRequest.headers.toString())
+        queue.add(jsonRequest)
+    }
+
+    fun getMyHouses(callback: VolleyCallbackAds) {
+        val queue = Volley.newRequestQueue(Application.appContext)
+        val url = "http://${Application.IP}/ad/all/user"
+
+        val jsonArrayRequest: JsonArrayRequest = object : JsonArrayRequest(
+            Method.GET, url, null,
+            { response ->
+                // Handle the JSONArray response
+                callback.onSuccessArray(response)
+            },
+            { error ->
+                callback.onError()
+                println(error.message)
+                println(error.cause?.message.toString())
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "Bearer " + Application.JWT
+                params["User-Agent"] = "Mozilla/5.0"
+                return params
+            }
+        }
+        queue.add(jsonArrayRequest)
+    }
+
+    fun getHousesByCity(city: String, callback: VolleyCallbackAds) {
+        val queue = Volley.newRequestQueue(Application.appContext)
+        val url = "http://${Application.IP}/ad/all?city=$city"
+
+        val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
+            Method.GET, url, null,
+            { response -> callback.onSuccessArray(response) },
+            { error ->
+                callback.onError()
+                println(error.message)
+                println(error.cause?.message.toString())
+            }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "Bearer " + Application.JWT
+                params["User-Agent"] = "Mozilla/5.0"
+                return params
+            }
+        }
+        queue.add(jsonRequest)
+    }
+
+    fun getHousesAroundMe(latitude: Double, longitude: Double, callback: VolleyCallbackAds) {
+        val queue = Volley.newRequestQueue(Application.appContext)
+        val url = "http://${Application.IP}/housings/area/$longitude&$latitude&20"
 
         val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
             Method.GET, url, null,
@@ -47,63 +128,7 @@ class Ads {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
                 params["Authorization"] = "Bearer " + Application.JWT
-                return params
-            }
-        }
-        queue.add(jsonRequest)
-    }
-
-    fun getMyHouses(callback: VolleyCallbackAds) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/add/all/user"
-
-        val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
-            Method.GET, url, null,
-            { response -> callback.onSuccessObject(response) },
-            { _ -> callback.onError() }) {
-            @Throws(AuthFailureError::class)
-            override fun getHeaders(): Map<String, String> {
-                val params: MutableMap<String, String> = HashMap()
-                params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
-                return params
-            }
-        }
-        queue.add(jsonRequest)
-    }
-
-    fun getHousesByCity(city: String, callback: VolleyCallbackAds) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/housings/city/$city"
-
-        val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
-            Method.GET, url, null,
-            { response -> callback.onSuccessObject(response) },
-            { _ -> callback.onError() }) {
-            @Throws(AuthFailureError::class)
-            override fun getHeaders(): Map<String, String> {
-                val params: MutableMap<String, String> = HashMap()
-                params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
-                return params
-            }
-        }
-        queue.add(jsonRequest)
-    }
-
-    fun getHousesArroundMe(latitude: Double, longitude: Double, callback: VolleyCallbackAds) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/housings/area/$longitude&$latitude&20"
-
-        val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
-            Method.GET, url, null,
-            { response -> callback.onSuccessObject(response) },
-            { _ -> callback.onError() }) {
-            @Throws(AuthFailureError::class)
-            override fun getHeaders(): Map<String, String> {
-                val params: MutableMap<String, String> = HashMap()
-                params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
         }
@@ -136,6 +161,7 @@ class Ads {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = MULTIPART_FORMDATA
                 params["Authorization"] = "Bearer " + Application.JWT
+                params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
         }
@@ -162,6 +188,7 @@ class Ads {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
                 params["Authorization"] = "Bearer " + Application.JWT
+                params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
         }
@@ -182,6 +209,7 @@ class Ads {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
                 params["Authorization"] = "Bearer " + Application.JWT
+                params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
         }
