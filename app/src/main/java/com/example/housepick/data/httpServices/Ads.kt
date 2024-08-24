@@ -19,7 +19,7 @@ class Ads {
 
     fun getHouse(callback: VolleyCallbackAds, id: Int) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/housings/" + id.toString()
+        val url = "http://" + Application.IP + "/ad/" + id.toString()
 
         val jsonRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
@@ -34,7 +34,7 @@ class Ads {
 
     fun getHouses(callback: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/housings"
+        val url = "http://" + Application.IP + "/add/all"
 
         val jsonRequest = JsonArrayRequest(
             Request.Method.GET, url, null,
@@ -49,7 +49,7 @@ class Ads {
 
     fun getMyHouses(callback: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/housings/user"
+        val url = "http://" + Application.IP + "/add/all/user"
 
         val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
             Method.GET, url, null,
@@ -169,7 +169,7 @@ class Ads {
 
     fun deleteHousing(id: Int, cb: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/housings/" + id.toString()
+        val url = "http://" + Application.IP + "/ad/" + id.toString()
         val jsonObject = JSONObject()
         val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
             Method.DELETE, url, jsonObject,
