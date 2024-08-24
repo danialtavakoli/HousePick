@@ -1,7 +1,6 @@
 package com.example.housepick.data.httpServices
 
 import com.android.volley.AuthFailureError
-import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
@@ -10,55 +9,58 @@ import com.example.housepick.Application
 import com.example.housepick.classes.Housing
 import org.json.JSONObject
 
-
 class Ads {
 
     private var BOUNDARY =
-        "s2retfgsGSRFsERFGHfgdfgw734yhFHW567TYHSrf4yarg" //This the boundary which is used by the server to split the post parameters.
+        "s2retfgsGSRFsERFGHfgdfgw734yhFHW567TYHSrf4yarg" // This is the boundary which is used by the server to split the post parameters.
     private var MULTIPART_FORMDATA = "multipart/form-data;boundary=$BOUNDARY"
 
     fun getHouse(callback: VolleyCallbackAds, id: Int) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/ad/" + id.toString()
+        val url = "http://${Application.IP}/ad/$id"
 
-        val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, url, null,
-            { response ->
-                callback.onSuccessObject(response)
-            },
-            { _ ->
-                callback.onError()
-            })
+        val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, url, null,
+            { response -> callback.onSuccessObject(response) },
+            { _ -> callback.onError() }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "Bearer " + Application.JWT
+                return params
+            }
+        }
         queue.add(jsonRequest)
     }
 
     fun getHouses(callback: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/add/all"
+        val url = "http://${Application.IP}/add/all"
 
-        val jsonRequest = JsonArrayRequest(
-            Request.Method.GET, url, null,
-            { response ->
-                callback.onSuccessArray(response)
-            },
-            { _ ->
-                callback.onError()
-            })
+        val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
+            Method.GET, url, null,
+            { response -> callback.onSuccessArray(response) },
+            { _ -> callback.onError() }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "Bearer " + Application.JWT
+                return params
+            }
+        }
         queue.add(jsonRequest)
     }
 
     fun getMyHouses(callback: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/add/all/user"
+        val url = "http://${Application.IP}/add/all/user"
 
         val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
             Method.GET, url, null,
-            { response ->
-                callback.onSuccessObject(response)
-            },
-            {
-                callback.onError()
-            }) {
+            { response -> callback.onSuccessObject(response) },
+            { _ -> callback.onError() }) {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
@@ -72,54 +74,45 @@ class Ads {
 
     fun getHousesByCity(city: String, callback: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/housings/city/" + city
+        val url = "http://${Application.IP}/housings/city/$city"
 
-        val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, url, null,
-            { response ->
-                callback.onSuccessObject(response)
-            },
-            { _ ->
-                callback.onError()
-            })
+        val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, url, null,
+            { response -> callback.onSuccessObject(response) },
+            { _ -> callback.onError() }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "Bearer " + Application.JWT
+                return params
+            }
+        }
         queue.add(jsonRequest)
-
     }
 
     fun getHousesArroundMe(latitude: Double, longitude: Double, callback: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url =
-            "http://" + Application.IP + "/housings/area/" + longitude + "&" + latitude + "&" + 20
+        val url = "http://${Application.IP}/housings/area/$longitude&$latitude&20"
 
-        val jsonRequest = JsonObjectRequest(
-            Request.Method.GET, url, null,
-            { response ->
-                callback.onSuccessObject(response)
-            },
-            { _ ->
-                callback.onError()
-            })
-        queue.add(jsonRequest)
-
-    }
-
-    private fun createPostBody(params: Map<String, String?>?): String? {
-        val sbPost = StringBuilder()
-        if (params != null) {
-            for (key in params.keys) {
-                if (params[key] != null) {
-                    sbPost.append("\r\n--$BOUNDARY\r\n")
-                    sbPost.append("Content-Disposition: form-data; name=\"$key\"\r\n\r\n")
-                    sbPost.append(params[key].toString())
-                }
+        val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Method.GET, url, null,
+            { response -> callback.onSuccessObject(response) },
+            { _ -> callback.onError() }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "Bearer " + Application.JWT
+                return params
             }
         }
-        return sbPost.toString()
+        queue.add(jsonRequest)
     }
 
     fun hostImage(b64Image: String, cb: VolleyCallbackJsonObject) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "https://api.imgbb.com/1/upload?key=${"ce5f8c85e3cbe0c433c7002c95659dcb"}"
+        val url = "https://api.imgbb.com/1/upload?key=ce5f8c85e3cbe0c433c7002c95659dcb"
 
         val jsonObject = JSONObject()
 
@@ -137,6 +130,14 @@ class Ads {
                 map["image"] = b64Image
                 return createPostBody(map)!!.toByteArray()
             }
+
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = MULTIPART_FORMDATA
+                params["Authorization"] = "Bearer " + Application.JWT
+                return params
+            }
         }
 
         queue.add(jsonRequest)
@@ -147,7 +148,7 @@ class Ads {
         callback: VolleyCallbackJsonObject
     ) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/ad"
+        val url = "http://${Application.IP}/ad"
 
         val jsonObject = housing.toJsonObject()
         println(jsonObject)
@@ -169,8 +170,9 @@ class Ads {
 
     fun deleteHousing(id: Int, cb: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/ad/" + id.toString()
+        val url = "http://${Application.IP}/ad/$id"
         val jsonObject = JSONObject()
+
         val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
             Method.DELETE, url, jsonObject,
             Response.Listener { response -> cb.onSuccessObject(response) },
@@ -186,4 +188,17 @@ class Ads {
         queue.add(jsonRequest)
     }
 
+    private fun createPostBody(params: Map<String, String?>?): String? {
+        val sbPost = StringBuilder()
+        if (params != null) {
+            for (key in params.keys) {
+                if (params[key] != null) {
+                    sbPost.append("\r\n--$BOUNDARY\r\n")
+                    sbPost.append("Content-Disposition: form-data; name=\"$key\"\r\n\r\n")
+                    sbPost.append(params[key].toString())
+                }
+            }
+        }
+        return sbPost.toString()
+    }
 }
