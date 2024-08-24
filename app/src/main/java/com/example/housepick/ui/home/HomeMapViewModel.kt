@@ -55,7 +55,7 @@ class HomeMapViewModel: ViewModel() {
             }
 
         }
-        ads.getHousesArroundMe(latitude,longitude,cb)
+        ads.getHousesAroundMe(latitude,longitude,cb)
     }
     private fun showDataLoaded() {
         mAction.value = Action(Action.HOMES_LOADED)
