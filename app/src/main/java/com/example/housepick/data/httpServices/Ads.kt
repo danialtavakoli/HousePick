@@ -147,7 +147,7 @@ class Ads {
         callback: VolleyCallbackJsonObject
     ) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/housings"
+        val url = "http://" + Application.IP + "/ad"
 
         val jsonObject = housing.toJsonObject()
         println(jsonObject)
