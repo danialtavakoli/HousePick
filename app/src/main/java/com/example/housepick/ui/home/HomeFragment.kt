@@ -16,6 +16,8 @@ import com.example.housepick.databinding.FragmentHomeBinding
 import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.NumberFormat
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -139,12 +141,18 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         val textFor = holder.itemView.context.getString(R.string.text_for)
         val textRial = holder.itemView.context.getString(R.string.rial)
 
-        holder.item.findViewById<TextView>(R.id.adItemPrice).text = "$price $textRial"
+        val numberFormat = NumberFormat.getNumberInstance(Locale("fa", "IR"))
+        val persianPrice = numberFormat.format(price)
+        val persianBedNumber = numberFormat.format(bedNumber).toString()
+        val persianBathNumber = numberFormat.format(bathNumber).toString()
+
+        holder.item.findViewById<TextView>(R.id.adItemPrice).text = "$persianPrice $textRial"
         holder.item.findViewById<TextView>(R.id.adItemAddress).text = "$street, $city, $country"
-        holder.item.findViewById<TextView>(R.id.adItemBedNumber).text = bedNumber.toString()
-        holder.item.findViewById<TextView>(R.id.adItemBathNumber).text = bathNumber.toString()
+        holder.item.findViewById<TextView>(R.id.adItemBedNumber).text = persianBedNumber
+        holder.item.findViewById<TextView>(R.id.adItemBathNumber).text = persianBathNumber
 //        holder.item.findViewById<TextView>(R.id.adItemCarNumber).text = carNumber.toString()
-        holder.item.findViewById<TextView>(R.id.adItemEstateType).text = "$estateType $textFor $rent"
+        holder.item.findViewById<TextView>(R.id.adItemEstateType).text =
+            "$estateType $textFor $rent"
 
         //val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
         //OneHomeFragment.DownloadImageFromInternet(img).execute(house.getString("imgpath"))

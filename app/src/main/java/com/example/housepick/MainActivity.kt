@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.housepick.data.utils.TokenUtils
+import com.example.housepick.databinding.ActivityMainBinding
 import com.example.housepick.ui.login.LoginFragment
 import com.example.housepick.ui.register.RegisterFragment
 import java.util.Locale
@@ -16,10 +17,11 @@ import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        binding = ActivityMainBinding.inflate(layoutInflater)
         //set lang to farsi
         val config = resources.configuration
         val lang = "fa" // your language code
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) createConfigurationContext(config)
         resources.updateConfiguration(config, resources.displayMetrics)
 
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         val authenticationStateAdapter = AuthenticationStateAdapter(this)
         authenticationStateAdapter.addFragment(LoginFragment())
