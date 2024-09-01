@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.housepick.Application
@@ -21,8 +23,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.text.NumberFormat
 import java.util.Locale
-
-
 
 
 class AdsFragment : Fragment() {
@@ -132,7 +132,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         val ad = myDataset[position] as JSONObject
 
         // Extract data from JSONObject
-        //val id = ad.getInt("id")
+        val id = ad.getInt("id")
         val price = ad.getInt("statePrice")
         val street = ad.getString("street")
         val city = ad.getString("city")
@@ -158,18 +158,19 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         holder.item.findViewById<TextView>(R.id.adItemBedNumber).text = persianBedNumber
         holder.item.findViewById<TextView>(R.id.adItemBathNumber).text = persianBathNumber
 //        holder.item.findViewById<TextView>(R.id.adItemCarNumber).text = carNumber.toString()
-        holder.item.findViewById<TextView>(R.id.adItemEstateType).text = "$estateType $textFor $rent"
+        holder.item.findViewById<TextView>(R.id.adItemEstateType).text =
+            "$estateType $textFor $rent"
 
 
         val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
         //OneHomeFragment.DownloadImageFromInternet(img).execute(ad.getString("imgpath"))
 
-        /*holder.item.setOnClickListener {
+        holder.item.setOnClickListener {
             val bundle = bundleOf("id" to id)
             holder.item.findNavController().navigate(
                 R.id.action_navigation_ads_to_oneAdFragment, bundle
             )
-        }*/
+        }
     }
 
     fun swapDataSet(newData: JSONArray) {

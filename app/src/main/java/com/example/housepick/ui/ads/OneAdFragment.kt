@@ -19,6 +19,8 @@ import com.example.housepick.R
 import com.example.housepick.databinding.FragmentOneAdBinding
 import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONObject
+import java.text.NumberFormat
+import java.util.Locale
 
 
 class OneAdFragment : Fragment() {
@@ -80,21 +82,28 @@ class OneAdFragment : Fragment() {
                 val city = ad.getString("city")
                 val country = ad.getString("country")
                 val estateType = ad.getString("stateType")
-                val bedNumber = ad.getInt("numberBed").toString()
-                val bathNumber = ad.getInt("numberBath").toString()
+                val bedNumber = ad.getInt("numberBed")
+                val bathNumber = ad.getInt("numberBath")
                 val email = ad.getString("email")
-                val phone = ad.getString("phone")
+                val phone = ad.getString("phone").toInt()
                 val description = ad.getString("description")
                 val title = ad.getString("title")
+
+                val numberFormat = NumberFormat.getNumberInstance(Locale("fa", "IR"))
+                val persianPrice = numberFormat.format(price)
+                val persianBedNumber = numberFormat.format(bedNumber).toString()
+                val persianBathNumber = numberFormat.format(bathNumber).toString()
+                val persianPhone = numberFormat.format(phone).toString()
+
                 binding.adDetailsTitle.text = title
                 binding.adDetailsAddress.text = "$street, $city, $country"
-                binding.adDetailsPrice.text = "$price $textRial"
+                binding.adDetailsPrice.text = "$persianPrice $textRial"
                 binding.adDetailsEstateType.text = "$estateType $textFor $rent"
-                binding.adDetailsBedNumber.text = bedNumber
-                binding.adDetailsBathNumber.text = bathNumber
+                binding.adDetailsBedNumber.text = persianBedNumber
+                binding.adDetailsBathNumber.text = persianBathNumber
 //                binding.adDetailsCarNumber.setText(home.getInt("numbercar").toString())
                 binding.adDetailsEmail.text = email
-                binding.adDetailsPhone.text = phone
+                binding.adDetailsPhone.text = persianPhone
                 binding.adDetailsDescription.text = description
 
                 val img = binding.adDetailsImage

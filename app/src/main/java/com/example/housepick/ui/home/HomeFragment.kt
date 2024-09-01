@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.housepick.Application
@@ -126,7 +128,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         val house = myDataset[position] as JSONObject
 
         // Extract data from JSONObject
-        //val id = house.getInt("id")
+        val id = house.getInt("id")
         val price = house.getInt("statePrice")
         val street = house.getString("street")
         val city = house.getString("city")
@@ -158,7 +160,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         //OneHomeFragment.DownloadImageFromInternet(img).execute(house.getString("imgpath"))
 
 
-        /*holder.item.setOnClickListener {
+        holder.item.setOnClickListener {
             val bundle = bundleOf("id" to id)
             print("BUNDLE")
             println(bundle)
@@ -166,7 +168,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
             holder.item.findNavController().navigate(
                 R.id.action_navigation_home_to_oneHomeFragment, bundle
             )
-        }*/
+        }
     }
 
     fun swapDataSet(newData: JSONArray) {
