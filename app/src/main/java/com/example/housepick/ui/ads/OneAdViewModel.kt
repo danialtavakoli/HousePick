@@ -53,7 +53,6 @@ class OneAdViewModel : ViewModel() {
 
     private fun onDeleteError() {
         mAction.value = OneAdAction(OneAdAction.DELETE_ERROR)
-
     }
 
     fun deleteHousing(id: Int) {

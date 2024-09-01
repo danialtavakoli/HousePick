@@ -1,7 +1,9 @@
 package com.example.housepick.data.httpServices
 
 import com.android.volley.AuthFailureError
+import com.android.volley.NetworkResponse
 import com.android.volley.Response
+import com.android.volley.toolbox.HttpHeaderParser
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -198,10 +200,9 @@ class Ads {
     fun deleteHousing(id: Int, cb: VolleyCallbackAds) {
         val queue = Volley.newRequestQueue(Application.appContext)
         val url = "http://${Application.IP}/ad/$id"
-        val jsonObject = JSONObject()
 
         val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
-            Method.DELETE, url, jsonObject,
+            Method.DELETE, url, null,
             Response.Listener { response -> cb.onSuccessObject(response) },
             Response.ErrorListener { cb.onError() }) {
             @Throws(AuthFailureError::class)
@@ -211,6 +212,15 @@ class Ads {
                 params["Authorization"] = "Bearer " + Application.JWT
                 params["User-Agent"] = "Mozilla/5.0"
                 return params
+            }
+
+            override fun parseNetworkResponse(response: NetworkResponse?): Response<JSONObject> {
+                return if (response != null && response.data.isNotEmpty()) {
+                    super.parseNetworkResponse(response)
+                } else {
+                    // Treat an empty or blank response as an empty JSON object
+                    Response.success(JSONObject(), HttpHeaderParser.parseCacheHeaders(response))
+                }
             }
         }
         queue.add(jsonRequest)
