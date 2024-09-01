@@ -137,7 +137,7 @@ class Ads {
 
     fun hostImage(b64Image: String, cb: VolleyCallbackJsonObject) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "https://api.imgbb.com/1/upload?key=ce5f8c85e3cbe0c433c7002c95659dcb"
+        val url = "https://api.imgbb.com/1/upload?key=9a3afcf8b9d022957fe5e9c9baa29c7e"
 
         val jsonObject = JSONObject()
 
