@@ -85,7 +85,7 @@ class OneAdFragment : Fragment() {
                 val bedNumber = ad.getInt("numberBed")
                 val bathNumber = ad.getInt("numberBath")
                 val email = ad.getString("email")
-                val phone = ad.getString("phone").toInt()
+                val phone = ad.getString("phone")
                 val description = ad.getString("description")
                 val title = ad.getString("title")
 
@@ -93,7 +93,6 @@ class OneAdFragment : Fragment() {
                 val persianPrice = numberFormat.format(price)
                 val persianBedNumber = numberFormat.format(bedNumber).toString()
                 val persianBathNumber = numberFormat.format(bathNumber).toString()
-                val persianPhone = numberFormat.format(phone).toString()
 
                 binding.adDetailsTitle.text = title
                 binding.adDetailsAddress.text = "$street, $city, $country"
@@ -103,7 +102,7 @@ class OneAdFragment : Fragment() {
                 binding.adDetailsBathNumber.text = persianBathNumber
 //                binding.adDetailsCarNumber.setText(home.getInt("numbercar").toString())
                 binding.adDetailsEmail.text = email
-                binding.adDetailsPhone.text = persianPhone
+                binding.adDetailsPhone.text = phone
                 binding.adDetailsDescription.text = description
 
                 val img = binding.adDetailsImage
