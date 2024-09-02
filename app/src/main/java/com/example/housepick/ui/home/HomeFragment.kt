@@ -56,6 +56,8 @@ class HomeFragment : Fragment() {
         binding.homeSearchBtn.setOnClickListener {
             if (binding.homeSearch.text.toString().isNotEmpty()) {
                 homeViewModel.displayHomesByCity(binding.homeSearch.text.toString())
+            } else {
+                homeViewModel.displayHomes()
             }
         }
 
