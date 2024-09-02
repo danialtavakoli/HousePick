@@ -74,7 +74,7 @@ class NotificationsFragment : Fragment() {
             binding.profileButtonPasswordUpdate.isEnabled = false
             val password: String = binding.profileEditTextPassword.text.toString()
             val repassword: String = binding.profileEditTextPasswordRetype.text.toString()
-            notificationsViewModel.changePassword(password, repassword)
+            //notificationsViewModel.changePassword(password, repassword)
         }
 
         disconnectButton.setOnClickListener {
