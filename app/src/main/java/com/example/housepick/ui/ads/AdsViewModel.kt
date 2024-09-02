@@ -25,7 +25,6 @@ class AdsViewModel : ViewModel() {
                 //not used
             }
             override fun onSuccessArray(result: JSONArray) {
-                println(result.toString())
                 adsArray = result
                 showDataLoaded()
             }
@@ -34,7 +33,6 @@ class AdsViewModel : ViewModel() {
             }
         }
         ads.getMyHouses(cb)
-
     }
 
     private fun showDataLoaded() {

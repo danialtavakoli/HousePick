@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigator
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -20,6 +23,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.text.NumberFormat
 import java.util.Locale
+import java.util.logging.Handler
 
 class HomeFragment : Fragment() {
 
@@ -160,7 +164,6 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
 
         //val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
         //OneHomeFragment.DownloadImageFromInternet(img).execute(house.getString("imgpath"))
-
 
         holder.item.setOnClickListener {
             val bundle = bundleOf("id" to id)

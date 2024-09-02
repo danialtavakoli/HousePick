@@ -18,19 +18,13 @@ class HomeViewModel : ViewModel() {
     }
     private val ads = Ads()
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-
     fun displayHomes(){
         val cb: VolleyCallbackAds = object: VolleyCallbackAds {
             override fun onSuccessObject(result: JSONObject) {
                 // Not used
             }
             override fun onSuccessArray(result: JSONArray) {
-                if (result != null) {
-                    homesArray = result
-                }
+                homesArray = result
                 showDataLoaded()
             }
             override fun onError() {
@@ -39,7 +33,6 @@ class HomeViewModel : ViewModel() {
 
         }
         ads.getHouses(cb)
-
     }
 
     fun displayHomesByCity(city: String){
