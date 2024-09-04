@@ -44,14 +44,9 @@ class Ads {
 
         val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
             Method.GET, url, null,
-            { response ->
-                callback.onSuccessArray(response)
-            },
-            { error ->
-                callback.onError()
-                println(error.message)
-                println(error.cause?.message.toString())
-            }) {
+            { response -> callback.onSuccessArray(response)
+            }, { callback.onError() })
+        {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
@@ -139,14 +134,19 @@ class Ads {
 
     fun hostImage(b64Image: String, cb: VolleyCallbackJsonObject) {
         val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "https://api.imgbb.com/1/upload?key=9a3afcf8b9d022957fe5e9c9baa29c7e"
+        val url = "http://${Application.IP}/upload"
 
         val jsonObject = JSONObject()
 
         val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
             Method.POST, url, jsonObject,
-            Response.Listener { response -> cb.onSuccess(response) },
-            Response.ErrorListener { cb.onError() }) {
+            Response.Listener { response ->
+                cb.onSuccess(response)
+            },
+            Response.ErrorListener {
+                cb.onError()
+            }) {
+
             override fun getBodyContentType(): String? {
                 return MULTIPART_FORMDATA
             }
@@ -179,7 +179,6 @@ class Ads {
         val url = "http://${Application.IP}/ad"
 
         val jsonObject = housing.toJsonObject()
-        println(jsonObject)
 
         val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
             Method.POST, url, jsonObject,

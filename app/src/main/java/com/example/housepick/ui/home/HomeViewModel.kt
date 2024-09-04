@@ -16,17 +16,20 @@ class HomeViewModel : ViewModel() {
     fun getAction(): LiveData<Action> {
         return mAction
     }
+
     private val ads = Ads()
 
-    fun displayHomes(){
-        val cb: VolleyCallbackAds = object: VolleyCallbackAds {
+    fun displayHomes() {
+        val cb: VolleyCallbackAds = object : VolleyCallbackAds {
             override fun onSuccessObject(result: JSONObject) {
                 // Not used
             }
+
             override fun onSuccessArray(result: JSONArray) {
                 homesArray = result
                 showDataLoaded()
             }
+
             override fun onError() {
                 showNetworkError()
             }
@@ -35,8 +38,8 @@ class HomeViewModel : ViewModel() {
         ads.getHouses(cb)
     }
 
-    fun displayHomesByCity(city: String){
-        val cb: VolleyCallbackAds = object: VolleyCallbackAds {
+    fun displayHomesByCity(city: String) {
+        val cb: VolleyCallbackAds = object : VolleyCallbackAds {
             override fun onSuccessObject(result: JSONObject) {
                 homesArray = result.getJSONArray("housings") as JSONArray
                 showDataLoaded()
@@ -59,6 +62,7 @@ class HomeViewModel : ViewModel() {
         mAction.value = Action(Action.HOMES_LOADED)
 
     }
+
     private fun showNetworkError() {
         mAction.value = Action(Action.NETWORK_ERROR)
     }

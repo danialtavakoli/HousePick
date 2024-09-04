@@ -14,6 +14,8 @@ import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.housepick.Application
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentOneAdBinding
@@ -88,6 +90,7 @@ class OneAdFragment : Fragment() {
                 val phone = ad.getString("phone")
                 val description = ad.getString("description")
                 val title = ad.getString("title")
+                val imagePath = ad.getString("image")
 
                 val numberFormat = NumberFormat.getNumberInstance(Locale("fa", "IR"))
                 val persianPrice = numberFormat.format(price)
@@ -108,6 +111,11 @@ class OneAdFragment : Fragment() {
                 val img = binding.adDetailsImage
                 //Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
                 //DownloadImageFromInternet(img).execute(ad.getString("imgpath"))
+
+                // Load the image using Glide
+                Glide.with(context)
+                    .load(imagePath)
+                    .into(img)
             }
 
             OneAdAction.NETWORK_ERROR -> {

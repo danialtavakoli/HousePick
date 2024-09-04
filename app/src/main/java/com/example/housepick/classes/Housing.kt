@@ -18,7 +18,7 @@ class Housing(
     var phone: String,
     var description: String,
     var latLong: LatLng?,
-    var imgPath: String?
+    var imgPath: String?,
 ) {
 
 
@@ -37,13 +37,11 @@ class Housing(
         jsonObject.put("email", email)
         jsonObject.put("phone", phone)
         jsonObject.put("rent", rent)
+        jsonObject.put("image", imgPath)
         /*jsonObject.put(
             "latLong", JSONObject().put("longitude", latLong!!.longitude)
                 .put("latitude", latLong!!.latitude).toString()
-        )
-        if (imgPath !== null) {
-            jsonObject.put("imgPath", imgPath)
-        }*/
+        )*/
         return jsonObject
     }
 }

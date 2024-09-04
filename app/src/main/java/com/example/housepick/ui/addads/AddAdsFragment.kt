@@ -3,6 +3,7 @@ package com.example.housepick.ui.addads
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Switch
 import androidx.activity.result.ActivityResult
@@ -29,6 +29,7 @@ import com.example.housepick.databinding.FragmentAddAdsBinding
 import com.example.housepick.ui.utils.showSnackBar
 import com.google.android.gms.maps.model.LatLng
 import java.io.ByteArrayOutputStream
+import java.io.InputStream
 
 class AddAdsFragment : Fragment() {
 
@@ -58,20 +59,13 @@ class AddAdsFragment : Fragment() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        addAdsViewModel =
-            ViewModelProvider(this).get(AddAdsViewModel::class.java)
+        addAdsViewModel = ViewModelProvider(this).get(AddAdsViewModel::class.java)
 
         _binding = FragmentAddAdsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val imgAddButton: ImageButton = binding.imgAddButton
-        val locationButton: ImageButton = binding.locationButton
-        val imageButtonBed: ImageButton = binding.imageButtonBed
-        val imageButtonBathroom: ImageButton = binding.imageButtonBathroom
         createAdsButton = binding.createAdsButton
         createAdsButton.isEnabled = false
 
@@ -143,23 +137,23 @@ class AddAdsFragment : Fragment() {
 
             val latLng = LatLng(32.63647365027362, 51.67652963465183)
             housing.latLong = latLng
-            addAdsViewModel.createAd(housing)
+            //addAdsViewModel.createAd(housing)
 
-            /*if (uri != null) {
+            if (uri != null) {
                 val imageStream: InputStream? = context?.contentResolver?.openInputStream(uri!!)
                 if (imageStream != null) {
                     val selectedImage = BitmapFactory.decodeStream(imageStream)
                     val encodedImage: String? = encodeImage(selectedImage)
                     if (encodedImage != null) {
                         binding.createAdsButton.isEnabled = false
-                        addAdsViewModel.createAd(housing, encodedImage)
-
+                        housing.imgPath = uri.toString()
+                        addAdsViewModel.createAd(housing)
                     }
                 }
             } else {
                 showSnackBar(binding.root, R.string.no_image_selected, R.drawable.mail_box_icon)
                 //Toast.makeText(context, "No image selected", Toast.LENGTH_SHORT).show()
-            }*/
+            }
         }
 
         binding.imgAddButton.setOnClickListener {
@@ -263,18 +257,19 @@ class AddAdsFragment : Fragment() {
                 if (res != null) {
                     val extra = res.data
                     uri = extra
+                    val takeFlags: Int =
+                        res.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+                    requireContext().contentResolver.takePersistableUriPermission(uri!!, takeFlags)
                     imgToUpload.setImageURI(extra)
                 }
             }
         }
 
     private fun openActivityForResult() {
-
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
         startForResult.launch(intent)
-
     }
 
 }

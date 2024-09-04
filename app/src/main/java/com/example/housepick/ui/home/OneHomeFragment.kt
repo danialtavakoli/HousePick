@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.housepick.Application
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentOneHomeBinding
@@ -20,6 +21,7 @@ import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONObject
 import java.text.NumberFormat
 import java.util.Locale
+
 
 class OneHomeFragment : Fragment() {
     private lateinit var oneHomeViewModel: OneHomeViewModel
@@ -83,6 +85,7 @@ class OneHomeFragment : Fragment() {
                 val phone = home.getString("phone")
                 val description = home.getString("description")
                 val title = home.getString("title")
+                val imagePath = home.getString("image")
 
                 val numberFormat = NumberFormat.getNumberInstance(Locale("fa", "IR"))
                 val persianPrice = numberFormat.format(price)
@@ -103,6 +106,11 @@ class OneHomeFragment : Fragment() {
                 val img = binding.adDetailsImage
                 //Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
                 //DownloadImageFromInternet(img).execute(home.getString("imgpath"))
+
+                // Load the image using Glide
+                Glide.with(context)
+                    .load(imagePath)
+                    .into(img)
             }
 
             OneHomeAction.NETWORK_ERROR -> {
@@ -116,7 +124,8 @@ class OneHomeFragment : Fragment() {
 
     @SuppressLint("StaticFieldLeak")
     @Suppress("DEPRECATION")
-    class DownloadImageFromInternet(var imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
+    class DownloadImageFromInternet(private var imageView: ImageView) :
+        AsyncTask<String, Void, Bitmap?>() {
         //        init {
 //            Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
 //        }

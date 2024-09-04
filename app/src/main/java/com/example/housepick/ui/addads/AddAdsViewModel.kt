@@ -15,12 +15,6 @@ class AddAdsViewModel : ViewModel() {
     private val ads = Ads()
     private val geocoder: Geocoder = Geocoder(Application.appContext!!, Locale.getDefault())
 
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is add ads Fragment"
-    }
-    val text: LiveData<String> = _text
-
     private val mAction: MutableLiveData<Action> = MutableLiveData<Action>()
 
     fun getAction(): LiveData<Action> {
@@ -33,7 +27,6 @@ class AddAdsViewModel : ViewModel() {
         } else {
             val addHousingCb: VolleyCallbackJsonObject = object : VolleyCallbackJsonObject {
                 override fun onSuccess(result: JSONObject?) {
-                    println(result.toString())
                     showAdsCreated()
                 }
 
@@ -46,61 +39,47 @@ class AddAdsViewModel : ViewModel() {
     }
 
     /*fun createAd(housing: Housing, b64Image: String) {
-        val latLong: LatLng
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(housing.email).matches()) {
             showBadMail()
         } else {
-            val address =
-                "${housing.street}, ${housing.postalCode}, ${housing.city}, ${housing.country}"
-            val addressToLatLong: List<Address> =
-                geocoder.getFromLocationName(address, 1)!!
-            println("GEOCODER")
-            println(addressToLatLong)
-            if (addressToLatLong.isNotEmpty()) {
-                latLong = LatLng(addressToLatLong[0].latitude, addressToLatLong[0].longitude)
-                housing.latLong = latLong
-                val uploadImageCb: VolleyCallbackJsonObject = object : VolleyCallbackJsonObject {
-                    override fun onSuccess(result: JSONObject?) {
-                        val addHousingCb: VolleyCallbackJsonObject =
-                            object : VolleyCallbackJsonObject {
-                                override fun onSuccess(result: JSONObject?) {
-                                    showAdsCreated()
-                                }
-
-                                override fun onError() {
-                                    showInvalidArguments()
-                                }
+            val uploadImageCb: VolleyCallbackJsonObject = object : VolleyCallbackJsonObject {
+                override fun onSuccess(result: JSONObject?) {
+                    println(result.toString())
+                    val addHousingCb: VolleyCallbackJsonObject =
+                        object : VolleyCallbackJsonObject {
+                            override fun onSuccess(result: JSONObject?) {
+                                showAdsCreated()
                             }
-                        println("onSuccess")
-                        var valid = false
-                        if (result != null) {
-                            val data = result.get("data") as JSONObject?
-                            if (data != null) {
-                                val imgUrl = data.get("url") as String?
-                                if (imgUrl != null) {
-                                    valid = true
-                                    println(imgUrl)
-                                    housing.imgPath = imgUrl
-                                    ads.createAd(housing, addHousingCb)
-                                }
+
+                            override fun onError() {
+                                showInvalidArguments()
                             }
                         }
-                        if (!valid) {
-                            showInvalidArguments()
+                    println("onSuccess")
+                    var valid = false
+                    if (result != null) {
+                        val data = result.get("data") as JSONObject?
+                        if (data != null) {
+                            val imgUrl = data.get("url") as String?
+                            if (imgUrl != null) {
+                                valid = true
+                                println(imgUrl)
+                                housing.imgPath = imgUrl
+                                ads.createAd(housing, addHousingCb)
+                            }
                         }
                     }
-
-                    override fun onError() {
+                    if (!valid) {
                         showInvalidArguments()
                     }
                 }
-                ads.hostImage(b64Image, uploadImageCb)
-            } else {
-                showBadAddress()
+
+                override fun onError() {
+                    showInvalidArguments()
+                }
             }
+            ads.hostImage(b64Image, uploadImageCb)
         }
-
-
     }*/
 
     private fun showInvalidArguments() {

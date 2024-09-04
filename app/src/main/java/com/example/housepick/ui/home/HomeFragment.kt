@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -12,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.housepick.Application
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentHomeBinding
@@ -138,6 +141,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         val estateType = house.getString("stateType")
         val bedNumber = house.getInt("numberBed")
         val bathNumber = house.getInt("numberBath")
+        val imagePath = house.getString("image")
 //        val carNumber = house.getInt("numberCar")
         val textRent = holder.itemView.context.getString(R.string.rent)
         val textSell = holder.itemView.context.getString(R.string.sell)
@@ -158,8 +162,13 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         holder.item.findViewById<TextView>(R.id.adItemEstateType).text =
             "$estateType $textFor $rent"
 
-        //val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
-        //OneHomeFragment.DownloadImageFromInternet(img).execute(house.getString("imgpath"))
+        val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
+        //OneHomeFragment.DownloadImageFromInternet(img).execute(imagePath)
+
+        // Load the image using Glide
+        Glide.with(holder.itemView.context)
+            .load(imagePath)
+            .into(img)
 
         holder.item.setOnClickListener {
             val bundle = bundleOf("id" to id)
