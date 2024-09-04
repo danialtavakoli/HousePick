@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
-    id 'org.jetbrains.kotlin.kapt'
 }
 
 android {
@@ -85,5 +84,4 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:2.1.0"
 
     implementation 'com.github.bumptech.glide:glide:4.8.0'
-    kapt 'com.github.bumptech.glide:compiler:4.8.0'
 }

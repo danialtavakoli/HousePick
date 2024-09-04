@@ -137,7 +137,6 @@ class AddAdsFragment : Fragment() {
 
             val latLng = LatLng(32.63647365027362, 51.67652963465183)
             housing.latLong = latLng
-            //addAdsViewModel.createAd(housing)
 
             if (uri != null) {
                 val imageStream: InputStream? = context?.contentResolver?.openInputStream(uri!!)
@@ -146,7 +145,8 @@ class AddAdsFragment : Fragment() {
                     val encodedImage: String? = encodeImage(selectedImage)
                     if (encodedImage != null) {
                         binding.createAdsButton.isEnabled = false
-                        housing.imgPath = uri.toString()
+                        //housing.imgPath = uri.toString()
+                        housing.imgPath = encodedImage
                         addAdsViewModel.createAd(housing)
                     }
                 }

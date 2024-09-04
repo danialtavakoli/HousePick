@@ -13,10 +13,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.example.housepick.Application
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentOneHomeBinding
+import com.example.housepick.ui.utils.showImage
 import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONObject
 import java.text.NumberFormat
@@ -104,13 +104,7 @@ class OneHomeFragment : Fragment() {
                 binding.adDetailsDescription.text = description
 
                 val img = binding.adDetailsImage
-                //Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
-                //DownloadImageFromInternet(img).execute(home.getString("imgpath"))
-
-                // Load the image using Glide
-                Glide.with(context)
-                    .load(imagePath)
-                    .into(img)
+                showImage(imagePath, img)
             }
 
             OneHomeAction.NETWORK_ERROR -> {

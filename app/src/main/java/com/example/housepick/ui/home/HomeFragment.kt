@@ -13,11 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.housepick.Application
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentHomeBinding
+import com.example.housepick.ui.utils.showImage
 import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONArray
 import org.json.JSONObject
@@ -163,12 +162,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
             "$estateType $textFor $rent"
 
         val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
-        //OneHomeFragment.DownloadImageFromInternet(img).execute(imagePath)
-
-        // Load the image using Glide
-        Glide.with(holder.itemView.context)
-            .load(imagePath)
-            .into(img)
+        showImage(imagePath, img)
 
         holder.item.setOnClickListener {
             val bundle = bundleOf("id" to id)
