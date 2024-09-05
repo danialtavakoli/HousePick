@@ -132,6 +132,8 @@ class AddAdsFragment : Fragment() {
                 phone,
                 desc,
                 null,
+                null,
+                null,
                 null
             )
 
