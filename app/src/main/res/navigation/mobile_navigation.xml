@@ -9,7 +9,7 @@
         android:id="@+id/navigation_home"
         android:name="com.example.housepick.ui.home.MainHomeFragment"
         android:label="@string/title_real_estate"
-        tools:layout="@layout/fragment_main_home" >
+        tools:layout="@layout/fragment_main_home">
         <action
             android:id="@+id/action_navigation_home_to_oneHomeFragment"
             app:destination="@id/oneHomeFragment" />
@@ -19,7 +19,7 @@
         android:id="@+id/navigation_ads"
         android:name="com.example.housepick.ui.ads.AdsFragment"
         android:label="@string/title_ads"
-        tools:layout="@layout/fragment_ads" >
+        tools:layout="@layout/fragment_ads">
         <action
             android:id="@+id/action_navigation_ads_to_oneAdFragment"
             app:destination="@id/oneAdFragment" />
@@ -40,4 +40,10 @@
         android:name="com.example.housepick.ui.ads.OneAdFragment"
         android:label="fragment_one_ad"
         tools:layout="@layout/fragment_one_ad" />
+    <fragment
+        android:id="@+id/navigation_aiChat"
+        android:name="com.example.housepick.ui.aichat.AIFragment"
+        android:label="AI Chat"
+        tools:layout="@layout/fragment_ai_chat" />
+
 </navigation>

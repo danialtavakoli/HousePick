@@ -13,6 +13,12 @@
         android:title="@string/title_ads" />
 
     <item
+        android:id="@+id/navigation_aiChat"
+        android:icon="@drawable/ai_chat_icon"
+        android:tint="@color/grey"
+        android:title="@string/ai_chat" />
+
+    <item
         android:id="@+id/navigation_notifications"
         android:icon="@drawable/line_md_account"
         android:tint="@color/grey"

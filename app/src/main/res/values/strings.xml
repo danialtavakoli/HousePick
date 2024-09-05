@@ -70,4 +70,11 @@
     <string name="disconnect">Disconnect</string>
     <string name="sign_out">Sign out</string>
     <string name="map">Map</string>
+
+    <!-- ai chat -->
+    <string name="hint_type_message">Type your message…</string>
+    <string name="send_message">Send Message</string>
+    <string name="ai_response_hint">AI Response will appear here</string>
+    <string name="ai_chat">AI</string>
+
 </resources>
