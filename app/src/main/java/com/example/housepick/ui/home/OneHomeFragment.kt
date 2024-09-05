@@ -43,6 +43,7 @@ class OneHomeFragment : Fragment() {
         val root: View = binding.root
 
         val id: Int = arguments?.getInt("id")!!
+        oneHomeViewModel.sendClickedAdId(id)
 
         oneHomeViewModel.getAction().observe(viewLifecycleOwner) { action ->
             action?.let {

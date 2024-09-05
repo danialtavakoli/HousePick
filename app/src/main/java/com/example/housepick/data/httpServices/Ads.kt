@@ -44,9 +44,9 @@ class Ads {
 
         val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
             Method.GET, url, null,
-            { response -> callback.onSuccessArray(response)
-            }, { callback.onError() })
-        {
+            { response ->
+                callback.onSuccessArray(response)
+            }, { callback.onError() }) {
             @Throws(AuthFailureError::class)
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
@@ -238,4 +238,27 @@ class Ads {
         }
         return sbPost.toString()
     }
+
+    fun sendClickedAd(adId: Int, callback: VolleyCallbackJsonObject) {
+        val queue = Volley.newRequestQueue(Application.appContext)
+        val url = "http://${Application.IP}/ad/click"
+
+        val jsonObject = JSONObject()
+        jsonObject.put("adId", adId)
+
+        val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
+            Method.POST, url, jsonObject,
+            { response -> callback.onSuccess(response) },
+            { callback.onError() }) {
+            @Throws(AuthFailureError::class)
+            override fun getHeaders(): Map<String, String> {
+                val params: MutableMap<String, String> = HashMap()
+                params["Content-Type"] = "application/json; charset=UTF-8"
+                params["Authorization"] = "Bearer " + Application.JWT
+                return params
+            }
+        }
+        queue.add(jsonRequest)
+    }
+
 }

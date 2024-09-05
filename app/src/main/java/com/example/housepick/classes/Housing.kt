@@ -19,6 +19,8 @@ class Housing(
     var description: String,
     var latLong: LatLng?,
     var imgPath: String?,
+    var priceTag: String?,
+    var isRecommended: Boolean?,
 ) {
 
 
