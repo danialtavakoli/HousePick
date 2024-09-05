@@ -23,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <!-- Ad Image -->
             <ImageView
                 android:id="@+id/adDetailsImage"
                 android:layout_width="0dp"
@@ -41,12 +42,14 @@
                 android:background="@color/greyLight"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailsImage" />
 
+            <!-- Price Text -->
             <TextView
                 android:id="@+id/adDetailsPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:textAllCaps="false"
+                android:paddingHorizontal="16dp"
+
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -54,12 +57,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailsImage" />
 
+            <!-- Address Text -->
             <TextView
                 android:id="@+id/adDetailsAddress"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:paddingHorizontal="16dp"
                 android:textColor="@color/greyLight"
+
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,16 +79,18 @@
                 android:background="@color/greyLight"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress" />
 
-            <!-- Amenities layout -->
+            <!-- Amenities Section (Bed, Bath, Car, Type) -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/amenitiesLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailsAddress">
 
+                <!-- Bed Icon and Number -->
                 <ImageView
                     android:id="@+id/adDetailsBedImg"
                     android:layout_width="24dp"
@@ -102,6 +110,7 @@
                     app:layout_constraintStart_toEndOf="@+id/adDetailsBedImg"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <!-- Bath Icon and Number -->
                 <ImageView
                     android:id="@+id/adDetailsBathImg"
                     android:layout_width="24dp"
@@ -122,6 +131,7 @@
                     app:layout_constraintStart_toEndOf="@+id/adDetailsBathImg"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <!-- Car Icon and Number -->
                 <ImageView
                     android:id="@+id/adDetailsCarImg"
                     android:layout_width="24dp"
@@ -142,7 +152,7 @@
                     app:layout_constraintStart_toEndOf="@+id/adDetailsCarImg"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- Vertical line divider -->
+                <!-- Vertical Divider -->
                 <ImageView
                     android:id="@+id/adDetailsVerticalLine"
                     android:layout_width="1dp"
@@ -153,6 +163,7 @@
                     app:layout_constraintStart_toEndOf="@+id/adDetailsCarNumber"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <!-- Estate Type Text -->
                 <TextView
                     android:id="@+id/adDetailsEstateType"
                     android:layout_width="wrap_content"
@@ -174,13 +185,14 @@
                 android:background="@color/greyLight"
                 app:layout_constraintTop_toBottomOf="@+id/amenitiesLayout" />
 
-            <!-- Title and description -->
+            <!-- Title -->
             <TextView
                 android:id="@+id/adDetailsTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:textAllCaps="false"
+
+                android:paddingHorizontal="16dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -188,6 +200,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/amenitiesLayout" />
 
+            <!-- Description -->
             <TextView
                 android:id="@+id/adDetailsDescription"
                 android:layout_width="0dp"
@@ -195,6 +208,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:justificationMode="inter_word"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="16dp"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -215,13 +230,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="16dp">
 
+            <!-- Phone Icon and Text -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -245,6 +261,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <!-- Email Icon and Text -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
                 android:layout_width="0dp"
