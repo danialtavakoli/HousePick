@@ -73,6 +73,7 @@
     <string name="disconnect">قطع ارتباط</string>
     <string name="sign_out">خروج از حساب کاربری</string>
     <string name="map">نقشه</string>
+    <string name="confirm_location">تایید موقعیت</string>
 
     <!-- ai chat -->
     <string name="hint_type_message">پیام خود را تایپ کنید…</string>

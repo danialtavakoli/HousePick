@@ -1,6 +1,5 @@
 package com.example.housepick.classes
 
-import com.google.android.gms.maps.model.LatLng
 import org.json.JSONObject
 
 class Housing(
@@ -18,7 +17,8 @@ class Housing(
     var email: String,
     var phone: String,
     var description: String,
-    var latLong: LatLng?,
+    var latitude: String?,
+    var longitude: String?,
     var imgPath: String?,
     var priceTag: String?,
     var closestHomeId: String?
@@ -42,10 +42,10 @@ class Housing(
         jsonObject.put("phone", phone)
         jsonObject.put("rent", rent)
         jsonObject.put("image", imgPath)
-        /*jsonObject.put(
-            "latLong", JSONObject().put("longitude", latLong!!.longitude)
-                .put("latitude", latLong!!.latitude).toString()
-        )*/
+        if (latitude != null && longitude != null) {
+            jsonObject.put("latitude", latitude!!.toDouble())
+            jsonObject.put("longitude", longitude!!.toDouble())
+        }
         return jsonObject
     }
 }

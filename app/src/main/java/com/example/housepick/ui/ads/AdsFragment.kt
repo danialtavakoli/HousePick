@@ -8,15 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.housepick.MyApplication
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentAdsBinding
-import com.example.housepick.ui.addads.AddAdsFragment
 import com.example.housepick.ui.utils.LocaleUtils
 import com.example.housepick.ui.utils.showImage
 import com.example.housepick.ui.utils.showSnackBar
@@ -70,11 +69,7 @@ class AdsFragment : Fragment() {
         }
 
         binding.floatingAddButton.setOnClickListener {
-            parentFragmentManager.commit {
-                replace(container!!.id, AddAdsFragment())
-                setReorderingAllowed(true)
-                addToBackStack("com.example.housepick.ui.addads.AddAdsFragment in the place")
-            }
+            findNavController().navigate(R.id.action_navigation_ads_to_addAdsFragment)
         }
 
         return root

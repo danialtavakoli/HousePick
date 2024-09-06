@@ -27,7 +27,6 @@ import com.example.housepick.R
 import com.example.housepick.classes.Housing
 import com.example.housepick.databinding.FragmentAddAdsBinding
 import com.example.housepick.ui.utils.showSnackBar
-import com.google.android.gms.maps.model.LatLng
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 
@@ -51,6 +50,8 @@ class AddAdsFragment : Fragment() {
 
     private lateinit var addAdsViewModel: AddAdsViewModel
     private var _binding: FragmentAddAdsBinding? = null
+    private lateinit var latitude: String
+    private lateinit var longitude: String
 
     private var uri: Uri? = null
 
@@ -135,14 +136,12 @@ class AddAdsFragment : Fragment() {
                 email,
                 phone,
                 desc,
+                latitude,
+                longitude,
                 null,
                 null,
-                null,
-                null,
+                null
             )
-
-            val latLng = LatLng(32.63647365027362, 51.67652963465183)
-            housing.latLong = latLng
 
             if (uri != null) {
                 val imageStream: InputStream? = context?.contentResolver?.openInputStream(uri!!)
@@ -164,6 +163,21 @@ class AddAdsFragment : Fragment() {
 
         binding.imgAddButton.setOnClickListener {
             openActivityForResult()
+        }
+
+        binding.locationButton.setOnClickListener {
+            findNavController().navigate(R.id.action_addAdsFragment_to_locationPickerFragment)
+        }
+
+        parentFragmentManager.setFragmentResultListener("requestKey", this) { key, bundle ->
+            val latitudeBundle = bundle.getDouble("latitude")
+            val longitudeBundle = bundle.getDouble("longitude")
+
+            // Update latitude and longitude variables on the UI thread
+            latitude = latitudeBundle.toString()
+            longitude = longitudeBundle.toString()
+            println(latitude)
+            println(longitude)
         }
 
         binding.imageButtonBed.setOnClickListener {

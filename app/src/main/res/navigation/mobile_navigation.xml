@@ -23,6 +23,10 @@
         <action
             android:id="@+id/action_navigation_ads_to_oneAdFragment"
             app:destination="@id/oneAdFragment" />
+
+        <action
+            android:id="@+id/action_navigation_ads_to_addAdsFragment"
+            app:destination="@id/addAdsFragment" />
     </fragment>
 
     <fragment
@@ -30,6 +34,23 @@
         android:name="com.example.housepick.ui.notifications.NotificationsFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_notifications" />
+
+
+    <fragment
+        android:id="@+id/addAdsFragment"
+        android:name="com.example.housepick.ui.addads.AddAdsFragment"
+        android:label="Add Ad"
+        tools:layout="@layout/fragment_add_ads">
+        <action
+            android:id="@+id/action_addAdsFragment_to_locationPickerFragment"
+            app:destination="@id/locationPickerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/locationPickerFragment"
+        android:name="com.example.housepick.ui.location.LocationPickerFragment"
+        android:label="Pick Location"
+        tools:layout="@layout/fragment_location_picker" />
 
     <fragment
         android:id="@+id/oneHomeFragment"
@@ -53,7 +74,8 @@
         android:id="@+id/oneAdFragment"
         android:name="com.example.housepick.ui.ads.OneAdFragment"
         android:label="fragment_one_ad"
-        tools:layout="@layout/fragment_one_ad" />
+        tools:layout="@layout/fragment_one_ad"></fragment>
+
     <fragment
         android:id="@+id/navigation_aiChat"
         android:name="com.example.housepick.ui.aichat.AIFragment"

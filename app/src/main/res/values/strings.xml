@@ -73,6 +73,7 @@
     <string name="disconnect">Disconnect</string>
     <string name="sign_out">Sign out</string>
     <string name="map">Map</string>
+    <string name="confirm_location">Confirm Location</string>
 
     <!-- ai chat -->
     <string name="hint_type_message">Type your message…</string>
