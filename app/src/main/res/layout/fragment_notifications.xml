@@ -1,152 +1,137 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.notifications.NotificationsFragment">
 
-    <ImageView
-        android:id="@+id/profileImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/profile_picture"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/viewUp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/greyLight"
-        app:layout_constraintTop_toBottomOf="@id/profileEmail" />
-
     <LinearLayout
-        android:id="@+id/languageSection"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginVertical="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewUp">
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/profile_picture" />
 
         <TextView
-            android:id="@+id/languageLabel"
+            android:id="@+id/profileFullName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:text="@string/choose_language"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:text="@string/your_name" />
 
-        <Spinner
-            android:id="@+id/languageSpinner"
+        <TextView
+            android:id="@+id/profileEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:background="@drawable/spinner_background"
-            android:entries="@array/language_options" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="@string/e_mail" />
+
+        <View
+            android:id="@+id/viewUp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/greyLight" />
+
+        <LinearLayout
+            android:id="@+id/languageSection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginVertical="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/languageLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="@string/choose_language"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/languageSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/spinner_background"
+                android:entries="@array/language_options" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/viewDown"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/greyLight" />
+
+        <Switch
+            android:id="@+id/profileSwitchAllowNotifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="@string/profileNotificationSwicth" />
+
+        <EditText
+            android:id="@+id/profileEditTextOldPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/old_password"
+            android:inputType="textPassword"
+            android:padding="8dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/greyDark"
+            android:textColorHint="@color/greyLight"
+            android:textDirection="locale" />
+
+        <EditText
+            android:id="@+id/profileEditTextNewPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/et_custom"
+            android:ems="10"
+            android:hint="@string/new_password"
+            android:inputType="textPassword"
+            android:padding="8dp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/greyDark"
+            android:textColorHint="@color/greyLight"
+            android:textDirection="locale" />
+
+        <Button
+            android:id="@+id/profileButtonPasswordUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="26dp"
+            android:background="@drawable/btn_custom"
+            android:text="@string/profileUpdatePasswordButton"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/btn_disconnect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_custom"
+            android:text="@string/sign_out"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 
-    <View
-        android:id="@+id/viewDown"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/greyLight"
-        app:layout_constraintTop_toBottomOf="@id/languageSection" />
-
-    <Switch
-        android:id="@+id/profileSwitchAllowNotifications"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/profileNotificationSwicth"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewDown" />
-
-    <TextView
-        android:id="@+id/profileFullName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/your_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
-
-    <TextView
-        android:id="@+id/profileEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/e_mail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileFullName" />
-
-    <EditText
-        android:id="@+id/profileEditTextOldPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:background="@drawable/et_custom"
-        android:ems="10"
-        android:hint="@string/old_password"
-        android:inputType="textPassword"
-        android:padding="8dp"
-        android:textAlignment="viewStart"
-        android:textColor="@color/greyDark"
-        android:textColorHint="@color/greyLight"
-        android:textDirection="locale"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileSwitchAllowNotifications" />
-
-    <EditText
-        android:id="@+id/profileEditTextNewPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:background="@drawable/et_custom"
-        android:ems="10"
-        android:hint="@string/new_password"
-        android:inputType="textPassword"
-        android:padding="8dp"
-        android:textAlignment="viewStart"
-        android:textColor="@color/greyDark"
-        android:textColorHint="@color/greyLight"
-        android:textDirection="locale"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileEditTextOldPassword" />
-
-    <Button
-        android:id="@+id/profileButtonPasswordUpdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="26dp"
-        android:background="@drawable/btn_custom"
-        android:text="@string/profileUpdatePasswordButton"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileEditTextNewPassword" />
-
-    <Button
-        android:id="@+id/btn_disconnect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/btn_custom"
-        android:text="@string/sign_out"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileButtonPasswordUpdate" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
