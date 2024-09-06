@@ -21,6 +21,7 @@ class Housing(
     var latLong: LatLng?,
     var imgPath: String?,
     var priceTag: String?,
+    var closestHomeId: String?
 ) {
 
 

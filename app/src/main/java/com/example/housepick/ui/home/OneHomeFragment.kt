@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.housepick.MyApplication
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentOneHomeBinding
@@ -16,38 +17,31 @@ import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONObject
 import java.util.Locale
 
-
 class OneHomeFragment : Fragment() {
     private lateinit var oneHomeViewModel: OneHomeViewModel
     private var _binding: FragmentOneHomeBinding? = null
+    private val binding get() = _binding!!
 
     private var home = JSONObject()
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         oneHomeViewModel = ViewModelProvider(this).get(OneHomeViewModel::class.java)
-
         _binding = FragmentOneHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val id: Int = arguments?.getInt("id")!!
-        oneHomeViewModel.sendClickedAdId(id)
+        val id: Int = arguments?.getInt("id") ?: 0
 
+        // Observing actions from ViewModel
         oneHomeViewModel.getAction().observe(viewLifecycleOwner) { action ->
             action?.let {
-                handleAction(
-                    it,
-                    root.context
-                )
+                handleAction(it, root.context)
             }
         }
 
+        // Fetch and display the home details for the provided ID
         oneHomeViewModel.displayHome(id)
 
         return root
@@ -58,14 +52,39 @@ class OneHomeFragment : Fragment() {
         _binding = null
     }
 
+    // Handling actions when data is loaded or errors occur
     private fun handleAction(action: OneHomeAction, context: Context) {
         when (action.value) {
             OneHomeAction.HOME_LOADED -> {
+                // Home loaded, update the UI with the home details
                 home = oneHomeViewModel.home
                 updateHomeDetails(home, context)
 
                 val img = binding.adDetailsImage
                 showImage(home.getString("image"), img)
+
+                // Handle closestHomeId (recommended ad)
+                val closestHomeId = home.optInt("closestHomeId", -1)
+                if (closestHomeId != -1) {
+                    // If a valid closestHomeId is present, display the recommended ad
+                    oneHomeViewModel.displayHome(closestHomeId, isRecommendedAd = true)
+                } else {
+                    binding.recommendedAdCard.visibility = View.GONE
+                }
+            }
+
+            OneHomeAction.RECOMMENDED_HOME_LOADED -> {
+                // Recommended home loaded, update the recommended ad section
+                val recommendedHome = oneHomeViewModel.recommendedHome
+                updateRecommendedAdDetails(recommendedHome)
+
+                val img = binding.recommendedAdImage
+                showImage(recommendedHome.getString("image"), img)
+
+                // Set click listener to navigate to the recommended ad details
+                binding.recommendedAdCard.setOnClickListener {
+                    navigateToHome(recommendedHome.getInt("id"))
+                }
             }
 
             OneHomeAction.NETWORK_ERROR -> {
@@ -74,6 +93,20 @@ class OneHomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    // Method to handle navigation when a user clicks on the recommended ad
+    private fun navigateToHome(id: Int) {
+        val bundle = Bundle().apply {
+            putInt("id", id)  // Pass the recommended ad id to the fragment
+        }
+        findNavController().navigate(R.id.action_oneHomeFragment_self, bundle)
+    }
+
+    // Update recommended ad details in the UI
+    private fun updateRecommendedAdDetails(home: JSONObject) {
+        binding.recommendedAdTitle.text = home.getString("title")
+        binding.recommendedAdDetails.text = home.getString("description")
     }
 
     // Helper function to update home details
@@ -106,26 +139,22 @@ class OneHomeFragment : Fragment() {
         binding.adDetailsDescription.text = home.getString("description")
     }
 
-    // Helper function to format price
+    // Helper functions to format price, numbers, estate type, and address
     private fun formatPrice(price: Int, textRial: String): String {
         val locale = LocaleUtils.getSelectedLanguageId()
         return String.format(Locale(locale), "%d %s", price, textRial)
     }
 
-    // Helper function to format numbers (bedNumber, bathNumber)
     private fun formatNumber(number: Int): String {
         val locale = LocaleUtils.getSelectedLanguageId()
         return String.format(Locale(locale), "%d", number)
     }
 
-    // Helper function to format estate type with rent/sell status
     private fun formatEstateType(estateType: String, textFor: String, rentStatus: String): String {
         return "$estateType $textFor $rentStatus"
     }
 
-    // Helper function to format address
     private fun formatAddress(street: String, city: String, country: String): String {
         return "$street, $city, $country"
     }
-
 }

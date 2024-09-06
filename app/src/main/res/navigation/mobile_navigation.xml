@@ -30,11 +30,25 @@
         android:name="com.example.housepick.ui.notifications.NotificationsFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_notifications" />
+
     <fragment
         android:id="@+id/oneHomeFragment"
         android:name="com.example.housepick.ui.home.OneHomeFragment"
         android:label="fragment_one_home"
-        tools:layout="@layout/fragment_one_home" />
+        tools:layout="@layout/fragment_one_home">
+
+        <!-- Argument for passing the ad id -->
+        <argument
+            android:name="id"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <!-- New action to allow self-navigation to OneHomeFragment -->
+        <action
+            android:id="@+id/action_oneHomeFragment_self"
+            app:destination="@id/oneHomeFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/oneAdFragment"
         android:name="com.example.housepick.ui.ads.OneAdFragment"

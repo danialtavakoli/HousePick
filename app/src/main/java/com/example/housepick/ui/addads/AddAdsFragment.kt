@@ -138,6 +138,7 @@ class AddAdsFragment : Fragment() {
                 null,
                 null,
                 null,
+                null,
             )
 
             val latLng = LatLng(32.63647365027362, 51.67652963465183)

@@ -58,6 +58,7 @@
     <string name="text_for">برای</string>
     <string name="sell">فروش</string>
     <string name="rent">اجاره</string>
+    <string name="recommended_ad_label">آگهی پیشنهادی</string>
 
     <!-- profile strings -->
     <string name="profileImageContentDescription">پروفایل شما</string>
