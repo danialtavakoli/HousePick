@@ -56,8 +56,6 @@ class Ads {
                 return params
             }
         }
-        println(jsonRequest.url.toString())
-        println(jsonRequest.headers.toString())
         queue.add(jsonRequest)
     }
 

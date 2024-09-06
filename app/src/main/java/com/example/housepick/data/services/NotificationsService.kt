@@ -27,7 +27,6 @@ class NotificationsService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        println("SERVICE CREE")
         try {
             val options: IO.Options = IO.Options.builder().setUpgrade(false).build()
             mSocket = IO.socket("http://" + Application.IPSocket + ":8000", options)
@@ -85,7 +84,6 @@ class NotificationsService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        println("SERVICE STARTED")
         mSocket.connect()
         mSocket.on("/housings", onNewHouse)
         return START_STICKY
