@@ -75,6 +75,11 @@
     <string name="map">نقشه</string>
     <string name="confirm_location">تایید موقعیت</string>
 
+    <string name="enable_gps_title">فعال کردن موقعیت‌یاب</string>
+    <string name="enable_gps_message">سرویس‌های مکان‌یابی شما غیرفعال است. لطفاً برای ادامه آن را فعال کنید.</string>
+    <string name="enable_button">فعال کردن</string>
+    <string name="cancel_button">لغو</string>
+
     <!-- ai chat -->
     <string name="hint_type_message">پیام خود را تایپ کنید…</string>
     <string name="send_message">ارسال پیام</string>

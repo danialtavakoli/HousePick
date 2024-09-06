@@ -1,10 +1,18 @@
 package com.example.housepick.ui.location
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.housepick.R
@@ -58,27 +66,92 @@ class LocationPickerFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Enable the 'My Location' button to move the camera to user's location
-        mMap.isMyLocationEnabled = true
-
-        // Move camera to user's current location on the map
-        getLastKnownLocation()
+        // Enable the 'My Location' button in Google Maps
+        if (ContextCompat.checkSelfPermission(
+                requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            mMap.isMyLocationEnabled = true
+            mMap.uiSettings.isMyLocationButtonEnabled = true
+        } else {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
+        }
 
         // Add a listener to update the marker when the camera is moved
         mMap.setOnCameraIdleListener {
-            // Get the current center of the map (target) and update the marker
             val centerOfMap = mMap.cameraPosition.target
             if (centerMarker == null) {
-                // Create the marker for the first time at the center
                 centerMarker =
                     mMap.addMarker(MarkerOptions().position(centerOfMap).title("Selected Location"))
             } else {
-                // Move the marker to the new center position
                 centerMarker?.position = centerOfMap
             }
         }
+
+        // Handle the "My Location" button click event
+        mMap.setOnMyLocationButtonClickListener {
+            moveToUserLocation()
+            true // Return true if the event is handled, false otherwise
+        }
     }
 
+    @SuppressLint("MissingPermission")
+    private fun moveToUserLocation() {
+        if (isLocationEnabled()) {
+            // If GPS is enabled, proceed with getting the location
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    val currentLatLng = LatLng(location.latitude, location.longitude)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12F))
+                } else {
+                    // If location is null, move to a default location
+                    val defaultLocation = LatLng(-34.0, 151.0)
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12F))
+                    // Optionally, notify the user that location is unavailable
+                    // Toast.makeText(context, "Unable to get your location", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+            // If GPS is disabled, prompt the user to enable it
+            promptEnableLocation()
+        }
+    }
+
+    // Check if the GPS is enabled
+    private fun isLocationEnabled(): Boolean {
+        val locationManager = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requireContext().getSystemService(LocationManager::class.java)
+        } else {
+            TODO("VERSION.SDK_INT < M")
+        }
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    // Prompt user to enable GPS if it is disabled
+    private fun promptEnableLocation() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.enable_gps_title))
+            .setMessage(getString(R.string.enable_gps_message))
+            .setPositiveButton(getString(R.string.enable_button)) { _, _ ->
+                // Redirect the user to the location settings page to enable GPS
+                val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                startActivity(intent)
+            }
+            .setNegativeButton(getString(R.string.cancel_button), null)
+            .show()
+    }
+
+    // Check if location services (GPS) are enabled and act accordingly
+    private fun checkLocationServicesAndProceed() {
+        if (!isLocationEnabled()) {
+            promptEnableLocation()  // Prompt the user to enable GPS
+        } else {
+            getLastKnownLocation()  // Get the last known location if GPS is enabled
+        }
+    }
+
+    // Get the user's last known location if permissions are granted and GPS is enabled
     @SuppressLint("MissingPermission")
     private fun getLastKnownLocation() {
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
@@ -86,7 +159,6 @@ class LocationPickerFragment : Fragment(), OnMapReadyCallback {
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12F))
             } else {
-                // If location is null, move to a default location
                 val defaultLocation = LatLng(-34.0, 151.0)
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(defaultLocation, 12F))
             }

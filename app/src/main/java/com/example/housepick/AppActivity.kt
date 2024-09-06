@@ -13,7 +13,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.housepick.data.services.NotificationsService
 import com.example.housepick.databinding.ActivityAppBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.util.ArrayList
 
 class AppActivity : AppCompatActivity() {
 
@@ -24,13 +23,12 @@ class AppActivity : AppCompatActivity() {
         checkAndRequestPermissions()
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val serviceIntent = Intent(applicationContext, NotificationsService::class.java)
         startService(serviceIntent)
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_app)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         AppBarConfiguration(
             setOf(
                 R.id.navigation_home, R.id.navigation_notifications, R.id.navigation_ads
@@ -50,37 +48,26 @@ class AppActivity : AppCompatActivity() {
     }
 
     private fun checkAndRequestPermissions(): Boolean {
-        val internet = MyApplication.appContext?.let {
-            ContextCompat.checkSelfPermission(
-                it,
-                Manifest.permission.INTERNET
-            )
+        val permissionsNeeded = arrayOf(
+            Manifest.permission.INTERNET,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+
+        val listPermissionsNeeded = mutableListOf<String>()
+        for (permission in permissionsNeeded) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                listPermissionsNeeded.add(permission)
+            }
         }
-        val loc = MyApplication.appContext?.let {
-            ContextCompat.checkSelfPermission(
-                it,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-        }
-        val loc2 = MyApplication.appContext?.let {
-            ContextCompat.checkSelfPermission(
-                it,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-        }
-        val listPermissionsNeeded: MutableList<String> = ArrayList()
-        if (internet != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.INTERNET)
-        }
-        if (loc != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION)
-        }
-        if (loc2 != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION)
-        }
+
         if (listPermissionsNeeded.isNotEmpty()) {
             ActivityCompat.requestPermissions(
-                (this),
+                this,
                 listPermissionsNeeded.toTypedArray(),
                 1
             )
@@ -88,5 +75,4 @@ class AppActivity : AppCompatActivity() {
         }
         return true
     }
-
 }

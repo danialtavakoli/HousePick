@@ -75,6 +75,12 @@
     <string name="map">Map</string>
     <string name="confirm_location">Confirm Location</string>
 
+    <string name="enable_gps_title">Enable GPS</string>
+    <string name="enable_gps_message">Your location services are disabled. Please enable it to proceed.</string>
+    <string name="enable_button">Enable</string>
+    <string name="cancel_button">Cancel</string>
+
+
     <!-- ai chat -->
     <string name="hint_type_message">Type your message…</string>
     <string name="send_message">Send Message</string>
