@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 
 
 fun showSnackBar(viewRoot: View, text: Int, icon: Int) {
+    val locale = LocaleUtils.getSelectedLanguageId()
     val snackBar = Snackbar.make(viewRoot, text, Snackbar.LENGTH_SHORT)
     val snackBarView = snackBar.view
     snackBarView.translationY = -(convertDpToPixel(16F, viewRoot.context))
@@ -23,7 +24,13 @@ fun showSnackBar(viewRoot: View, text: Int, icon: Int) {
     snackBarTextView.apply {
         typeface = font
         setTextColor(ContextCompat.getColor(viewRoot.context, R.color.blue_dark))
-        setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
+        if (locale == "fa") {
+            // Persian (icon on the right)
+            setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0)
+        } else {
+            // English (icon on the left)
+            setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0)
+        }
         compoundDrawablePadding =
             viewRoot.resources.getDimensionPixelOffset(R.dimen.snackBar_padding_horizontal)
     }
