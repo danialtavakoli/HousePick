@@ -303,12 +303,13 @@
 
             <TextView
                 android:id="@+id/recommendedAdLabel"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
+                android:background="?attr/colorSecondary"
+                android:gravity="center"
                 android:text="@string/recommended_ad_label"
-                android:textAlignment="viewStart"
-                android:textColor="?attr/colorSecondary"
+                android:textColor="@color/white"
                 android:textDirection="locale"
                 android:textSize="14sp"
                 android:textStyle="bold"
