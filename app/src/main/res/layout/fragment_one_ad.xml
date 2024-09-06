@@ -57,6 +57,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/adDetailsImage" />
 
+            <TextView
+                android:id="@+id/adDetailsPriceStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingHorizontal="16dp"
+                android:textAlignment="viewStart"
+                android:textColor="@color/black"
+                android:textDirection="locale"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/adDetailsPrice" />
+
             <!-- Address Text -->
             <TextView
                 android:id="@+id/adDetailsAddress"
@@ -70,7 +84,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/adDetailsPrice" />
+                app:layout_constraintTop_toBottomOf="@+id/adDetailsPriceStatus" />
 
             <!-- Divider between sections -->
             <View
