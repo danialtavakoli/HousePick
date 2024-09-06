@@ -96,9 +96,9 @@ class NotificationsFragment : Fragment() {
 
         binding.profileButtonPasswordUpdate.setOnClickListener {
             binding.profileButtonPasswordUpdate.isEnabled = false
-            val password: String = binding.profileEditTextPassword.text.toString()
-            val repassword: String = binding.profileEditTextPasswordRetype.text.toString()
-            // Handle password change logic
+            val oldPassword: String = binding.profileEditTextOldPassword.text.toString()
+            val newPassword: String = binding.profileEditTextNewPassword.text.toString()
+            notificationsViewModel.changePassword(oldPassword, newPassword)
         }
 
         disconnectButton.setOnClickListener {

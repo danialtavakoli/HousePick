@@ -10,6 +10,8 @@
     <!--login string-->
     <string name="login">ورود</string>
     <string name="password">رمز عبور</string>
+    <string name="old_password">رمز عبور قدیم</string>
+    <string name="new_password">رمز عبور جدید</string>
     <string name="e_mail">ایمیل</string>
     <string name="tag">با ما بپیوندید و \nروابط خود را با دیگران بسازید</string>
     <string name="swipe_right_for_login">برای ورود به چپ بکشید</string>

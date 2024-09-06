@@ -51,15 +51,16 @@ class Authentication {
     }
 
     fun changePassword(
-        password: String, callback: VolleyCallbackJsonObject
+        oldPassword: String, newPassword: String, callback: VolleyCallbackJsonObject
     ) {
         val queue = Volley.newRequestQueue(MyApplication.appContext)
-        val url = "http://" + MyApplication.IP + "/users/" + MyApplication.getID()
+        val url = "http://" + MyApplication.IP + "/auth/changePassword"
 
         val jsonObject = JSONObject()
-        jsonObject.put("password", password)
+        jsonObject.put("oldPassword", oldPassword)
+        jsonObject.put("newPassword", newPassword)
 
-        val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(Method.PATCH,
+        val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(Method.POST,
             url,
             jsonObject,
             Response.Listener { response -> callback.onSuccess(response) },

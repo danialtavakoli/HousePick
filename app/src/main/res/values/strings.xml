@@ -9,6 +9,8 @@
     <!--login string-->
     <string name="login">Login</string>
     <string name="password">Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
     <string name="e_mail">Email</string>
     <string name="tag">Let\'s join us and \nBuild your relationship with others</string>
     <string name="swipe_right_for_login">Swipe Right for Login</string>

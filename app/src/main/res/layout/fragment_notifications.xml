@@ -91,13 +91,13 @@
         app:layout_constraintTop_toBottomOf="@+id/profileFullName" />
 
     <EditText
-        android:id="@+id/profileEditTextPassword"
+        android:id="@+id/profileEditTextOldPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:background="@drawable/et_custom"
         android:ems="10"
-        android:hint="@string/password"
+        android:hint="@string/old_password"
         android:inputType="textPassword"
         android:padding="8dp"
         android:textAlignment="viewStart"
@@ -109,13 +109,13 @@
         app:layout_constraintTop_toBottomOf="@+id/profileSwitchAllowNotifications" />
 
     <EditText
-        android:id="@+id/profileEditTextPasswordRetype"
+        android:id="@+id/profileEditTextNewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
         android:background="@drawable/et_custom"
         android:ems="10"
-        android:hint="@string/re_type_password"
+        android:hint="@string/new_password"
         android:inputType="textPassword"
         android:padding="8dp"
         android:textAlignment="viewStart"
@@ -124,7 +124,7 @@
         android:textDirection="locale"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileEditTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/profileEditTextOldPassword" />
 
     <Button
         android:id="@+id/profileButtonPasswordUpdate"
@@ -136,7 +136,7 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileEditTextPasswordRetype" />
+        app:layout_constraintTop_toBottomOf="@+id/profileEditTextNewPassword" />
 
     <Button
         android:id="@+id/btn_disconnect"

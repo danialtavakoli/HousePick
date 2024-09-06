@@ -19,39 +19,34 @@ class NotificationsViewModel : ViewModel() {
     fun getAction(): LiveData<Action> {
         return mAction
     }
+
     val text: LiveData<String> = _text
 
-    fun changePassword(password: String, repassword: String) {
-        if(password == repassword){
-            val cb: VolleyCallbackJsonObject = object: VolleyCallbackJsonObject {
-                override fun onSuccess(result: JSONObject?) {
-                    showSuccess()
-                }
-                override fun onError() {
-                    showErrorChangingPassword()
-                }
+    fun changePassword(oldPassword: String, newPassword: String) {
+        val cb: VolleyCallbackJsonObject = object : VolleyCallbackJsonObject {
+            override fun onSuccess(result: JSONObject?) {
+                showSuccess()
             }
-            authentication.changePassword(password, cb)
-        }else{
-            showPasswordMustCorrespond()
+
+            override fun onError() {
+                showPasswordMustCorrespond()
+            }
         }
-
-
+        authentication.changePassword(oldPassword, newPassword, cb)
     }
 
     private fun showErrorChangingPassword() {
         mAction.value = Action(Action.SHOW_ERROR)
     }
 
-
     private fun showSuccess() {
         mAction.value = Action(Action.SHOW_SUCCESS)
     }
+
     private fun showPasswordMustCorrespond() {
         mAction.value = Action(Action.SHOW_ERROR_MUST_CORRESPOND)
     }
 }
-
 
 class Action(val value: Int) {
 
@@ -59,6 +54,5 @@ class Action(val value: Int) {
         const val SHOW_SUCCESS = 0
         const val SHOW_ERROR = 1
         const val SHOW_ERROR_MUST_CORRESPOND = 2
-
     }
 }
