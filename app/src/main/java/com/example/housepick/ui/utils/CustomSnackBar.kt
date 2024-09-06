@@ -16,7 +16,7 @@ fun showSnackBar(viewRoot: View, text: Int, icon: Int) {
     val snackBarView = snackBar.view
     snackBarView.translationY = -(convertDpToPixel(16F, viewRoot.context))
     snackBar.setBackgroundTint(ContextCompat.getColor(viewRoot.context, R.color.white))
-    ViewCompat.setLayoutDirection(snackBarView, ViewCompat.LAYOUT_DIRECTION_RTL)
+    ViewCompat.setLayoutDirection(snackBarView, ViewCompat.LAYOUT_DIRECTION_LOCALE)
     val snackBarTextView =
         snackBarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
     val font = ResourcesCompat.getFont(viewRoot.context, R.font.iran_yekan_500)
