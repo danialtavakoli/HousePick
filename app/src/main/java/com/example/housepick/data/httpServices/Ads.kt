@@ -7,7 +7,7 @@ import com.android.volley.toolbox.HttpHeaderParser
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 import com.example.housepick.classes.Housing
 import org.json.JSONObject
 
@@ -18,8 +18,8 @@ class Ads {
     private var MULTIPART_FORMDATA = "multipart/form-data;boundary=$BOUNDARY"
 
     fun getHouse(callback: VolleyCallbackAds, id: Int) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/ad/$id"
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
+        val url = "http://${MyApplication.IP}/ad/$id"
 
         val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
             Method.GET, url, null,
@@ -29,7 +29,7 @@ class Ads {
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["Authorization"] = "Bearer " + MyApplication.JWT
                 params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
@@ -38,9 +38,9 @@ class Ads {
     }
 
     fun getHouses(callback: VolleyCallbackAds) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/ad/all"
-        println(Application.JWT)
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
+        val url = "http://${MyApplication.IP}/ad/all"
+        println(MyApplication.JWT)
 
         val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
             Method.GET, url, null,
@@ -51,7 +51,7 @@ class Ads {
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["Authorization"] = "Bearer " + MyApplication.JWT
                 params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
@@ -60,8 +60,8 @@ class Ads {
     }
 
     fun getMyHouses(callback: VolleyCallbackAds) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/ad/all/user"
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
+        val url = "http://${MyApplication.IP}/ad/all/user"
 
         val jsonArrayRequest: JsonArrayRequest = object : JsonArrayRequest(
             Method.GET, url, null,
@@ -78,7 +78,7 @@ class Ads {
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["Authorization"] = "Bearer " + MyApplication.JWT
                 params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
@@ -87,8 +87,8 @@ class Ads {
     }
 
     fun getHousesByCity(city: String, callback: VolleyCallbackAds) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/ad/all?city=$city"
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
+        val url = "http://${MyApplication.IP}/ad/all?city=$city"
 
         val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
             Method.GET, url, null,
@@ -102,7 +102,7 @@ class Ads {
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["Authorization"] = "Bearer " + MyApplication.JWT
                 params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
@@ -111,8 +111,8 @@ class Ads {
     }
 
     fun getHousesAroundMe(latitude: Double, longitude: Double, callback: VolleyCallbackAds) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/housings/area/$longitude&$latitude&20"
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
+        val url = "http://${MyApplication.IP}/housings/area/$longitude&$latitude&20"
 
         val jsonRequest: JsonArrayRequest = object : JsonArrayRequest(
             Method.GET, url, null,
@@ -122,7 +122,7 @@ class Ads {
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["Authorization"] = "Bearer " + MyApplication.JWT
                 params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
@@ -131,8 +131,8 @@ class Ads {
     }
 
     fun hostImage(b64Image: String, cb: VolleyCallbackJsonObject) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/upload"
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
+        val url = "http://${MyApplication.IP}/upload"
 
         val jsonObject = JSONObject()
 
@@ -160,7 +160,7 @@ class Ads {
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = MULTIPART_FORMDATA
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["Authorization"] = "Bearer " + MyApplication.JWT
                 params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
@@ -173,8 +173,8 @@ class Ads {
         housing: Housing,
         callback: VolleyCallbackJsonObject
     ) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/ad"
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
+        val url = "http://${MyApplication.IP}/ad"
 
         val jsonObject = housing.toJsonObject()
 
@@ -186,7 +186,7 @@ class Ads {
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["Authorization"] = "Bearer " + MyApplication.JWT
                 params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
@@ -195,8 +195,8 @@ class Ads {
     }
 
     fun deleteHousing(id: Int, cb: VolleyCallbackAds) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/ad/$id"
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
+        val url = "http://${MyApplication.IP}/ad/$id"
 
         val jsonRequest: JsonObjectRequest = object : JsonObjectRequest(
             Method.DELETE, url, null,
@@ -206,7 +206,7 @@ class Ads {
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["Authorization"] = "Bearer " + MyApplication.JWT
                 params["User-Agent"] = "Mozilla/5.0"
                 return params
             }
@@ -238,8 +238,8 @@ class Ads {
     }
 
     fun sendClickedAd(adId: Int, callback: VolleyCallbackJsonObject) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://${Application.IP}/ad/click"
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
+        val url = "http://${MyApplication.IP}/ad/click"
 
         val jsonObject = JSONObject()
         jsonObject.put("adId", adId)
@@ -252,7 +252,7 @@ class Ads {
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["Authorization"] = "Bearer " + MyApplication.JWT
                 return params
             }
         }

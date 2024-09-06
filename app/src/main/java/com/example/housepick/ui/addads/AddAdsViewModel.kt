@@ -4,7 +4,7 @@ import android.location.Geocoder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 import com.example.housepick.classes.Housing
 import com.example.housepick.data.httpServices.Ads
 import com.example.housepick.data.httpServices.VolleyCallbackJsonObject
@@ -13,7 +13,7 @@ import java.util.Locale
 
 class AddAdsViewModel : ViewModel() {
     private val ads = Ads()
-    private val geocoder: Geocoder = Geocoder(Application.appContext!!, Locale.getDefault())
+    private val geocoder: Geocoder = Geocoder(MyApplication.appContext!!, Locale.getDefault())
 
     private val mAction: MutableLiveData<Action> = MutableLiveData<Action>()
 

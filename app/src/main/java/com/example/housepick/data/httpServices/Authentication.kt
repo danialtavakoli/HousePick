@@ -5,14 +5,14 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 import org.json.JSONObject
 
 class Authentication {
 
-    private val queue = Volley.newRequestQueue(Application.appContext)
-    private val urlLogin = "http://" + Application.IP + "/auth/login"
-    private val urlSignup = "http://" + Application.IP + "/auth/signup"
+    private val queue = Volley.newRequestQueue(MyApplication.appContext)
+    private val urlLogin = "http://" + MyApplication.IP + "/auth/login"
+    private val urlSignup = "http://" + MyApplication.IP + "/auth/signup"
 
     fun login(mail: String, password: String, callbackJsonObject: VolleyCallbackJsonObject) {
         val jsonObject = JSONObject()
@@ -53,8 +53,8 @@ class Authentication {
     fun changePassword(
         password: String, callback: VolleyCallbackJsonObject
     ) {
-        val queue = Volley.newRequestQueue(Application.appContext)
-        val url = "http://" + Application.IP + "/users/" + Application.getID()
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
+        val url = "http://" + MyApplication.IP + "/users/" + MyApplication.getID()
 
         val jsonObject = JSONObject()
         jsonObject.put("password", password)
@@ -68,7 +68,7 @@ class Authentication {
             override fun getHeaders(): Map<String, String> {
                 val params: MutableMap<String, String> = HashMap()
                 params["Content-Type"] = "application/json; charset=UTF-8"
-                params["Authorization"] = "Bearer " + Application.JWT
+                params["Authorization"] = "Bearer " + MyApplication.JWT
                 return params
             }
         }

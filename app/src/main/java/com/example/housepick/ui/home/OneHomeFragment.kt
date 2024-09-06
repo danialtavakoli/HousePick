@@ -1,25 +1,19 @@
 package com.example.housepick.ui.home
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentOneHomeBinding
+import com.example.housepick.ui.utils.LocaleUtils
 import com.example.housepick.ui.utils.showImage
 import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONObject
-import java.text.NumberFormat
 import java.util.Locale
 
 
@@ -64,82 +58,72 @@ class OneHomeFragment : Fragment() {
         _binding = null
     }
 
-    @SuppressLint("SetTextI18n")
     private fun handleAction(action: OneHomeAction, context: Context) {
         when (action.value) {
             OneHomeAction.HOME_LOADED -> {
                 home = oneHomeViewModel.home
-                println(home.toString())
-                val textRent = context.getString(R.string.rent)
-                val textSell = context.getString(R.string.sell)
-                val rent = if (home.getBoolean("rent")) textRent else textSell
-                val textFor = context.getString(R.string.text_for)
-                val textRial = context.getString(R.string.rial)
-                val price = home.getInt("statePrice")
-                val street = home.getString("street")
-                val city = home.getString("city")
-                val country = home.getString("country")
-                val estateType = home.getString("stateType")
-                val bedNumber = home.getInt("numberBed")
-                val bathNumber = home.getInt("numberBath")
-                val email = home.getString("email")
-                val phone = home.getString("phone")
-                val description = home.getString("description")
-                val title = home.getString("title")
-                val imagePath = home.getString("image")
-
-                val numberFormat = NumberFormat.getNumberInstance(Locale("fa", "IR"))
-                val persianPrice = numberFormat.format(price)
-                val persianBedNumber = numberFormat.format(bedNumber).toString()
-                val persianBathNumber = numberFormat.format(bathNumber).toString()
-
-                binding.adDetailsTitle.text = title
-                binding.adDetailsAddress.text = "$street, $city, $country"
-                binding.adDetailsPrice.text = "$persianPrice $textRial"
-                binding.adDetailsEstateType.text = "$estateType $textFor $rent"
-                binding.adDetailsBedNumber.text = persianBedNumber
-                binding.adDetailsBathNumber.text = persianBathNumber
-//                binding.adDetailsCarNumber.setText(home.getInt("numbercar").toString())
-                binding.adDetailsEmail.text = email
-                binding.adDetailsPhone.text = phone
-                binding.adDetailsDescription.text = description
+                updateHomeDetails(home, context)
 
                 val img = binding.adDetailsImage
-                showImage(imagePath, img)
+                showImage(home.getString("image"), img)
             }
 
             OneHomeAction.NETWORK_ERROR -> {
-                if (Application.isActivityVisible()) {
+                if (MyApplication.isActivityVisible()) {
                     showSnackBar(binding.root, R.string.network_error, R.drawable.mail_box_icon)
-                    //Toast.makeText(context, R.string.network_error, Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
-    @SuppressLint("StaticFieldLeak")
-    @Suppress("DEPRECATION")
-    class DownloadImageFromInternet(private var imageView: ImageView) :
-        AsyncTask<String, Void, Bitmap?>() {
-        //        init {
-//            Toast.makeText(context, "Please wait for the image, it may take a few seconds...",     Toast.LENGTH_SHORT).show()
-//        }
-        override fun doInBackground(vararg urls: String): Bitmap? {
-            val imageURL = urls[0]
-            var image: Bitmap? = null
-            try {
-                val `in` = java.net.URL(imageURL).openStream()
-                image = BitmapFactory.decodeStream(`in`)
-            } catch (e: Exception) {
-                Log.e("Error Message", e.message.toString())
-                e.printStackTrace()
-            }
-            return image
-        }
+    // Helper function to update home details
+    private fun updateHomeDetails(home: JSONObject, context: Context) {
+        val textRent = context.getString(R.string.rent)
+        val textSell = context.getString(R.string.sell)
+        val rentStatus = if (home.getBoolean("rent")) textRent else textSell
+        val textFor = context.getString(R.string.text_for)
+        val textRial = context.getString(R.string.rial)
 
-        override fun onPostExecute(result: Bitmap?) {
-            imageView.setImageBitmap(result)
-        }
+        val price = home.getInt("statePrice")
+        val bedNumber = home.getInt("numberBed")
+        val bathNumber = home.getInt("numberBath")
+
+        binding.adDetailsTitle.text = home.getString("title")
+        binding.adDetailsAddress.text = formatAddress(
+            home.getString("street"),
+            home.getString("city"),
+            home.getString("country")
+        )
+        binding.adDetailsPrice.text = formatPrice(price, textRial)
+        binding.adDetailsEstateType.text =
+            formatEstateType(home.getString("stateType"), textFor, rentStatus)
+        binding.adDetailsBedNumber.text = formatNumber(bedNumber)
+        binding.adDetailsBathNumber.text = formatNumber(bathNumber)
+        binding.adDetailsEmail.text = home.getString("email")
+        binding.adDetailsPhone.text = home.getString("phone")
+        binding.adDetailsDescription.text = home.getString("description")
     }
-}
 
+    // Helper function to format price
+    private fun formatPrice(price: Int, textRial: String): String {
+        val locale = LocaleUtils.getSelectedLanguageId()
+        return String.format(Locale(locale), "%d %s", price, textRial)
+    }
+
+    // Helper function to format numbers (bedNumber, bathNumber)
+    private fun formatNumber(number: Int): String {
+        val locale = LocaleUtils.getSelectedLanguageId()
+        return String.format(Locale(locale), "%d", number)
+    }
+
+    // Helper function to format estate type with rent/sell status
+    private fun formatEstateType(estateType: String, textFor: String, rentStatus: String): String {
+        return "$estateType $textFor $rentStatus"
+    }
+
+    // Helper function to format address
+    private fun formatAddress(street: String, city: String, country: String): String {
+        return "$street, $city, $country"
+    }
+
+}

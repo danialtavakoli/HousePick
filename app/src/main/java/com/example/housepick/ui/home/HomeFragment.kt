@@ -1,6 +1,5 @@
 package com.example.housepick.ui.home
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentHomeBinding
+import com.example.housepick.ui.utils.LocaleUtils
 import com.example.housepick.ui.utils.showImage
 import com.example.housepick.ui.utils.showSnackBar
 import org.json.JSONArray
 import org.json.JSONObject
-import java.text.NumberFormat
 import java.util.Locale
 
 class HomeFragment : Fragment() {
@@ -92,7 +91,7 @@ class HomeFragment : Fragment() {
             }
 
             Action.NETWORK_ERROR -> {
-                if (Application.isActivityVisible()) {
+                if (MyApplication.isActivityVisible()) {
                     showSnackBar(
                         binding.root, R.string.no_houses_found, R.drawable.ant_design_home_outlined
                     )
@@ -124,11 +123,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         return ViewHolder(itemView)
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        // - get element from your dataset at this position
-        // - replace the contents of the view with that element
         val house = myDataset[position] as JSONObject
 
         // Extract data from JSONObject
@@ -141,35 +136,60 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         val bedNumber = house.getInt("numberBed")
         val bathNumber = house.getInt("numberBath")
         val imagePath = house.getString("image")
-//        val carNumber = house.getInt("numberCar")
+        val rentStatus = getRentStatus(holder, house.getBoolean("rent"))
+
+        // Set text to views
+        holder.apply {
+            setText(R.id.adItemPrice, formatPrice(holder, price))
+            setText(R.id.adItemAddress, "$street, $city, $country")
+            setText(R.id.adItemBedNumber, formatNumber(bedNumber))
+            setText(R.id.adItemBathNumber, formatNumber(bathNumber))
+            setText(
+                R.id.adItemEstateType,
+                "$estateType ${holder.itemView.context.getString(R.string.text_for)} $rentStatus"
+            )
+
+            // Load image
+            val img = item.findViewById<ImageView>(R.id.adItemImage)
+            showImage(imagePath, img)
+
+            // Handle item click event
+            item.setOnClickListener {
+                navigateToDetail(holder, id)
+            }
+        }
+    }
+
+    // Helper function to format price based on locale
+    private fun formatPrice(holder: ViewHolder, price: Int): String {
+        val local = LocaleUtils.getSelectedLanguageId()
+        val textRial = holder.itemView.context.getString(R.string.rial)
+        return String.format(Locale(local), "%d %s", price, textRial)
+    }
+
+    // Helper function to format bedNumber and bathNumber based on locale
+    private fun formatNumber(number: Int): String {
+        val local = LocaleUtils.getSelectedLanguageId()
+        return String.format(Locale(local), "%d", number)
+    }
+
+    // Helper function to get rent status
+    private fun getRentStatus(holder: ViewHolder, isRent: Boolean): String {
         val textRent = holder.itemView.context.getString(R.string.rent)
         val textSell = holder.itemView.context.getString(R.string.sell)
-        val rent = if (house.getBoolean("rent")) textRent else textSell
-        val textFor = holder.itemView.context.getString(R.string.text_for)
-        val textRial = holder.itemView.context.getString(R.string.rial)
+        return if (isRent) textRent else textSell
+    }
 
-        val numberFormat = NumberFormat.getNumberInstance(Locale("fa", "IR"))
-        val persianPrice = numberFormat.format(price)
-        val persianBedNumber = numberFormat.format(bedNumber).toString()
-        val persianBathNumber = numberFormat.format(bathNumber).toString()
+    // Helper function to set text on a TextView
+    private fun ViewHolder.setText(viewId: Int, text: String) {
+        item.findViewById<TextView>(viewId).text = text
+    }
 
-        holder.item.findViewById<TextView>(R.id.adItemPrice).text = "$persianPrice $textRial"
-        holder.item.findViewById<TextView>(R.id.adItemAddress).text = "$street, $city, $country"
-        holder.item.findViewById<TextView>(R.id.adItemBedNumber).text = persianBedNumber
-        holder.item.findViewById<TextView>(R.id.adItemBathNumber).text = persianBathNumber
-//        holder.item.findViewById<TextView>(R.id.adItemCarNumber).text = carNumber.toString()
-        holder.item.findViewById<TextView>(R.id.adItemEstateType).text =
-            "$estateType $textFor $rent"
-
-        val img = holder.item.findViewById<ImageView>(R.id.adItemImage)
-        showImage(imagePath, img)
-
-        holder.item.setOnClickListener {
-            val bundle = bundleOf("id" to id)
-            holder.item.findNavController().navigate(
-                R.id.action_navigation_home_to_oneHomeFragment, bundle
-            )
-        }
+    // Helper function to navigate to detail view
+    private fun navigateToDetail(holder: ViewHolder, id: Int) {
+        val bundle = bundleOf("id" to id)
+        holder.item.findNavController()
+            .navigate(R.id.action_navigation_home_to_oneHomeFragment, bundle)
     }
 
     fun swapDataSet(newData: JSONArray) {

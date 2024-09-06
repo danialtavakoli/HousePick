@@ -41,28 +41,28 @@ class AppActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Application.activityResumed()
+        MyApplication.activityResumed()
     }
 
     override fun onPause() {
         super.onPause()
-        Application.activityPaused()
+        MyApplication.activityPaused()
     }
 
     private fun checkAndRequestPermissions(): Boolean {
-        val internet = Application.appContext?.let {
+        val internet = MyApplication.appContext?.let {
             ContextCompat.checkSelfPermission(
                 it,
                 Manifest.permission.INTERNET
             )
         }
-        val loc = Application.appContext?.let {
+        val loc = MyApplication.appContext?.let {
             ContextCompat.checkSelfPermission(
                 it,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         }
-        val loc2 = Application.appContext?.let {
+        val loc2 = MyApplication.appContext?.let {
             ContextCompat.checkSelfPermission(
                 it,
                 Manifest.permission.ACCESS_FINE_LOCATION

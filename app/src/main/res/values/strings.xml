@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HousePick</string>
+    <string name="app_name">House Pick</string>
     <string name="title_real_estate">Real Estate</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_profile">Profile</string>
@@ -77,4 +77,9 @@
     <string name="ai_response_hint">AI Response will appear here</string>
     <string name="ai_chat">AI</string>
 
+    <string name="choose_language">Choose Language</string>
+    <string-array name="language_options">
+        <item>English</item>
+        <item>Persian</item>
+    </string-array>
 </resources>

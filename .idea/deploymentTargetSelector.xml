@@ -13,10 +13,10 @@
         </DropdownSelection>
         <DialogSelection />
       </SelectionState>
-      <SelectionState runConfigName="testRegisterButton_EnabledAfterAllFieldsFilled()">
+      <SelectionState runConfigName="testInvalidEmail_ShowsErrorMessage()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="testInvalidEmail_ShowsErrorMessage()">
+      <SelectionState runConfigName="LanguageChangeTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

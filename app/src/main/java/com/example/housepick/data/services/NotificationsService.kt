@@ -8,7 +8,7 @@ import android.os.IBinder
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 import com.example.housepick.MainActivity
 import com.example.housepick.R
 import io.socket.client.IO
@@ -29,7 +29,7 @@ class NotificationsService : Service() {
         super.onCreate()
         try {
             val options: IO.Options = IO.Options.builder().setUpgrade(false).build()
-            mSocket = IO.socket("http://" + Application.IPSocket + ":8000", options)
+            mSocket = IO.socket("http://" + MyApplication.IPSocket + ":8000", options)
         } catch (e: URISyntaxException) {
             print(e)
         }
@@ -46,7 +46,7 @@ class NotificationsService : Service() {
     //example to update
     private val onNewHouse = Emitter.Listener { args ->
         runOnUiThread {
-            if (Application.allowNotifications) {
+            if (MyApplication.allowNotifications) {
                 val json: JSONObject = args[0] as JSONObject
                 val housing: JSONObject = json.getJSONObject("newHousing")
                 val titleHouse: String = housing.getString("title")
@@ -56,7 +56,7 @@ class NotificationsService : Service() {
                 val intent = Intent(this, MainActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
-                createNotification(title, text, intent, Application.getIdNotifParis())
+                createNotification(title, text, intent, MyApplication.getIdNotifParis())
             }
 
         }
@@ -65,7 +65,7 @@ class NotificationsService : Service() {
 
 
     private fun createNotification(title: String, text: String, intent: Intent, id: Int) {
-        if (Application.isActivityVisible()) {
+        if (MyApplication.isActivityVisible()) {
             Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
         } else {
             val pendingIntent: PendingIntent = PendingIntent.getActivity(

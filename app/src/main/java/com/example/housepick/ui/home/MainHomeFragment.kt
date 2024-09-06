@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentMainHomeBinding
 
@@ -43,7 +43,7 @@ class MainHomeFragment : Fragment() {
     private fun switchToList() {
 
         val transaction = parentFragmentManager.beginTransaction()
-        Application.homeListOrMap = false
+        MyApplication.homeListOrMap = false
         transaction.replace(R.id.mainHomeLayout, homeFragment)
         transaction.addToBackStack(null)
         transaction.commit()
@@ -52,7 +52,7 @@ class MainHomeFragment : Fragment() {
     private fun switchToMap() {
 
         val transaction = parentFragmentManager.beginTransaction()
-        Application.homeListOrMap = true
+        MyApplication.homeListOrMap = true
         transaction.replace(R.id.mainHomeLayout, homeMapFragment)
         transaction.addToBackStack(null)
         transaction.commit()

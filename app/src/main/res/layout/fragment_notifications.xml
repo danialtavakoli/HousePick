@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -16,26 +15,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<!--    Next fav feature-->
-<!--    <Switch-->
-<!--        android:id="@+id/profileSwitchAgency"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="40dp"-->
-<!--        android:text="@string/profileAgencySwicth"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />-->
+    <View
+        android:id="@+id/viewUp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/greyLight"
+        app:layout_constraintTop_toBottomOf="@id/profileEmail" />
+
+    <LinearLayout
+        android:id="@+id/languageSection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewUp">
+
+        <TextView
+            android:id="@+id/languageLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/choose_language"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/languageSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/spinner_background"
+            android:entries="@array/language_options" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/viewDown"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/greyLight"
+        app:layout_constraintTop_toBottomOf="@id/languageSection" />
 
     <Switch
         android:id="@+id/profileSwitchAllowNotifications"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/profileNotificationSwicth"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileEmail" />
+        app:layout_constraintTop_toBottomOf="@+id/viewDown" />
 
     <TextView
         android:id="@+id/profileFullName"
@@ -65,10 +98,12 @@
         android:background="@drawable/et_custom"
         android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPersonName"
+        android:inputType="textPassword"
         android:padding="8dp"
+        android:textAlignment="viewStart"
         android:textColor="@color/greyDark"
         android:textColorHint="@color/greyLight"
+        android:textDirection="locale"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileSwitchAllowNotifications" />
@@ -81,10 +116,12 @@
         android:background="@drawable/et_custom"
         android:ems="10"
         android:hint="@string/re_type_password"
-        android:inputType="textPersonName"
-        android:textColorHint="@color/greyLight"
-        android:textColor="@color/greyDark"
+        android:inputType="textPassword"
         android:padding="8dp"
+        android:textAlignment="viewStart"
+        android:textColor="@color/greyDark"
+        android:textColorHint="@color/greyLight"
+        android:textDirection="locale"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileEditTextPassword" />

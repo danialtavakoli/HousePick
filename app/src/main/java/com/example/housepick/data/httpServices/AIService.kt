@@ -3,12 +3,12 @@ package com.example.housepick.data.httpServices
 import com.android.volley.AuthFailureError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 
 class AIService {
 
     fun sendMessage(message: String, callback: VolleyCallbackJsonObject) {
-        val queue = Volley.newRequestQueue(Application.appContext)
+        val queue = Volley.newRequestQueue(MyApplication.appContext)
         val url =
             "https://api3.haji-api.ir/lic/gpt/4?q=$message&license=k5varPleXpAWNB3RXEoNfxg3ajz4SAaOADw2ZW6jBaeu1WDXYW"
 

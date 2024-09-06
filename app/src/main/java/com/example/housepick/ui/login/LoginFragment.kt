@@ -1,6 +1,5 @@
 package com.example.housepick.ui.login
 
-import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.content.SharedPreferences
@@ -9,11 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.housepick.AppActivity
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 import com.example.housepick.R
 import com.example.housepick.databinding.FragmentLoginBinding
 import com.example.housepick.ui.utils.showSnackBar
@@ -42,12 +40,8 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.tvTitle
         loginButton = binding.btnLogin
 
-        loginViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         loginViewModel.getAction().observe(
             viewLifecycleOwner
         ) { action -> action?.let { handleAction(it) } }
@@ -65,7 +59,7 @@ class LoginFragment : Fragment() {
     private fun handleAction(action: Action) {
         when (action.value) {
             Action.SHOW_WELCOME -> {
-                val jwt = Application.JWT
+                val jwt = MyApplication.JWT
                 val sharedPreferences: SharedPreferences =
                     requireActivity().getSharedPreferences("MySharedPref", MODE_PRIVATE)
                 val myEdit = sharedPreferences.edit()

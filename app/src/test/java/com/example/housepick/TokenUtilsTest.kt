@@ -26,9 +26,9 @@ class TokenUtilsTest {
         MockitoAnnotations.initMocks(this)
 
         // Set up the Application context to use the mock SharedPreferences
-        Application.appContext = mock(Application::class.java)
+        MyApplication.appContext = mock(MyApplication::class.java)
         `when`(
-            Application.appContext?.getSharedPreferences(
+            MyApplication.appContext?.getSharedPreferences(
                 "MySharedPref", AppCompatActivity.MODE_PRIVATE
             )
         ).thenReturn(mockSharedPreferences)

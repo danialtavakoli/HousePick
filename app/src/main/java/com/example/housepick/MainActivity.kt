@@ -1,7 +1,6 @@
 package com.example.housepick
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -12,8 +11,6 @@ import com.example.housepick.data.utils.TokenUtils
 import com.example.housepick.databinding.ActivityMainBinding
 import com.example.housepick.ui.login.LoginFragment
 import com.example.housepick.ui.register.RegisterFragment
-import java.util.Locale
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var viewPager: ViewPager2
@@ -22,16 +19,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        //set lang to farsi
-        val config = resources.configuration
-        val lang = "fa" // your language code
-        val locale = Locale(lang)
-        Locale.setDefault(locale)
-        config.setLocale(locale)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) createConfigurationContext(config)
-        resources.updateConfiguration(config, resources.displayMetrics)
-
         setContentView(binding.root)
+
+        MyApplication.getInstance().initAppLanguage(this)
 
         val authenticationStateAdapter = AuthenticationStateAdapter(this)
         authenticationStateAdapter.addFragment(LoginFragment())
@@ -51,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         viewPager.currentItem = 0  // Assuming LoginFragment is at position 0
     }
 
-
     class AuthenticationStateAdapter(fragment: FragmentActivity) : FragmentStateAdapter(fragment) {
         private val fragmentList: ArrayList<Fragment> = ArrayList()
 
@@ -70,11 +59,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Application.activityResumed()
+        MyApplication.activityResumed()
     }
 
     override fun onPause() {
         super.onPause()
-        Application.activityPaused()
+        MyApplication.activityPaused()
     }
 }

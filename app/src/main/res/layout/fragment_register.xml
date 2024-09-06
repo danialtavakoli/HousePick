@@ -26,13 +26,13 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="26dp"
         android:background="@drawable/et_custom"
-        android:gravity="start|center_vertical"
         android:hint="@string/your_name"
         android:inputType="textPersonName"
-        android:layoutDirection="locale"
         android:padding="15dp"
+        android:textAlignment="viewStart"
         android:textColor="@color/greyDark"
         android:textColorHint="@color/greyLight"
+        android:textDirection="locale"
         android:textSize="15sp" />
 
     <EditText
@@ -43,13 +43,13 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="26dp"
         android:background="@drawable/et_custom"
-        android:gravity="start|center_vertical"
         android:hint="@string/e_mail"
         android:inputType="textEmailAddress"
-        android:layoutDirection="locale"
         android:padding="15dp"
+        android:textAlignment="viewStart"
         android:textColor="@color/greyDark"
         android:textColorHint="@color/greyLight"
+        android:textDirection="locale"
         android:textSize="15sp" />
 
     <EditText
@@ -63,8 +63,10 @@
         android:hint="@string/password"
         android:inputType="textPersonName"
         android:padding="15dp"
+        android:textAlignment="viewStart"
         android:textColor="@color/greyDark"
         android:textColorHint="@color/greyLight"
+        android:textDirection="locale"
         android:textSize="15sp" />
 
     <EditText
@@ -77,8 +79,10 @@
         android:hint="@string/re_type_password"
         android:inputType="textPersonName"
         android:padding="15dp"
+        android:textAlignment="viewStart"
         android:textColor="@color/greyDark"
         android:textColorHint="@color/greyLight"
+        android:textDirection="locale"
         android:textSize="15sp" />
 
     <RelativeLayout

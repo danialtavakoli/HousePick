@@ -4,18 +4,13 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 import com.example.housepick.data.httpServices.Authentication
 import com.example.housepick.data.httpServices.VolleyCallbackJsonObject
 import org.json.JSONObject
 
 class LoginViewModel : ViewModel() {
-    private val _text = MutableLiveData<String>().apply {
-        value = "ملک یاب"
-    }
     private val authentication = Authentication()
-
-    val text: LiveData<String> = _text
 
     //Stores actions for view.
     private val mAction: MutableLiveData<Action> = MutableLiveData<Action>()
@@ -29,12 +24,12 @@ class LoginViewModel : ViewModel() {
             override fun onSuccess(result: JSONObject?) {
                 if (result != null) {
                     val jsonResult = result.get("result") as JSONObject
-                    Application.JWT = jsonResult.get("token").toString()
+                    MyApplication.JWT = jsonResult.get("token").toString()
 
                     val fullName = jsonResult.getString("fullname")
                     val email = jsonResult.getString("username")
                     // Store full name and email in SharedPreferences
-                    val sharedPreferences = Application.appContext?.getSharedPreferences(
+                    val sharedPreferences = MyApplication.appContext?.getSharedPreferences(
                         "MySharedPref",
                         Context.MODE_PRIVATE
                     )

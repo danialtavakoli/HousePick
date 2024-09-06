@@ -3,19 +3,19 @@ package com.example.housepick.data.utils
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import com.auth0.android.jwt.JWT
-import com.example.housepick.Application
+import com.example.housepick.MyApplication
 
 class TokenUtils {
     companion object {
         fun checkIfExpired(): Boolean {
             val sharedPreferences: SharedPreferences? =
-                Application.appContext?.getSharedPreferences(
+                MyApplication.appContext?.getSharedPreferences(
                     "MySharedPref",
                     AppCompatActivity.MODE_PRIVATE
                 )
             val token: String? = sharedPreferences?.getString("jwt", null)
             if (token != null) {
-                Application.JWT = token
+                MyApplication.JWT = token
                 val jwt = JWT(token)
                 return (jwt.isExpired(10))
             }
@@ -24,7 +24,7 @@ class TokenUtils {
 
         fun getId(): Int? {
             val sharedPreferences: SharedPreferences? =
-                Application.appContext?.getSharedPreferences(
+                MyApplication.appContext?.getSharedPreferences(
                     "MySharedPref",
                     AppCompatActivity.MODE_PRIVATE
                 )

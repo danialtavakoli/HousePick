@@ -9,27 +9,30 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.housepick.data.utils.TokenUtils
+import com.example.housepick.ui.utils.LocaleUtils
 
-class Application : Application() {
-    companion object{
+class MyApplication : Application() {
+    companion object {
         var IP = "192.168.1.102:8080"
         var IPSocket = IP.split(":")[0]
         var JWT: String? = null
         var appContext: Context? = null
         var allowNotifications = false
+
         //true = map and false = list
         var homeListOrMap: Boolean = false
-        private var idNotifs : Int = 1000
+        private var idNotifs: Int = 1000
 
-        fun getIdNotifParis()  : Int{
+        fun getIdNotifParis(): Int {
             idNotifs += 1
             return idNotifs
         }
-        private var ID : Int? = null
+
+        private var ID: Int? = null
 
 
-        fun getID(): Int?{
-            if(ID === null){
+        fun getID(): Int? {
+            if (ID === null) {
                 ID = TokenUtils.getId()
             }
             return ID
@@ -48,20 +51,28 @@ class Application : Application() {
         }
 
         private var activityVisible = false
+
+        private lateinit var instance: MyApplication
+
+        fun getInstance(): MyApplication = instance
     }
 
     override fun onCreate() {
         super.onCreate()
-        val sharedPreferences : SharedPreferences = applicationContext.getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
-        allowNotifications = sharedPreferences.getBoolean("allowNotifs",true)
+        instance = this
+        val sharedPreferences: SharedPreferences =
+            applicationContext.getSharedPreferences("MySharedPref", AppCompatActivity.MODE_PRIVATE)
+        allowNotifications = sharedPreferences.getBoolean("allowNotifs", true)
         appContext = applicationContext
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
+        // Set default language
+        LocaleUtils.initialize(applicationContext, LocaleUtils.getSelectedLanguageId())
         createNotificationChannel()
-
     }
 
-
+    fun initAppLanguage(context: Context) {
+        LocaleUtils.initialize(context, LocaleUtils.getSelectedLanguageId())
+    }
 
     private fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
@@ -79,8 +90,5 @@ class Application : Application() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
-
-
 
 }

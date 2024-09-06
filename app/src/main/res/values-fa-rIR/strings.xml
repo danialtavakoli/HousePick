@@ -76,4 +76,10 @@
     <string name="send_message">ارسال پیام</string>
     <string name="ai_response_hint">پاسخ AI اینجا ظاهر می‌شود</string>
     <string name="ai_chat">هوش‌مصنوعی</string>
+
+    <string name="choose_language">انتخاب زبان</string>
+    <string-array name="language_options">
+        <item>انگلیسی</item>
+        <item>فارسی</item>
+    </string-array>
 </resources>
