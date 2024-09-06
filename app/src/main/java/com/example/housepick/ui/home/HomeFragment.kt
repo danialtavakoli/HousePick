@@ -1,6 +1,7 @@
 package com.example.housepick.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -135,6 +136,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         val estateType = house.getString("stateType")
         val bedNumber = house.getInt("numberBed")
         val bathNumber = house.getInt("numberBath")
+        val numberParking = house.getInt("numberParking")
         val imagePath = house.getString("image")
         val rentStatus = getRentStatus(holder, house.getBoolean("rent"))
 
@@ -144,6 +146,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
             setText(R.id.adItemAddress, "$street, $city, $country")
             setText(R.id.adItemBedNumber, formatNumber(bedNumber))
             setText(R.id.adItemBathNumber, formatNumber(bathNumber))
+            setText(R.id.adItemCarNumber, formatNumber(numberParking))
             setText(
                 R.id.adItemEstateType,
                 "$estateType ${holder.itemView.context.getString(R.string.text_for)} $rentStatus"

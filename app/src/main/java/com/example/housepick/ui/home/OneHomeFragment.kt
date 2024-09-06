@@ -87,6 +87,7 @@ class OneHomeFragment : Fragment() {
         val price = home.getInt("statePrice")
         val bedNumber = home.getInt("numberBed")
         val bathNumber = home.getInt("numberBath")
+        val numberParking = home.getInt("numberParking")
 
         binding.adDetailsTitle.text = home.getString("title")
         binding.adDetailsAddress.text = formatAddress(
@@ -99,6 +100,7 @@ class OneHomeFragment : Fragment() {
             formatEstateType(home.getString("stateType"), textFor, rentStatus)
         binding.adDetailsBedNumber.text = formatNumber(bedNumber)
         binding.adDetailsBathNumber.text = formatNumber(bathNumber)
+        binding.adDetailsCarNumber.text = formatNumber(numberParking)
         binding.adDetailsEmail.text = home.getString("email")
         binding.adDetailsPhone.text = home.getString("phone")
         binding.adDetailsDescription.text = home.getString("description")

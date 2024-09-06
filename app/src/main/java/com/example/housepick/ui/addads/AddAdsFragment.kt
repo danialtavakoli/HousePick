@@ -43,6 +43,7 @@ class AddAdsFragment : Fragment() {
     private lateinit var editTextEstatePrice: EditText
     private lateinit var editTextNumberBathroom: EditText
     private lateinit var editTextNumberBed: EditText
+    private lateinit var editTextNumberParking: EditText
     private lateinit var editTextEmail: EditText
     private lateinit var editTextPhone: EditText
     private lateinit var imgToUpload: ImageView
@@ -81,6 +82,7 @@ class AddAdsFragment : Fragment() {
         editTextEstatePrice = binding.editTextEstatePrice
         editTextNumberBathroom = binding.editTextNumberBathroom
         editTextNumberBed = binding.editTextNumberBed
+        editTextNumberParking = binding.editTextNumberGarage
         editTextEmail = binding.editTextEmail
         editTextPhone = binding.editTextPhone
         imgToUpload = binding.imgToUpload
@@ -114,6 +116,7 @@ class AddAdsFragment : Fragment() {
             val estatePrice = editTextEstatePrice.text.toString()
             val numberBath = editTextNumberBathroom.text.toString()
             val numberBed = editTextNumberBed.text.toString()
+            val numberParking = editTextNumberParking.text.toString()
             val email = editTextEmail.text.toString()
             val phone = editTextPhone.text.toString()
             val rent = switchRent.isChecked
@@ -128,13 +131,13 @@ class AddAdsFragment : Fragment() {
                 rent,
                 numberBath,
                 numberBed,
+                numberParking,
                 email,
                 phone,
                 desc,
                 null,
                 null,
                 null,
-                null
             )
 
             val latLng = LatLng(32.63647365027362, 51.67652963465183)

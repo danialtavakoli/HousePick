@@ -14,13 +14,13 @@ class Housing(
     var rent: Boolean,
     var numberBath: String,
     var numberBed: String,
+    var numberParking: String,
     var email: String,
     var phone: String,
     var description: String,
     var latLong: LatLng?,
     var imgPath: String?,
     var priceTag: String?,
-    var isRecommended: Boolean?,
 ) {
 
 
@@ -36,6 +36,7 @@ class Housing(
         jsonObject.put("statePrice", estatePrice.toFloat())
         jsonObject.put("numberBath", numberBath.toInt())
         jsonObject.put("numberBed", numberBed.toInt())
+        jsonObject.put("numberParking", numberParking.toInt())
         jsonObject.put("email", email)
         jsonObject.put("phone", phone)
         jsonObject.put("rent", rent)

@@ -136,6 +136,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
         val estateType = ad.getString("stateType")
         val bedNumber = ad.getInt("numberBed")
         val bathNumber = ad.getInt("numberBath")
+        val numberParking = ad.getInt("numberParking")
         val imagePath = ad.getString("image")
         val rentStatus = getRentStatus(holder, ad.getBoolean("rent"))
 
@@ -145,6 +146,7 @@ class MyAdapter(private var myDataset: JSONArray) : RecyclerView.Adapter<MyAdapt
             setText(R.id.adItemAddress, "$street, $city, $country")
             setText(R.id.adItemBedNumber, formatNumber(bedNumber))
             setText(R.id.adItemBathNumber, formatNumber(bathNumber))
+            setText(R.id.adItemCarNumber, formatNumber(numberParking))
             setText(
                 R.id.adItemEstateType,
                 "$estateType ${holder.itemView.context.getString(R.string.text_for)} $rentStatus"

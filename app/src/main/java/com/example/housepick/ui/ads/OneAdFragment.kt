@@ -106,6 +106,7 @@ class OneAdFragment : Fragment() {
         val price = ad.getInt("statePrice")
         val bedNumber = ad.getInt("numberBed")
         val bathNumber = ad.getInt("numberBath")
+        val numberParking = ad.getInt("numberParking")
 
         binding.adDetailsTitle.text = ad.getString("title")
         binding.adDetailsAddress.text =
@@ -115,6 +116,7 @@ class OneAdFragment : Fragment() {
             formatEstateType(ad.getString("stateType"), textFor, rentStatus)
         binding.adDetailsBedNumber.text = formatNumber(bedNumber)
         binding.adDetailsBathNumber.text = formatNumber(bathNumber)
+        binding.adDetailsCarNumber.text = formatNumber(numberParking)
         binding.adDetailsEmail.text = ad.getString("email")
         binding.adDetailsPhone.text = ad.getString("phone")
         binding.adDetailsDescription.text = ad.getString("description")
