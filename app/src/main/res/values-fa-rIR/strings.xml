@@ -59,8 +59,10 @@
     <string name="sell">فروش</string>
     <string name="rent">اجاره</string>
     <string name="recommended_ad_label">آگهی پیشنهادی</string>
-    <string name="price_status">وضعیت قیمت:</string>
+    <string name="price_status">وضعیت قیمت</string>
     <string name="normal_status">معمولی</string>
+    <string name="appropriate">مناسب</string>
+    <string name="inappropriate">نامناسب</string>
 
     <!-- profile strings -->
     <string name="profileImageContentDescription">پروفایل شما</string>

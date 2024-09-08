@@ -138,8 +138,6 @@ class AddAdsFragment : Fragment() {
                 desc,
                 latitude,
                 longitude,
-                null,
-                null,
                 null
             )
 
@@ -176,8 +174,6 @@ class AddAdsFragment : Fragment() {
             // Update latitude and longitude variables on the UI thread
             latitude = latitudeBundle.toString()
             longitude = longitudeBundle.toString()
-            println(latitude)
-            println(longitude)
         }
 
         binding.imageButtonBed.setOnClickListener {

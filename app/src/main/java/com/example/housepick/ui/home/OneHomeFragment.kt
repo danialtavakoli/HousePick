@@ -118,8 +118,13 @@ class OneHomeFragment : Fragment() {
         val textRial = context.getString(R.string.rial)
 
         // Get price status string resources
-        val priceStatusLabel = context.getString(R.string.price_status)
-        val normalStatus = context.getString(R.string.normal_status)
+        val priceStatusWord = context.getString(R.string.price_status)
+        val appropriate = context.getString(R.string.appropriate)
+        val inappropriate = context.getString(R.string.inappropriate)
+
+        val isAppropriate = home.getString("isAppropriate")
+        val priceStatusText = if (isAppropriate.equals("NO")) inappropriate else appropriate
+        val priceStatusToShow = "$priceStatusWord: $priceStatusText"
 
         val price = home.getInt("statePrice")
         val bedNumber = home.getInt("numberBed")
@@ -137,7 +142,7 @@ class OneHomeFragment : Fragment() {
         binding.adDetailsPrice.text = formatPrice(price, textRial)
 
         // Set price status in the new TextView
-        binding.adDetailsPriceStatus.text = "$priceStatusLabel $normalStatus"
+        binding.adDetailsPriceStatus.text = priceStatusToShow
 
         binding.adDetailsEstateType.text =
             formatEstateType(home.getString("stateType"), textFor, rentStatus)

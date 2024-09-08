@@ -58,8 +58,10 @@
     <string name="sell">sell</string>
     <string name="rent">rent</string>
     <string name="recommended_ad_label">Recommended Ad</string>
-    <string name="price_status">Price Status:</string>
+    <string name="price_status">Price Status</string>
     <string name="normal_status">Normal</string>
+    <string name="appropriate">Appropriate</string>
+    <string name="inappropriate">Inappropriate</string>
 
     <!-- profile strings -->
     <string name="profileImageContentDescription">Your profile</string>

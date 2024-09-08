@@ -19,11 +19,8 @@ class Housing(
     var description: String,
     var latitude: String?,
     var longitude: String?,
-    var imgPath: String?,
-    var priceTag: String?,
-    var closestHomeId: String?
+    var imgPath: String?
 ) {
-
 
     fun toJsonObject(): JSONObject {
         val jsonObject = JSONObject()
