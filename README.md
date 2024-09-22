@@ -1,11 +1,7 @@
 # HousePick
 
 ## Project Description
-
 HousePick is an Android application that allows users to browse, add, and manage real estate listings. The app includes AI-powered features to assist users in finding the perfect property, and it provides a streamlined interface for interacting with property ads.
-
-## Tech stacks
-XML, MVVM, Mateial Design, Volley, EasyPermission
 
 ## Screenshots:
 <p float="left">
@@ -17,6 +13,8 @@ XML, MVVM, Mateial Design, Volley, EasyPermission
   <img src="https://github.com/danialtavakoli/HousePick/blob/master/Screenshots/ad.jpg" width="25%" >
 </p>
 
+## Tech stacks
+XML, MVVM, Mateial Design, Volley, EasyPermission
 
 ## Features
 
